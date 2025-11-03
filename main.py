@@ -1,25 +1,15 @@
-from models.models_implementations.easyocr_adapter import EasyOCRAdapter
-from models.models_implementations.qwen_vl_adapter import QwenVLAdapter
-from ocr_datasets.datasets.gothenburg_price_tag import GothenburgPriceTag
-from ocr_datasets.datasets.historical_danish_handwriting import DanishHistoricalHandwriting
-from ocr_datasets.datasets.norhand import Norhand
-from ocr_datasets.datasets.simple_dataset import *
-from evaluators.standard_evaluator import *
-from tasks.ocr_task import *
+# main.py
 
+from ocr_datasets.datasets.simple_dataset import SimpleDataset
+from tasks.ocr_task import default_ocr_task
+from models.model_registry import  get_model
 
 def main():
-
-    #dataset_meta = DanishHistoricalHandwriting(max_examples = 10, streaming = True)
-    dataset_meta = SimpleDataset()
-    dataset = dataset_meta.load_dataset()
-    task = default_ocr_task(QwenVLAdapter("Qwen3-VL-2B-Instruct"))
+    model = get_model("Qwen/Qwen2-VL-2B-Instruct")
+    dataset = SimpleDataset().load_dataset()
+    task = default_ocr_task(model)
     report = dataset.evaluate_sync(task)
     report.print(include_input=True, include_output=True, include_durations=True)
-
-
-
-
 
 if __name__ == "__main__":
     main()
