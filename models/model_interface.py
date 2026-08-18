@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from pydantic import BaseModel, Field
 from PIL import Image
 from dataclasses import dataclass
 

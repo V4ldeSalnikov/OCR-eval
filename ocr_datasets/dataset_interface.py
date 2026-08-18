@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
-from pathlib import Path
-from typing import Iterable, Sequence
-from pydantic_evals import Dataset, Case
+from pydantic_evals import Dataset
 from pydantic_evals.evaluators import Evaluator
 
 

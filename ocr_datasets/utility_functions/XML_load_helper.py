@@ -1,9 +1,3 @@
-from datasets import load_dataset
-from pydantic_evals import Case, Dataset
-from evaluators.standard_evaluator import StandardEvaluator
-from models.model_interface import OCRInput
-from ocr_datasets.dataset_interface import OCRDataset
-
 from PIL import Image
 import xml.etree.ElementTree as ET
 

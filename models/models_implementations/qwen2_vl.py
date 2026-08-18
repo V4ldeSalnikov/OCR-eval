@@ -1,5 +1,5 @@
 from models.model_interface import OCRModel, OCRInput, OCROutput
-from transformers import Qwen3VLForConditionalGeneration, AutoTokenizer, AutoProcessor, Qwen2VLForConditionalGeneration
+from transformers import AutoProcessor, Qwen2VLForConditionalGeneration
 from qwen_vl_utils import process_vision_info
 import torch
 
