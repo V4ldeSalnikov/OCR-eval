@@ -50,6 +50,6 @@ class GothenburgPriceTag(OCRDataset):
                 )
             )
 
-        return Dataset(cases=cases, evaluators=[self.default_evaluator])
+        return Dataset(name=self.id, cases=cases, evaluators=[self.default_evaluator])
 
 

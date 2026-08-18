@@ -1,5 +1,3 @@
-from evaluate import evaluator
-from pyarrow.dataset import dataset
 from pydantic_evals import Case, Dataset
 from PIL import Image
 from pathlib import Path
@@ -42,7 +40,11 @@ class SimpleDataset(OCRDataset):
             metadata={'difficulty': 'easy'},
         )
 
-        dataset = Dataset(cases=[case1, case2],evaluators= [self.default_evaluator])
+        dataset = Dataset(
+            name=self.id,
+            cases=[case1, case2],
+            evaluators=[self.default_evaluator],
+        )
 
         return dataset
 
