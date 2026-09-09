@@ -38,7 +38,7 @@ class Qwen3VL(OCRModel):
         model_input = model_input.to(self.device)
 
         #Model inference
-        generated_ids = self.model.generate(**model_input, do_sample=True, temperature=0.1, max_new_tokens=1024)
+        generated_ids = self.model.generate(**model_input, do_sample=False, max_new_tokens=1024)
         generated_ids_trimmed = [
             out_ids[len(in_ids):] for in_ids, out_ids in zip(model_input.input_ids, generated_ids)
         ]
