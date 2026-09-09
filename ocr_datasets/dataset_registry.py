@@ -3,6 +3,7 @@ from ocr_datasets.datasets.historical_danish_handwriting import DanishHistorical
 from ocr_datasets.datasets.norhand import Norhand
 from ocr_datasets.datasets.riksarkivet_ood import RiksarkivetOODLines
 from ocr_datasets.datasets.simple_dataset import SimpleDataset
+from ocr_datasets.datasets.swedish_fraktur import SwedishFrakturLines
 
 
 def create_simple_dataset(max_examples: int | None) -> OCRDataset:
@@ -21,11 +22,16 @@ def create_riksarkivet_ood_dataset(max_examples: int | None) -> OCRDataset:
     return RiksarkivetOODLines(max_examples=max_examples, streaming=True)
 
 
+def create_swedish_fraktur_dataset(max_examples: int | None) -> OCRDataset:
+    return SwedishFrakturLines(max_examples=max_examples, streaming=True)
+
+
 DATASET_REGISTRY = {
     "simple": create_simple_dataset,
     "norhand": create_norhand_dataset,
     "historical-danish": create_historical_danish_dataset,
     "riksarkivet-ood": create_riksarkivet_ood_dataset,
+    "swedish-fraktur": create_swedish_fraktur_dataset,
 }
 
 
