@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.19.0] - 2026-09-10
+
+### Added
+
+- Added the Riksarkivet out-of-domain Swedish historical handwriting lines as a streaming evaluation dataset.
+- Added `riksarkivet-ood` to command-line dataset selection.
+
 ## [v0.18.0] - 2026-09-09
 
 ### Added
