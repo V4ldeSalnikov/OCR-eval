@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.22.0] - 2026-09-10
+
+### Added
+
+- Published the EHRI Danish typewritten material as 1,007 prepared line images on Hugging Face.
+- Added `danish-typewritten` as a streaming evaluation dataset loaded directly from Hugging Face.
+
 ## [v0.21.0] - 2026-09-10
 
 ### Added
