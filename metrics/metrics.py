@@ -1,15 +1,10 @@
+import jiwer
 
-from evaluate import load
 
-# CER - Character error rate metrics
-def cer(model_output : str, ground_truth : str) -> int :
-    metrics = load("cer")
-    cer_score = metrics.compute(predictions=[model_output], references=[ground_truth])
-    return cer_score
+def cer(model_output: str, ground_truth: str) -> float:
+    return jiwer.cer(ground_truth, model_output)
 
-# WER - word error rate metrics
-def wer (model_output : str, ground_truth : str) -> int :
-    metrics = load("wer")
-    wer_score = metrics.compute(predictions=[model_output], references=[ground_truth])
-    return wer_score
+
+def wer(model_output: str, ground_truth: str) -> float:
+    return jiwer.wer(ground_truth, model_output)
 

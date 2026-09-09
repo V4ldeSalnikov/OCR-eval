@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated dataset construction for the current Pydantic Evals API.
 - Migrated the development environment to Python 3.12 and uv with a cross-platform lockfile.
 - Replaced the legacy dependency freeze with direct, reproducible dependencies and explicit CUDA 12.6 PyTorch wheels.
+- Replaced Hugging Face Evaluate metric loading with direct JiWER CER and WER calculations.
 
 ### Fixed
 
