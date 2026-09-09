@@ -31,9 +31,12 @@ class DanishHistoricalHandwriting(OCRDataset):
 
         cases = []
 
-        for id, ex in enumerate(ds):
+        for page_index, ex in enumerate(ds):
 
-            if id >= self.max_pages:
+            if page_index >= self.max_pages:
+                break
+
+            if self.max_examples is not None and len(cases) >= self.max_examples:
                 break
 
             page_img: Image.Image = ex["image"]
@@ -44,16 +47,16 @@ class DanishHistoricalHandwriting(OCRDataset):
             if not alto_xml:
                 continue
 
-            for i, (x, y, w, h, gt_text) in enumerate(parse_alto(alto_xml)):
+            for line_index, (x, y, w, h, gt_text) in enumerate(parse_alto(alto_xml)):
 
-                if self.max_examples is not None and i >= self.max_examples:
+                if self.max_examples is not None and len(cases) >= self.max_examples:
                     break
 
                 line_crop = crop_img(page_img, x, y, w, h, margin=self.margin)
 
                 cases.append(
                     Case(
-                        name=f"dkhist-{doc_id}-{i}",
+                        name=f"dkhist-{doc_id}-{page_index}-{line_index}",
                         inputs=OCRInput(image=line_crop),
                         expected_output=gt_text,
                         metadata={
