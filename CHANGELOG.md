@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.17.0] - 2026-09-09
+
+### Fixed
+
+- Saved evaluation reports before printing results so completed runs survive console failures.
+- Configured command-line output as UTF-8 so OCR predictions can contain any Unicode character.
+
 ## [v0.16.0] - 2026-09-09
 
 ### Added
