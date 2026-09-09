@@ -2,6 +2,9 @@ from PIL import Image
 import xml.etree.ElementTree as ET
 
 ALTO_NS = {"alto": "http://www.loc.gov/standards/alto/ns-v4#"}
+PAGE_NS = {
+    "page": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"
+}
 
 def text_normalize(s: str) -> str:
     return " ".join(s.strip().split())
@@ -48,3 +51,24 @@ def parse_alto(xml_str: str):
             x, y, w, h = min(xs), min(ys), max(xe) - min(xs), max(ye) - min(ys)
 
         yield x, y, w, h, text
+
+
+def parse_page(xml_str: str):
+    """Get bounding boxes and text from PAGE XML text lines."""
+    root = ET.fromstring(xml_str)
+
+    for text_line in root.findall(".//page:TextLine", PAGE_NS):
+        coords = text_line.find("./page:Coords", PAGE_NS)
+        points = [
+            tuple(map(int, point.split(",")))
+            for point in coords.attrib["points"].split()
+        ]
+        xs, ys = zip(*points)
+
+        x = min(xs)
+        y = min(ys)
+        width = max(xs) - x
+        height = max(ys) - y
+        text = text_line.find("./page:TextEquiv/page:Unicode", PAGE_NS).text
+
+        yield x, y, width, height, text

@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.21.0] - 2026-09-10
+
+### Added
+
+- Added modern Danish handwriting as a streaming line evaluation dataset.
+- Added PAGE XML line parsing and `modern-danish` command-line selection.
+
 ## [v0.20.0] - 2026-09-10
 
 ### Added
