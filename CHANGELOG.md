@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.9.0] - 2026-09-09
+
+### Added
+
+- Added an explicit batch runner that keeps each dataset case paired with its model output.
+
+### Changed
+
+- Updated the current two-image demo to run as one batch and print each reference and prediction.
+
 ## [v0.8.0] - 2026-09-09
 
 ### Added
