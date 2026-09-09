@@ -22,4 +22,18 @@ uv sync --locked
 uv run python main.py
 ```
 
-The current entry point is a two-image Qwen2-VL demo. Its first run downloads the selected model weights; it is not yet the final benchmark interface.
+The current entry point defaults to the two-image Qwen2-VL demo. Its first run downloads the selected model weights; it is not yet the final benchmark interface.
+
+Available models, datasets, and command-line options can be listed with:
+
+```shell
+uv run python main.py --help
+```
+
+Runs are limited to 100 examples by default while dataset cases are held in memory.
+
+For example, run ten NorHand lines with Qwen2-VL using:
+
+```shell
+uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset norhand --batch-size 2 --max-examples 10
+```

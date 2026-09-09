@@ -11,13 +11,14 @@ class SimpleDataset(OCRDataset):
     languages = ["da"]
     default_evaluator = StandardEvaluator()
 
-    def __init__(self, image_dir: Path | str = None):
+    def __init__(self, image_dir: Path | str = None, max_examples: int | None = None):
 
         if image_dir is None:
             ROOT = Path(__file__).resolve().parents[2]
             self.image_dir = ROOT / "test_images"
         else:
             self.image_dir = Path(image_dir)
+        self.max_examples = max_examples
 
     def load_dataset(self) -> Dataset:
 
@@ -40,9 +41,13 @@ class SimpleDataset(OCRDataset):
             metadata={'difficulty': 'easy'},
         )
 
+        cases = [case1, case2]
+        if self.max_examples is not None:
+            cases = cases[:self.max_examples]
+
         dataset = Dataset(
             name=self.id,
-            cases=[case1, case2],
+            cases=cases,
             evaluators=[self.default_evaluator],
         )
 

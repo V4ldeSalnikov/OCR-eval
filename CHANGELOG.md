@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.16.0] - 2026-09-09
+
+### Added
+
+- Added command-line selection for registered OCR models, line datasets, batch size, and example limits.
+
+### Changed
+
+- Allowed Historical Danish example limits to span multiple pages.
+- Limited command-line runs to 100 examples by default while datasets are held in memory.
+
 ## [v0.15.0] - 2026-09-09
 
 ### Changed

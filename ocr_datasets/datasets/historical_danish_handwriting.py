@@ -15,7 +15,13 @@ class DanishHistoricalHandwriting(OCRDataset):
     languages = ["da"]
     default_evaluator = StandardEvaluator()
 
-    def __init__(self, max_examples: int | None = None, streaming: bool = False, margin: int = 2, max_pages : int = 1):
+    def __init__(
+        self,
+        max_examples: int | None = None,
+        streaming: bool = False,
+        margin: int = 2,
+        max_pages: int | None = None,
+    ):
         self.max_examples = max_examples
         self.streaming = streaming
         self.margin = margin
@@ -33,7 +39,7 @@ class DanishHistoricalHandwriting(OCRDataset):
 
         for page_index, ex in enumerate(ds):
 
-            if page_index >= self.max_pages:
+            if self.max_pages is not None and page_index >= self.max_pages:
                 break
 
             if self.max_examples is not None and len(cases) >= self.max_examples:
