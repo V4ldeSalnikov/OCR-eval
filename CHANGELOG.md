@@ -3,30 +3,60 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+From v0.1.0 onward, each development commit advances the minor version.
 
-## [Unreleased]
+## [v0.7.0] - 2026-09-09
+
+### Changed
+
+- Reorganized the changelog so each development commit has its own version.
+- Updated the project version to 0.7.0.
+
+## [v0.6.0] - 2026-09-09
+
+### Changed
+
+- Replaced Hugging Face Evaluate metric loading with direct JiWER CER and WER calculations.
+- Removed Hugging Face Evaluate from the project dependencies.
+
+## [v0.5.0] - 2026-08-18
 
 ### Added
 
 - Added this changelog for a human-readable record of project changes.
 - Added a draft README for documentation that will be published with the MVP.
 
+### Docs
+
+- Documented the verified setup and current entry point in the draft README.
+
+## [v0.4.0] - 2026-08-18
+
+### Changed
+
+- Migrated the development environment to Python 3.12 and uv.
+- Replaced the legacy dependency freeze with direct, reproducible dependencies.
+- Added a cross-platform lockfile with explicit CUDA 12.6 PyTorch wheels.
+
+## [v0.3.0] - 2026-08-18
+
+### Changed
+
+- Removed unused imports left over from the prototype.
+
+## [v0.2.0] - 2026-08-18
+
 ### Changed
 
 - Updated dataset construction for the current Pydantic Evals API.
-- Migrated the development environment to Python 3.12 and uv with a cross-platform lockfile.
-- Replaced the legacy dependency freeze with direct, reproducible dependencies and explicit CUDA 12.6 PyTorch wheels.
-- Replaced Hugging Face Evaluate metric loading with direct JiWER CER and WER calculations.
+
+## [v0.1.0] - 2026-08-18
 
 ### Fixed
 
 - Repaired the Git ignore rules so Python version files and dataset adapter source files can be tracked.
 
-### Docs
-
-- Documented the verified setup and current entry point in the draft README.
-
-## Pre-MVP prototype - 2025-10-04 to 2025-11-04
+## Pre-versioned prototype - 2025-10-04 to 2025-11-04
 
 ### Added
 
