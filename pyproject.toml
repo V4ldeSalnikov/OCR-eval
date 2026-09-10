@@ -1,6 +1,6 @@
 [project]
 name = "ocr-eval"
-version = "0.41.0"
+version = "0.42.0"
 description = "Evaluation framework for multilingual OCR models"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -20,6 +20,7 @@ dependencies = [
     "pydantic-evals==2.31.1",
     "pytesseract==0.3.13",
     "qwen-vl-utils==0.0.14",
+    "requests==2.34.2",
     "torch==2.13.0+cu126",
     "torchvision==0.28.0+cu126",
     "transformers==5.15.0",

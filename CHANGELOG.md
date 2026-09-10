@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.42.0] - 2026-09-10
+
+### Added
+
+- Added four hosted Danish Transkribus models covering broad documents,
+  historical handwriting, modern cursive handwriting, and Fraktur newspapers.
+- Added direct authentication and polling for the Transkribus processing API.
+
+### Changed
+
+- Made Transkribus batches submit every image before waiting for results, while
+  preserving the input order in the returned transcriptions.
+
 ## [v0.41.0] - 2026-09-10
 
 ### Added

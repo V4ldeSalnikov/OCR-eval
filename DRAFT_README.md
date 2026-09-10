@@ -46,9 +46,10 @@ page datasets, including `historical-danish`, `modern-danish`,
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-danish --task page-transcription --max-examples 10
 ```
 
-The current page-capable adapters are Qwen2-VL, Qwen3-VL, GLM-OCR, GOT-OCR2,
-and Tesseract. TrOCR, EasyOCR, and the Transformers-only PaddleOCR-VL adapter
-remain line-only. Unsupported combinations fail before model weights are loaded.
+The current local page-capable adapters are Qwen2-VL, Qwen3-VL, GLM-OCR,
+GOT-OCR2, and Tesseract. TrOCR, EasyOCR, and the Transformers-only PaddleOCR-VL
+adapter remain line-only. Unsupported combinations fail before model weights
+are loaded.
 
 Modern printed-page references are extracted from the source PDFs rather than
 manually transcribed. This provenance is included in each evaluation report.
@@ -59,30 +60,56 @@ Hosted adapters send each evaluated image to the selected provider and may
 incur usage charges. API credentials are read from environment variables and
 are never stored in evaluation reports.
 
+Mistral, OpenAI, and Anthropic currently make one synchronous request per case;
+their `--batch-size` groups benchmark cases but does not make a provider batch
+request. Transkribus submits every job in a batch before polling. Hosted APIs do
+not guarantee identical output across repeated calls.
+
 Mistral OCR requires `MISTRAL_API_KEY`:
 
 ```shell
-uv run python main.py --model Mistral/mistral-ocr-4-1 --dataset simple
+uv run python main.py --model Mistral/mistral-ocr-4-1 --dataset simple --max-examples 1
 ```
+
+Mistral OCR returns raw Markdown. On page datasets, Markdown markers are scored
+as characters until the benchmark defines a shared page-output policy.
 
 OpenAI models require `OPENAI_API_KEY`. Luna is the economical baseline and
 Terra is the balanced baseline:
 
 ```shell
-uv run python main.py --model OpenAI/gpt-5.6-luna --dataset simple
-uv run python main.py --model OpenAI/gpt-5.6-terra --dataset simple
+uv run python main.py --model OpenAI/gpt-5.6-luna --dataset simple --max-examples 1
+uv run python main.py --model OpenAI/gpt-5.6-terra --dataset simple --max-examples 1
 ```
 
 Claude models require `ANTHROPIC_API_KEY`. Haiku is the economical baseline
 and Sonnet is the stronger baseline:
 
 ```shell
-uv run python main.py --model Anthropic/claude-haiku-4-5-20251001 --dataset simple
-uv run python main.py --model Anthropic/claude-sonnet-5 --dataset simple
+uv run python main.py --model Anthropic/claude-haiku-4-5-20251001 --dataset simple --max-examples 1
+uv run python main.py --model Anthropic/claude-sonnet-5 --dataset simple --max-examples 1
 ```
 
 Very small line crops can reduce Claude's vision accuracy. The benchmark sends
 the original image without provider-specific resizing.
+
+Transkribus requires `TRANSKRIBUS_USERNAME`, `TRANSKRIBUS_PASSWORD`, API access,
+and processing credits. Four Danish models are registered; for example:
+
+```shell
+uv run python main.py --model Transkribus/Dansk-Dokumentalist-309713 --dataset danish-typewritten --max-examples 1
+```
+
+The adapter uses the currently live v1 processing API. For line crops,
+Transkribus performs its own line detection before recognition, so those scores
+measure both stages. Lossless page images must stay within the API's 20 MB image
+limit. The `Danish-1870-1950-v3.5-26311` model may contain training material that
+overlaps `historical-danish`; do not present that pairing as an out-of-domain
+result.
+
+Before running or publishing a large comparative evaluation, clarify with
+READ-COOP whether its restriction on infrastructure benchmarks also applies to
+OCR accuracy benchmarking.
 
 ## Tesseract
 

@@ -829,7 +829,7 @@ wheels = [
 
 [[package]]
 name = "ocr-eval"
-version = "0.41.0"
+version = "0.42.0"
 source = { virtual = "." }
 dependencies = [
     { name = "accelerate" },
@@ -847,6 +847,7 @@ dependencies = [
     { name = "pypdfium2" },
     { name = "pytesseract" },
     { name = "qwen-vl-utils" },
+    { name = "requests" },
     { name = "torch" },
     { name = "torchvision" },
     { name = "transformers" },
@@ -869,6 +870,7 @@ requires-dist = [
     { name = "pypdfium2", specifier = "==5.13.0" },
     { name = "pytesseract", specifier = "==0.3.13" },
     { name = "qwen-vl-utils", specifier = "==0.0.14" },
+    { name = "requests", specifier = "==2.34.2" },
     { name = "torch", specifier = "==2.13.0+cu126", index = "https://download.pytorch.org/whl/cu126" },
     { name = "torchvision", specifier = "==0.28.0+cu126", index = "https://download.pytorch.org/whl/cu126" },
     { name = "transformers", specifier = "==5.15.0" },

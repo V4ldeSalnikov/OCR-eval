@@ -10,6 +10,7 @@ from models.models_implementations import (
     qwen2_vl,
     qwen3_vl,
     tesseract_adapter,
+    transkribus,
     trocr,
 )
 from typing import Any
@@ -25,6 +26,7 @@ model_modules = [
     qwen3_vl,
     qwen2_vl,
     tesseract_adapter,
+    transkribus,
     trocr,
 ]
 
