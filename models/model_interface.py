@@ -23,10 +23,10 @@ class OCRModel(ABC):
 
     Attributes :
     id - name of the model
-    supported task - list of tasks that model supports (will be added in the future)
+    task - evaluation task configured for this model instance
     """
     id : str
-    supported_tasks : list[str]
+    task : str
 
     @abstractmethod
     def __call__(self, inputs : OCRInput) -> OCROutput:

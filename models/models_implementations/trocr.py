@@ -6,8 +6,9 @@ from models.model_meta import ModelMeta
 
 
 class TrOCR(OCRModel):
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, task: str):
         self.id = model_id
+        self.task = task
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = VisionEncoderDecoderModel.from_pretrained(model_id)
         self.model.to(self.device)
@@ -50,6 +51,7 @@ class TrOCR(OCRModel):
 SWEDISH_LION_LIBRE = ModelMeta(
     loader=TrOCR,
     name="Riksarkivet/trocr-base-handwritten-hist-swe-2",
+    supported_tasks=("line-recognition",),
     loader_kwargs={
         "model_id": "Riksarkivet/trocr-base-handwritten-hist-swe-2",
     },
@@ -63,6 +65,7 @@ SWEDISH_LION_LIBRE = ModelMeta(
 NORHAND_V3 = ModelMeta(
     loader=TrOCR,
     name="Sprakbanken/TrOCR-norhand-v3",
+    supported_tasks=("line-recognition",),
     loader_kwargs={"model_id": "Sprakbanken/TrOCR-norhand-v3"},
     family="TrOCR",
     languages=["no-Latn"],

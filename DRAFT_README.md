@@ -45,6 +45,10 @@ Page transcription is available for the `historical-danish` and
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-danish --task page-transcription --max-examples 10
 ```
 
+The current page-capable adapters are Qwen2-VL, Qwen3-VL, GLM-OCR, GOT-OCR2,
+and Tesseract. TrOCR, EasyOCR, and the Transformers-only PaddleOCR-VL adapter
+remain line-only. Unsupported combinations fail before model weights are loaded.
+
 ## Tesseract
 
 The Tesseract adapters assume that the Tesseract engine is installed and available as `tesseract` from a new shell. Install the official `dan`, `nor`, and `swe` files from [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) in Tesseract's active `tessdata` directory. If that directory is not writable, place the files in another directory and set `TESSDATA_PREFIX` to it.

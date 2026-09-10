@@ -6,8 +6,9 @@ from models.model_meta import ModelMeta
 
 
 class EasyOCRAdapter(OCRModel):
-    def __init__(self, model_id: str, languages: list[str]):
+    def __init__(self, model_id: str, languages: list[str], task: str):
         self.id = model_id
+        self.task = task
         self._reader = easyocr.Reader(languages, detector=False)
 
     def __call__(self, inputs: OCRInput) -> OCROutput:
@@ -26,6 +27,7 @@ class EasyOCRAdapter(OCRModel):
 EASYOCR_SCANDINAVIAN = ModelMeta(
     loader=EasyOCRAdapter,
     name="EasyOCR/Scandinavian",
+    supported_tasks=("line-recognition",),
     loader_kwargs={
         "model_id": "EasyOCR/Scandinavian",
         "languages": ["da", "no", "sv"],

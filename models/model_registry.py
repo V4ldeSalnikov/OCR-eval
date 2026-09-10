@@ -35,5 +35,5 @@ def get_model_meta(name: str) -> ModelMeta:
     except KeyError :
         raise KeyError(f"Unknown model '{name}'.")
 
-def get_model(name: str, **overrides: Any):
-    return get_model_meta(name).load(**overrides)
+def get_model(name: str, task: str, **overrides: Any):
+    return get_model_meta(name).load(task, **overrides)

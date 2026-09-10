@@ -5,8 +5,9 @@ from models.model_meta import ModelMeta
 
 
 class PaddleOCRVL(OCRModel):
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, task: str):
         self.id = model_id
+        self.task = task
         self.model = PaddleOCRVLForConditionalGeneration.from_pretrained(
             model_id,
             dtype="auto",
@@ -59,6 +60,7 @@ class PaddleOCRVL(OCRModel):
 PADDLEOCR_VL_1_6 = ModelMeta(
     loader=PaddleOCRVL,
     name="PaddlePaddle/PaddleOCR-VL-1.6",
+    supported_tasks=("line-recognition",),
     loader_kwargs={"model_id": "PaddlePaddle/PaddleOCR-VL-1.6"},
     family="PaddleOCR-VL",
     languages=["da-Latn", "no-Latn", "sv-Latn"],

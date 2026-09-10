@@ -4,9 +4,17 @@ from models.model_interface import OCRInput, OCRModel, OCROutput
 from models.model_meta import ModelMeta
 
 
+GLM_MAX_NEW_TOKENS = {
+    "line-recognition": 1024,
+    "page-transcription": 8192,
+}
+
+
 class GLMOCR(OCRModel):
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, task: str):
         self.id = model_id
+        self.task = task
+        self.max_new_tokens = GLM_MAX_NEW_TOKENS[task]
         self.model = GlmOcrForConditionalGeneration.from_pretrained(
             model_id,
             dtype="auto",
@@ -44,7 +52,7 @@ class GLMOCR(OCRModel):
         generated_ids = self.model.generate(
             **model_inputs,
             do_sample=False,
-            max_new_tokens=1024,
+            max_new_tokens=self.max_new_tokens,
         )
         input_length = model_inputs["input_ids"].shape[1]
         output_texts = self.processor.batch_decode(
@@ -59,10 +67,11 @@ class GLMOCR(OCRModel):
 GLM_OCR = ModelMeta(
     loader=GLMOCR,
     name="zai-org/GLM-OCR",
+    supported_tasks=("line-recognition", "page-transcription"),
     loader_kwargs={"model_id": "zai-org/GLM-OCR"},
     family="GLM-OCR",
     languages=["zh", "en", "fr", "es", "ru", "de", "ja", "ko"],
     license="mit",
     reference="https://huggingface.co/zai-org/GLM-OCR",
-    notes="0.9B OCR model evaluated zero-shot on Scandinavian line recognition",
+    notes="0.9B OCR model evaluated zero-shot on Scandinavian text recognition",
 )

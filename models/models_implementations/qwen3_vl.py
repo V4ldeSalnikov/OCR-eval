@@ -6,10 +6,34 @@ import torch
 from models.model_meta import ModelMeta
 
 
+QWEN3_TASK_SETTINGS = {
+    "line-recognition": (
+        "You are an OCR engine. Transcribe the text. Return ONLY the text from "
+        "the image, Do not include coordinates, bounding boxes, labels, or "
+        "explanations. Output text in a single line",
+        "Transcribe the text on the image. Output text only in a single line.",
+        1024,
+    ),
+    "page-transcription": (
+        "You are an OCR engine. Transcribe all text on the page in natural "
+        "reading order. Return ONLY the text from the image. Preserve line "
+        "breaks. Do not include coordinates, bounding boxes, labels, or "
+        "explanations.",
+        "Transcribe all text on this page in natural reading order. Preserve "
+        "line breaks and output text only.",
+        4096,
+    ),
+}
+
+
 class Qwen3VL(OCRModel):
 
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, task: str):
         self.id = model_id
+        self.task = task
+        self.system_prompt, self.user_prompt, self.max_new_tokens = (
+            QWEN3_TASK_SETTINGS[task]
+        )
 
         self.model = Qwen3VLForConditionalGeneration.from_pretrained(
             model_id, torch_dtype="auto", device_map="auto")
@@ -18,7 +42,6 @@ class Qwen3VL(OCRModel):
         self.model.to(self.device)
 
         self.processor = AutoProcessor.from_pretrained(model_id)
-        self.prompt = "You are an OCR engine. Transcribe the text. Return ONLY the text from the image, Do not include coordinates, bounding boxes, labels, or explanations. Output text in a single line"
 
     def __call__(self, inputs: OCRInput) -> OCROutput:
         return self.batch_call([inputs])[0]
@@ -28,10 +51,13 @@ class Qwen3VL(OCRModel):
         for ocr_input in inputs:
             image = ocr_input.image.convert("RGB")
             messages.append([
-                {"role": "system", "content": [{"type": "text", "text": self.prompt}]},
+                {
+                    "role": "system",
+                    "content": [{"type": "text", "text": self.system_prompt}],
+                },
                 {"role": "user", "content": [
                     {"type": "image", "image": image},
-                    {"type": "text", "text": "Transcribe the text on the image. Output text only in a single line."},
+                    {"type": "text", "text": self.user_prompt},
                 ]},
             ])
 
@@ -48,7 +74,11 @@ class Qwen3VL(OCRModel):
         model_inputs = model_inputs.to(self.device)
 
         #Model inference
-        generated_ids = self.model.generate(**model_inputs, do_sample=False, max_new_tokens=1024)
+        generated_ids = self.model.generate(
+            **model_inputs,
+            do_sample=False,
+            max_new_tokens=self.max_new_tokens,
+        )
         generated_ids_trimmed = [
             out_ids[len(in_ids):] for in_ids, out_ids in zip(model_inputs.input_ids, generated_ids)
         ]
@@ -61,6 +91,7 @@ class Qwen3VL(OCRModel):
 QWEN3_VL_2B_INSTRUCT = ModelMeta(
     loader=Qwen3VL,
     name="Qwen/Qwen3-VL-2B-Instruct",
+    supported_tasks=("line-recognition", "page-transcription"),
     loader_kwargs={"model_id": "Qwen/Qwen3-VL-2B-Instruct"},
     languages=["da-Latn", "eng-Latn"],
     license="apache-2.0",
@@ -71,6 +102,7 @@ QWEN3_VL_2B_INSTRUCT = ModelMeta(
 QWEN3_VL_4B_INSTRUCT = ModelMeta(
     loader=Qwen3VL,
     name="Qwen/Qwen3-VL-4B-Instruct",
+    supported_tasks=("line-recognition", "page-transcription"),
     loader_kwargs={"model_id": "Qwen/Qwen3-VL-4B-Instruct"},
     languages=["da-Latn", "eng-Latn"],
     license="apache-2.0",

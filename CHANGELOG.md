@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.33.0] - 2026-09-10
+
+### Added
+
+- Added explicit supported tasks to every model registration.
+- Added page transcription prompts for Qwen2-VL and Qwen3-VL.
+
+### Changed
+
+- Added longer page output limits for Qwen, GLM-OCR, and GOT-OCR2.
+- Configured Tesseract for automatic page segmentation during page transcription.
+- Unsupported model and task combinations now fail before loading datasets or
+  model weights.
+
 ## [v0.32.0] - 2026-09-10
 
 ### Added
