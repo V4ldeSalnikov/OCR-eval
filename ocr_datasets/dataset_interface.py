@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from PIL import Image
 
@@ -15,8 +15,9 @@ class LineAnnotation:
 class PageAnnotation:
     name: str
     image: Image.Image
-    lines: list[LineAnnotation]
+    text: str
     metadata: dict
+    lines: list[LineAnnotation] = field(default_factory=list)
 
 
 @dataclass
@@ -49,3 +50,7 @@ class PageDatasetSource(OCRDatasetSource):
     @abstractmethod
     def load_documents(self) -> Iterable[OCRDocument]:
         ...
+
+
+class LineAnnotatedPageDatasetSource(PageDatasetSource):
+    pass

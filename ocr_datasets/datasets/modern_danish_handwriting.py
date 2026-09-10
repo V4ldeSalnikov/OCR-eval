@@ -5,14 +5,14 @@ from datasets import load_dataset
 
 from ocr_datasets.dataset_interface import (
     LineAnnotation,
+    LineAnnotatedPageDatasetSource,
     OCRDocument,
     PageAnnotation,
-    PageDatasetSource,
 )
 from ocr_datasets.utility_functions.XML_load_helper import parse_page
 
 
-class ModernDanishHandwriting(PageDatasetSource):
+class ModernDanishHandwriting(LineAnnotatedPageDatasetSource):
     id = "modern-danish-handwriting"
     languages = ["da"]
 
@@ -54,10 +54,11 @@ class ModernDanishHandwriting(PageDatasetSource):
             yield PageAnnotation(
                 name=f"modern-danish-{doc_id}-{sequence}",
                 image=page["image"],
-                lines=lines,
+                text="\n".join(line.text for line in lines),
                 metadata={
                     "sequence": sequence,
                     "xml": "PAGE",
                     "lang": "da",
                 },
+                lines=lines,
             )

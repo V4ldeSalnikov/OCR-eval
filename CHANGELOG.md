@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.34.0] - 2026-09-10
+
+### Added
+
+- Added explicit page transcription text independently from optional line
+  annotations.
+- Added a source type for pages that provide line-level annotations.
+
+### Changed
+
+- Page transcription now reads the page reference directly.
+- Page-only datasets now fail clearly when used for line recognition.
+
 ## [v0.33.0] - 2026-09-10
 
 ### Added

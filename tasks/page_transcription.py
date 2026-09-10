@@ -38,6 +38,6 @@ class PageTranscriptionTask(OCRTask):
                 yield Case(
                     name=page.name,
                     inputs=OCRInput(image=page.image),
-                    expected_output="\n".join(line.text for line in page.lines),
+                    expected_output=page.text,
                     metadata={**document.metadata, **page.metadata},
                 )

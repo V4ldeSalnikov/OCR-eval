@@ -6,9 +6,9 @@ from pydantic_evals import Case, Dataset
 from evaluators.standard_evaluator import StandardEvaluator
 from models.model_interface import OCRInput
 from ocr_datasets.dataset_interface import (
+    LineAnnotatedPageDatasetSource,
     LineDatasetSource,
     OCRDatasetSource,
-    PageDatasetSource,
 )
 from ocr_datasets.utility_functions.XML_load_helper import crop
 from tasks.task_interface import OCRTask
@@ -38,9 +38,9 @@ class LineRecognitionTask(OCRTask):
     def _build_cases(self, source: OCRDatasetSource) -> Iterable[Case]:
         if isinstance(source, LineDatasetSource):
             return self._line_cases(source)
-        if isinstance(source, PageDatasetSource):
+        if isinstance(source, LineAnnotatedPageDatasetSource):
             return self._page_line_cases(source)
-        raise TypeError(f"Unsupported dataset source: {source.id}")
+        raise TypeError(f"Task '{self.id}' requires line annotations: {source.id}")
 
     def _line_cases(self, source: LineDatasetSource) -> Iterable[Case]:
         for line in source.load_lines():
@@ -51,7 +51,10 @@ class LineRecognitionTask(OCRTask):
                 metadata=line.metadata,
             )
 
-    def _page_line_cases(self, source: PageDatasetSource) -> Iterable[Case]:
+    def _page_line_cases(
+        self,
+        source: LineAnnotatedPageDatasetSource,
+    ) -> Iterable[Case]:
         for document in source.load_documents():
             for page in document.pages:
                 for line_index, line in enumerate(page.lines):
