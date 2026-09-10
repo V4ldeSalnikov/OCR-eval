@@ -11,6 +11,7 @@ from models.model_interface import OCROutput, OCRModel
 def build_evaluation_report(
     model: OCRModel,
     dataset: Dataset,
+    task: str,
     batch_size: int,
     results: list[tuple[Case, OCROutput]],
 ) -> dict:
@@ -31,6 +32,7 @@ def build_evaluation_report(
     return {
         "model": model.id,
         "dataset": dataset.name,
+        "task": task,
         "batch_size": batch_size,
         "cases": case_results,
         "corpus_metrics": {
@@ -41,6 +43,9 @@ def build_evaluation_report(
 
 
 def print_evaluation_report(report: dict) -> None:
+    print(f"Task: {report['task']}")
+    print()
+
     for case_result in report["cases"]:
         print(case_result["name"])
         print(f"Expected: {case_result['reference']}")
@@ -59,7 +64,9 @@ def save_evaluation_report(report: dict) -> Path:
     runs_dir.mkdir(exist_ok=True)
     timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     model_name = report["model"].replace("/", "--")
-    report_path = runs_dir / f"{timestamp}_{report['dataset']}_{model_name}.json"
+    report_path = runs_dir / (
+        f"{timestamp}_{report['dataset']}_{report['task']}_{model_name}.json"
+    )
 
     with report_path.open("w", encoding="utf-8") as file:
         json.dump(report, file, ensure_ascii=False, indent=2)

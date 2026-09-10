@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.30.0] - 2026-09-10
+
+### Added
+
+- Added an explicit OCR task interface and the `line-recognition` task.
+- Added command-line task selection and task identity to saved reports.
+
+### Changed
+
+- Routed existing line dataset loading through the selected task.
+
 ## [v0.29.0] - 2026-09-10
 
 ### Added

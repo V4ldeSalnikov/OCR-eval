@@ -11,15 +11,24 @@ from reports.evaluation_report import (
     save_evaluation_report,
 )
 from tasks.ocr_task import run_batch_ocr
+from tasks.task_registry import get_task
 
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     args = parse_args()
     model = get_model(args.model)
-    dataset = get_dataset(args.dataset, args.max_examples).load_dataset()
+    source = get_dataset(args.dataset, args.max_examples)
+    task = get_task(args.task)
+    dataset = task.build_dataset(source)
     results = run_batch_ocr(model, dataset, batch_size=args.batch_size)
-    report = build_evaluation_report(model, dataset, args.batch_size, results)
+    report = build_evaluation_report(
+        model,
+        dataset,
+        task.id,
+        args.batch_size,
+        results,
+    )
 
     report_path = save_evaluation_report(report)
     print_evaluation_report(report)

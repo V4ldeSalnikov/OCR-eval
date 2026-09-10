@@ -7,6 +7,7 @@ from argparse import (
 
 from models.model_registry import MODEL_REGISTRY
 from ocr_datasets.dataset_registry import DATASET_REGISTRY
+from tasks.task_registry import TASK_REGISTRY
 
 
 def positive_integer(value: str) -> int:
@@ -32,6 +33,12 @@ def parse_args() -> Namespace:
         choices=sorted(DATASET_REGISTRY),
         default="simple",
         help="Dataset to evaluate.",
+    )
+    parser.add_argument(
+        "--task",
+        choices=sorted(TASK_REGISTRY),
+        default="line-recognition",
+        help="OCR task to evaluate.",
     )
     parser.add_argument(
         "--batch-size",
