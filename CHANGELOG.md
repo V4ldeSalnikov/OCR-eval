@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.32.0] - 2026-09-10
+
+### Added
+
+- Added page transcription using complete page images and references assembled
+  from human line annotations in source order.
+
+### Changed
+
+- Invalid task and dataset combinations now fail before the OCR model is loaded.
+
 ## [v0.31.0] - 2026-09-10
 
 ### Added

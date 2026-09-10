@@ -38,6 +38,13 @@ For example, run ten NorHand lines with Qwen2-VL using:
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset norhand --batch-size 2 --max-examples 10
 ```
 
+Page transcription is available for the `historical-danish` and
+`modern-danish` page datasets:
+
+```shell
+uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-danish --task page-transcription --max-examples 10
+```
+
 ## Tesseract
 
 The Tesseract adapters assume that the Tesseract engine is installed and available as `tesseract` from a new shell. Install the official `dan`, `nor`, and `swe` files from [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) in Tesseract's active `tessdata` directory. If that directory is not writable, place the files in another directory and set `TESSDATA_PREFIX` to it.
