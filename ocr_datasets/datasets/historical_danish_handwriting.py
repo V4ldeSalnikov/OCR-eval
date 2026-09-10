@@ -1,82 +1,81 @@
-# pip install datasets pillow
+from collections.abc import Iterable
+from itertools import groupby, islice
 
 from datasets import load_dataset
-from pydantic_evals import Case, Dataset
-from evaluators.standard_evaluator import StandardEvaluator
-from models.model_interface import OCRInput
-from ocr_datasets.dataset_interface import OCRDataset
 
-from PIL import Image
-# your helpers (moved out)
-from ocr_datasets.utility_functions.XML_load_helper import parse_alto,crop as crop_img
+from ocr_datasets.dataset_interface import (
+    LineAnnotation,
+    OCRDocument,
+    PageAnnotation,
+    PageDatasetSource,
+)
+from ocr_datasets.utility_functions.XML_load_helper import parse_alto
 
-class DanishHistoricalHandwriting(OCRDataset):
+
+class DanishHistoricalHandwriting(PageDatasetSource):
     id = "historical-danish-handwriting"
     languages = ["da"]
-    default_evaluator = StandardEvaluator()
 
     def __init__(
         self,
-        max_examples: int | None = None,
         streaming: bool = False,
-        margin: int = 2,
         max_pages: int | None = None,
     ):
-        self.max_examples = max_examples
         self.streaming = streaming
-        self.margin = margin
         self.max_pages = max_pages
 
-    def load_dataset(self) -> Dataset:
-
-        ds = load_dataset(
+    def load_documents(self) -> Iterable[OCRDocument]:
+        dataset = load_dataset(
             "aarhus-city-archives/historical-danish-handwriting",
             split="train",
-            streaming=self.streaming
+            streaming=self.streaming,
         )
 
-        cases = []
+        indexed_pages = enumerate(dataset)
+        if self.max_pages is not None:
+            indexed_pages = islice(indexed_pages, self.max_pages)
 
-        for page_index, ex in enumerate(ds):
+        documents = groupby(
+            indexed_pages,
+            key=lambda indexed_page: indexed_page[1].get("doc_id"),
+        )
 
-            if self.max_pages is not None and page_index >= self.max_pages:
-                break
+        for doc_id, pages in documents:
+            yield OCRDocument(
+                id=str(doc_id),
+                pages=self._load_pages(pages),
+                metadata={
+                    "source": "aarhus-city-archives/historical-danish-handwriting",
+                    "doc_id": int(doc_id) if doc_id is not None else None,
+                },
+            )
 
-            if self.max_examples is not None and len(cases) >= self.max_examples:
-                break
-
-            page_img: Image.Image = ex["image"]
-            alto_xml: str | None = ex.get("alto")
-            doc_id = ex.get("doc_id")
-            seq = ex.get("sequence")
-
+    def _load_pages(
+        self,
+        pages: Iterable[tuple[int, dict]],
+    ) -> Iterable[PageAnnotation]:
+        for page_index, page in pages:
+            alto_xml = page.get("alto")
             if not alto_xml:
                 continue
 
-            for line_index, (x, y, w, h, gt_text) in enumerate(parse_alto(alto_xml)):
-
-                if self.max_examples is not None and len(cases) >= self.max_examples:
-                    break
-
-                line_crop = crop_img(page_img, x, y, w, h, margin=self.margin)
-
-                cases.append(
-                    Case(
-                        name=f"dkhist-{doc_id}-{page_index}-{line_index}",
-                        inputs=OCRInput(image=line_crop),
-                        expected_output=gt_text,
-                        metadata={
-                            "source": "aarhus-city-archives/historical-danish-handwriting",
-                            "doc_id": int(doc_id) if doc_id is not None else None,
-                            "sequence": int(seq) if seq is not None else None,
-                            "line_bbox": [int(x), int(y), int(w), int(h)],
-                            "xml": "ALTO",
-                            "lang": "da",
-                        },
-                    )
+            doc_id = page.get("doc_id")
+            sequence = page.get("sequence")
+            lines = [
+                LineAnnotation(
+                    bbox=(int(x), int(y), int(width), int(height)),
+                    text=text,
                 )
+                for x, y, width, height, text in parse_alto(alto_xml)
+            ]
 
-
-
-
-        return Dataset(name=self.id, cases=cases, evaluators=[self.default_evaluator])
+            yield PageAnnotation(
+                name=f"dkhist-{doc_id}-{page_index}",
+                image=page["image"],
+                lines=lines,
+                metadata={
+                    "sequence": int(sequence) if sequence is not None else None,
+                    "xml": "ALTO",
+                    "lang": "da",
+                },
+            )

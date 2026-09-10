@@ -1,31 +1,51 @@
 from abc import ABC, abstractmethod
-from pydantic_evals import Dataset
-from pydantic_evals.evaluators import Evaluator
+from collections.abc import Iterable
+from dataclasses import dataclass
+
+from PIL import Image
 
 
+@dataclass
+class LineAnnotation:
+    bbox: tuple[int, int, int, int]
+    text: str
 
-class OCRDataset(ABC):
 
-    """
-    Abstract class to standardize the datasets
+@dataclass
+class PageAnnotation:
+    name: str
+    image: Image.Image
+    lines: list[LineAnnotation]
+    metadata: dict
 
-    Attributes :
 
-    id - name of the dataset
-    languages - languages that are present in dataset
-    default_evaluator - default evaluator that will be used for the dataset
+@dataclass
+class OCRDocument:
+    id: str
+    pages: Iterable[PageAnnotation]
+    metadata: dict
 
-    Functions :
 
-    Load dataset - responsible to loading the dataset (together with default evaluator)
-    """
+@dataclass
+class LineSample:
+    name: str
+    image: Image.Image
+    text: str
+    metadata: dict
+
+
+class OCRDatasetSource(ABC):
     id: str
     languages: list[str]
-    default_evaluator : Evaluator | None
 
 
+class LineDatasetSource(OCRDatasetSource):
     @abstractmethod
-    def load_dataset(self) -> Dataset:
+    def load_lines(self) -> Iterable[LineSample]:
         ...
 
 
+class PageDatasetSource(OCRDatasetSource):
+    @abstractmethod
+    def load_documents(self) -> Iterable[OCRDocument]:
+        ...

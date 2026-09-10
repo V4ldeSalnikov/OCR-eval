@@ -1,43 +1,32 @@
+from collections.abc import Iterable
+
 from datasets import load_dataset
-from pydantic_evals import Case, Dataset
 
-from evaluators.standard_evaluator import StandardEvaluator
-from models.model_interface import OCRInput
-from ocr_datasets.dataset_interface import OCRDataset
+from ocr_datasets.dataset_interface import LineDatasetSource, LineSample
 
 
-class SwedishFrakturLines(OCRDataset):
+class SwedishFrakturLines(LineDatasetSource):
     id = "swedish-fraktur-lines"
     languages = ["swe"]
-    default_evaluator = StandardEvaluator()
 
-    def __init__(self, max_examples: int | None = None, streaming: bool = False):
-        self.max_examples = max_examples
+    def __init__(self, streaming: bool = False):
         self.streaming = streaming
 
-    def load_dataset(self) -> Dataset:
-        hf = load_dataset(
+    def load_lines(self) -> Iterable[LineSample]:
+        lines = load_dataset(
             "Riksarkivet/swedish_fraktur",
             split="train",
             streaming=self.streaming,
         )
 
-        cases = []
-        for index, example in enumerate(hf):
-            if self.max_examples is not None and index >= self.max_examples:
-                break
-
-            cases.append(
-                Case(
-                    name=f"swedish-fraktur-train-{index}",
-                    inputs=OCRInput(image=example["image"]),
-                    expected_output=example["text"],
-                    metadata={
-                        "source": "Riksarkivet/swedish_fraktur",
-                        "split": "train",
-                        "lang": "swe",
-                    },
-                )
+        for index, example in enumerate(lines):
+            yield LineSample(
+                name=f"swedish-fraktur-train-{index}",
+                image=example["image"],
+                text=example["text"],
+                metadata={
+                    "source": "Riksarkivet/swedish_fraktur",
+                    "split": "train",
+                    "lang": "swe",
+                },
             )
-
-        return Dataset(name=self.id, cases=cases, evaluators=[self.default_evaluator])

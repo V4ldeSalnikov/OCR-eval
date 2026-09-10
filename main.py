@@ -18,9 +18,9 @@ def main():
     sys.stdout.reconfigure(encoding="utf-8")
     args = parse_args()
     model = get_model(args.model)
-    source = get_dataset(args.dataset, args.max_examples)
+    source = get_dataset(args.dataset)
     task = get_task(args.task)
-    dataset = task.build_dataset(source)
+    dataset = task.build_dataset(source, args.max_examples)
     results = run_batch_ocr(model, dataset, batch_size=args.batch_size)
     report = build_evaluation_report(
         model,

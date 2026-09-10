@@ -50,6 +50,6 @@ def parse_args() -> Namespace:
         "--max-examples",
         type=positive_integer,
         default=100,
-        help="Maximum number of examples to load.",
+        help="Maximum number of evaluation cases.",
     )
     return parser.parse_args()

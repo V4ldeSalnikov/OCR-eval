@@ -1,73 +1,63 @@
+from collections.abc import Iterable
+from itertools import groupby
+
 from datasets import load_dataset
-from pydantic_evals import Case, Dataset
 
-from evaluators.standard_evaluator import StandardEvaluator
-from models.model_interface import OCRInput
-from ocr_datasets.dataset_interface import OCRDataset
-from ocr_datasets.utility_functions.XML_load_helper import crop, parse_page
+from ocr_datasets.dataset_interface import (
+    LineAnnotation,
+    OCRDocument,
+    PageAnnotation,
+    PageDatasetSource,
+)
+from ocr_datasets.utility_functions.XML_load_helper import parse_page
 
 
-class ModernDanishHandwriting(OCRDataset):
+class ModernDanishHandwriting(PageDatasetSource):
     id = "modern-danish-handwriting"
     languages = ["da"]
-    default_evaluator = StandardEvaluator()
 
-    def __init__(
-        self,
-        max_examples: int | None = None,
-        streaming: bool = False,
-        margin: int = 2,
-    ):
-        self.max_examples = max_examples
+    def __init__(self, streaming: bool = False):
         self.streaming = streaming
-        self.margin = margin
 
-    def load_dataset(self) -> Dataset:
-        pages = load_dataset(
+    def load_documents(self) -> Iterable[OCRDocument]:
+        dataset = load_dataset(
             "RA-Data-Science/modern-danish-handwriting",
             split="train",
             streaming=self.streaming,
         )
 
-        cases = []
-        for page in pages:
-            if self.max_examples is not None and len(cases) >= self.max_examples:
-                break
+        documents = groupby(dataset, key=lambda page: page["doc_id"])
 
-            page_image = page["image"]
+        for doc_id, pages in documents:
+            yield OCRDocument(
+                id=str(doc_id),
+                pages=self._load_pages(pages),
+                metadata={
+                    "source": "RA-Data-Science/modern-danish-handwriting",
+                    "split": "train",
+                    "doc_id": int(doc_id),
+                },
+            )
+
+    def _load_pages(self, pages: Iterable[dict]) -> Iterable[PageAnnotation]:
+        for page in pages:
             doc_id = int(page["doc_id"])
             sequence = int(page["sequence"])
-
-            for line_index, (x, y, width, height, text) in enumerate(
-                parse_page(page["page"])
-            ):
-                if self.max_examples is not None and len(cases) >= self.max_examples:
-                    break
-
-                line_image = crop(
-                    page_image,
-                    x,
-                    y,
-                    width,
-                    height,
-                    margin=self.margin,
+            lines = [
+                LineAnnotation(
+                    bbox=(int(x), int(y), int(width), int(height)),
+                    text=text,
                 )
+                for x, y, width, height, text in parse_page(page["page"])
+            ]
 
-                cases.append(
-                    Case(
-                        name=f"modern-danish-{doc_id}-{sequence}-{line_index}",
-                        inputs=OCRInput(image=line_image),
-                        expected_output=text,
-                        metadata={
-                            "source": "RA-Data-Science/modern-danish-handwriting",
-                            "split": "train",
-                            "doc_id": doc_id,
-                            "sequence": sequence,
-                            "line_bbox": [x, y, width, height],
-                            "xml": "PAGE",
-                            "lang": "da",
-                        },
-                    )
-                )
-
-        return Dataset(name=self.id, cases=cases, evaluators=[self.default_evaluator])
+            yield PageAnnotation(
+                name=f"modern-danish-{doc_id}-{sequence}",
+                image=page["image"],
+                lines=lines,
+                metadata={
+                    "sequence": sequence,
+                    "xml": "PAGE",
+                    "lang": "da",
+                },
+            )
