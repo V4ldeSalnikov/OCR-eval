@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.37.0] - 2026-09-10
+
+### Added
+
+- Added recent Norwegian research publications from Nasjonalt vitenarkiv as a
+  page-transcription dataset.
+- Added PDFium for cross-platform PDF page rendering and text extraction.
+
+### Changed
+
+- Selected a fixed set of 19 Norwegian-language PDFs from 2020 onward and
+  excluded English attachments and short event programmes.
+- Excluded pages without embedded PDF text instead of using OCR-generated text
+  as evaluation references.
+
 ## [v0.36.0] - 2026-09-10
 
 ### Changed

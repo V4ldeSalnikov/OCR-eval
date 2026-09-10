@@ -40,7 +40,7 @@ uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset norhand --batc
 
 Page transcription is available for annotated handwriting and modern printed
 page datasets, including `historical-danish`, `modern-danish`,
-`oj4ocrmt-danish`, and `oj4ocrmt-swedish`:
+`oj4ocrmt-danish`, `oj4ocrmt-swedish`, and `nasjonalt-vitenarkiv`:
 
 ```shell
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-danish --task page-transcription --max-examples 10
@@ -49,6 +49,9 @@ uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-dan
 The current page-capable adapters are Qwen2-VL, Qwen3-VL, GLM-OCR, GOT-OCR2,
 and Tesseract. TrOCR, EasyOCR, and the Transformers-only PaddleOCR-VL adapter
 remain line-only. Unsupported combinations fail before model weights are loaded.
+
+Modern printed-page references are extracted from the source PDFs rather than
+manually transcribed. This provenance is included in each evaluation report.
 
 ## Tesseract
 
