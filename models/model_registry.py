@@ -1,7 +1,7 @@
 from models.model_meta import ModelMeta
-from models.models_implementations import easyocr_adapter, paddleocr_vl, qwen2_vl, qwen3_vl
+from models.models_implementations import easyocr_adapter, glm_ocr, paddleocr_vl, qwen2_vl, qwen3_vl
 from typing import Any
-model_modules = [easyocr_adapter, paddleocr_vl, qwen3_vl, qwen2_vl]
+model_modules = [easyocr_adapter, glm_ocr, paddleocr_vl, qwen3_vl, qwen2_vl]
 
 MODEL_REGISTRY = {}
 
