@@ -53,6 +53,18 @@ remain line-only. Unsupported combinations fail before model weights are loaded.
 Modern printed-page references are extracted from the source PDFs rather than
 manually transcribed. This provenance is included in each evaluation report.
 
+## Hosted API models
+
+Hosted adapters send each evaluated image to the selected provider and may
+incur usage charges. API credentials are read from environment variables and
+are never stored in evaluation reports.
+
+Mistral OCR requires `MISTRAL_API_KEY`:
+
+```shell
+uv run python main.py --model Mistral/mistral-ocr-4-1 --dataset simple
+```
+
 ## Tesseract
 
 The Tesseract adapters assume that the Tesseract engine is installed and available as `tesseract` from a new shell. Install the official `dan`, `nor`, and `swe` files from [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) in Tesseract's active `tessdata` directory. If that directory is not writable, place the files in another directory and set `TESSDATA_PREFIX` to it.

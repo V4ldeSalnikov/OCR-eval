@@ -1,6 +1,6 @@
 [project]
 name = "ocr-eval"
-version = "0.38.0"
+version = "0.39.0"
 description = "Evaluation framework for multilingual OCR models"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -10,6 +10,7 @@ dependencies = [
     "easyocr==1.7.2",
     "huggingface-hub==1.28.0",
     "jiwer==4.0.0",
+    "mistralai==2.10.0",
     "numpy==2.5.2",
     "opencv-python-headless==5.0.0.93",
     "pillow==12.3.0",

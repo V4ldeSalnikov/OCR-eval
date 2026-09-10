@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.39.0] - 2026-09-10
+
+### Added
+
+- Added the hosted Mistral OCR 4.1 model for line recognition and page
+  transcription.
+- Added lossless PNG encoding for images sent to hosted OCR APIs.
+
+### Changed
+
+- Pinned the Mistral model and Python SDK versions for reproducible runs.
+
 ## [v0.38.0] - 2026-09-10
 
 ### Added
