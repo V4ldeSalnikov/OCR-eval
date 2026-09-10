@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.29.0] - 2026-09-10
+
+### Added
+
+- Added the Sprakbanken TrOCR model for historical Norwegian handwritten lines.
+
+### Changed
+
+- Applied the Transformers 5 positional-embedding compatibility fix only to TrOCR models that use fixed sinusoidal positions.
+
 ## [v0.28.0] - 2026-09-10
 
 ### Added

@@ -14,13 +14,13 @@ class TrOCR(OCRModel):
         self.model.eval()
         self.processor = TrOCRProcessor.from_pretrained(model_id)
 
-        # Transformers 5 does not restore this checkpoint's old positional buffer.
-        position_embeddings = self.model.decoder.model.decoder.embed_positions
-        position_embeddings.weights = position_embeddings.get_embedding(
-            position_embeddings.weights.size(0),
-            position_embeddings.embedding_dim,
-            position_embeddings.padding_idx,
-        ).to(self.device)
+        if not self.model.config.decoder.use_learned_position_embeddings:
+            position_embeddings = self.model.decoder.model.decoder.embed_positions
+            position_embeddings.weights = position_embeddings.get_embedding(
+                position_embeddings.weights.size(0),
+                position_embeddings.embedding_dim,
+                position_embeddings.padding_idx,
+            ).to(self.device)
 
     def __call__(self, inputs: OCRInput) -> OCROutput:
         return self.batch_call([inputs])[0]
@@ -58,4 +58,15 @@ SWEDISH_LION_LIBRE = ModelMeta(
     license="apache-2.0",
     reference="https://huggingface.co/Riksarkivet/trocr-base-handwritten-hist-swe-2",
     notes="Swedish handwriting from 1600-1900; use riksarkivet-ood to avoid training overlap",
+)
+
+NORHAND_V3 = ModelMeta(
+    loader=TrOCR,
+    name="Sprakbanken/TrOCR-norhand-v3",
+    loader_kwargs={"model_id": "Sprakbanken/TrOCR-norhand-v3"},
+    family="TrOCR",
+    languages=["no-Latn"],
+    license="cc-by-4.0",
+    reference="https://huggingface.co/Sprakbanken/TrOCR-norhand-v3",
+    notes="Norwegian historical handwriting model fine-tuned on NorHand v3; norhand is an in-domain evaluation",
 )
