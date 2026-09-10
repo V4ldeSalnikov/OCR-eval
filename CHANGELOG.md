@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.23.0] - 2026-09-10
+
+### Added
+
+- Registered EasyOCR as a Scandinavian OCR baseline for Danish, Norwegian, and Swedish.
+
+### Changed
+
+- Simplified the existing EasyOCR adapter and made greedy decoding explicit.
+- Used recognition-only inference because evaluation samples are already cropped lines.
+- Kept EasyOCR inference serial because its batched API requires equal-sized images.
+
 ## [v0.22.0] - 2026-09-10
 
 ### Added

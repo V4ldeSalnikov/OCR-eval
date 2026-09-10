@@ -1,31 +1,38 @@
-import cv2
 import easyocr
 import numpy as np
-from models.model_interface import OCRModel, OCRInput, OCROutput
+
+from models.model_interface import OCRInput, OCRModel, OCROutput
+from models.model_meta import ModelMeta
 
 
 class EasyOCRAdapter(OCRModel):
+    def __init__(self, model_id: str, languages: list[str]):
+        self.id = model_id
+        self._reader = easyocr.Reader(languages, detector=False)
+
+    def __call__(self, inputs: OCRInput) -> OCROutput:
+        image = np.array(inputs.image.convert("L"))
+
+        parts = self._reader.recognize(
+            image,
+            decoder="greedy",
+            detail=0,
+            paragraph=False,
+        )
+
+        return OCROutput(text=" ".join(parts))
 
 
-    def __init__(self):
-        self.id = "easyocr"
-        self._reader = easyocr.Reader(['da'])
-
-
-    def __call__(self, inputs : OCRInput) -> OCROutput:
-
-        #Convert image to OpenCV format
-
-        img = inputs.image.convert("RGB")
-        cv_image = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-
-        #detail = 0 will output only text
-        result = self._reader.readtext(cv_image, detail = 0, paragraph = True )
-
-        text = ""
-        for res in result :
-            text += res + " "
-
-        text = text [:-1]
-
-        return OCROutput(text)
+EASYOCR_SCANDINAVIAN = ModelMeta(
+    loader=EasyOCRAdapter,
+    name="EasyOCR/Scandinavian",
+    loader_kwargs={
+        "model_id": "EasyOCR/Scandinavian",
+        "languages": ["da", "no", "sv"],
+    },
+    family="EasyOCR",
+    languages=["da-Latn", "no-Latn", "sv-Latn"],
+    license="apache-2.0",
+    reference="https://github.com/JaidedAI/EasyOCR",
+    notes="Conventional recognition-only baseline for pre-cropped lines",
+)
