@@ -3,6 +3,7 @@ from ocr_datasets.datasets.danish_typewritten import DanishTypewrittenLines
 from ocr_datasets.datasets.historical_danish_handwriting import DanishHistoricalHandwriting
 from ocr_datasets.datasets.modern_danish_handwriting import ModernDanishHandwriting
 from ocr_datasets.datasets.norhand import Norhand
+from ocr_datasets.datasets.oj4ocrmt import OJ4OCRMT
 from ocr_datasets.datasets.riksarkivet_ood import RiksarkivetOODLines
 from ocr_datasets.datasets.simple_dataset import SimpleDataset
 from ocr_datasets.datasets.swedish_fraktur import SwedishFrakturLines
@@ -36,6 +37,14 @@ def create_swedish_fraktur_dataset() -> OCRDatasetSource:
     return SwedishFrakturLines(streaming=True)
 
 
+def create_oj4ocrmt_danish_dataset() -> OCRDatasetSource:
+    return OJ4OCRMT(language="da")
+
+
+def create_oj4ocrmt_swedish_dataset() -> OCRDatasetSource:
+    return OJ4OCRMT(language="sv")
+
+
 DATASET_REGISTRY = {
     "simple": create_simple_dataset,
     "norhand": create_norhand_dataset,
@@ -44,6 +53,8 @@ DATASET_REGISTRY = {
     "danish-typewritten": create_danish_typewritten_dataset,
     "riksarkivet-ood": create_riksarkivet_ood_dataset,
     "swedish-fraktur": create_swedish_fraktur_dataset,
+    "oj4ocrmt-danish": create_oj4ocrmt_danish_dataset,
+    "oj4ocrmt-swedish": create_oj4ocrmt_swedish_dataset,
 }
 
 

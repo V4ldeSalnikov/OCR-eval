@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.35.0] - 2026-09-10
+
+### Added
+
+- Added the 2023 OJ4OCRMT regular-page evaluation set for Danish and Swedish.
+- Added selective Hugging Face file streaming so evaluations do not download the
+  complete 128 GB multilingual dataset.
+
+### Changed
+
+- Recorded OJ4OCRMT's PDF-derived reference text explicitly in report metadata.
+
 ## [v0.34.0] - 2026-09-10
 
 ### Added

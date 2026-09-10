@@ -38,8 +38,9 @@ For example, run ten NorHand lines with Qwen2-VL using:
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset norhand --batch-size 2 --max-examples 10
 ```
 
-Page transcription is available for the `historical-danish` and
-`modern-danish` page datasets:
+Page transcription is available for annotated handwriting and modern printed
+page datasets, including `historical-danish`, `modern-danish`,
+`oj4ocrmt-danish`, and `oj4ocrmt-swedish`:
 
 ```shell
 uv run python main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset historical-danish --task page-transcription --max-examples 10
