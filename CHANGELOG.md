@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.40.0] - 2026-09-10
+
+### Added
+
+- Added OpenAI GPT-5.6 Luna and Terra as hosted vision-language baselines for
+  line recognition and page transcription.
+
+### Changed
+
+- Sent lossless PNG inputs with original image detail and disabled reasoning so
+  evaluation tokens are used for the OCR transcription itself.
+
 ## [v0.39.0] - 2026-09-10
 
 ### Added
