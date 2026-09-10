@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.38.0] - 2026-09-10
+
+### Added
+
+- Added task-owned metric definitions so future OCR tasks can use metrics other
+  than text error rates.
+
+### Changed
+
+- Made evaluation reporting calculate and display the metrics declared by the
+  selected task.
+- Kept line recognition and page transcription on the same CER/WER metrics and
+  preserved the existing report fields.
+- Removed the unused Pydantic evaluator wrapper.
+
 ## [v0.37.0] - 2026-09-10
 
 ### Added

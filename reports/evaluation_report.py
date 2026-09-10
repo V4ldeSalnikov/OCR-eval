@@ -4,14 +4,14 @@ from pathlib import Path
 
 from pydantic_evals import Case, Dataset
 
-from metrics.metrics import cer, wer
 from models.model_interface import OCROutput, OCRModel
+from tasks.task_interface import OCRTask
 
 
 def build_evaluation_report(
     model: OCRModel,
     dataset: Dataset,
-    task: str,
+    task: OCRTask,
     batch_size: int,
     results: list[tuple[Case, OCROutput]],
 ) -> dict:
@@ -22,8 +22,7 @@ def build_evaluation_report(
             "name": case.name,
             "reference": case.expected_output,
             "prediction": output.text,
-            "cer": cer(output.text, case.expected_output),
-            "wer": wer(output.text, case.expected_output),
+            **task.calculate_metrics(output.text, case.expected_output),
             "metadata": case.metadata,
         }
         for case, output in results
@@ -32,13 +31,10 @@ def build_evaluation_report(
     return {
         "model": model.id,
         "dataset": dataset.name,
-        "task": task,
+        "task": task.id,
         "batch_size": batch_size,
         "cases": case_results,
-        "corpus_metrics": {
-            "cer": cer(predictions, references),
-            "wer": wer(predictions, references),
-        },
+        "corpus_metrics": task.calculate_metrics(predictions, references),
     }
 
 
@@ -50,13 +46,13 @@ def print_evaluation_report(report: dict) -> None:
         print(case_result["name"])
         print(f"Expected: {case_result['reference']}")
         print(f"Predicted: {case_result['prediction']}")
-        print(f"CER: {case_result['cer']:.4f}")
-        print(f"WER: {case_result['wer']:.4f}")
+        for name in report["corpus_metrics"]:
+            print(f"{name.upper()}: {case_result[name]:.4f}")
         print()
 
     print("Corpus")
-    print(f"CER: {report['corpus_metrics']['cer']:.4f}")
-    print(f"WER: {report['corpus_metrics']['wer']:.4f}")
+    for name, value in report["corpus_metrics"].items():
+        print(f"{name.upper()}: {value:.4f}")
 
 
 def save_evaluation_report(report: dict) -> Path:

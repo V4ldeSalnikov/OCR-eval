@@ -3,7 +3,7 @@ from itertools import islice
 
 from pydantic_evals import Case, Dataset
 
-from evaluators.standard_evaluator import StandardEvaluator
+from metrics.metrics import cer, wer
 from models.model_interface import OCRInput
 from ocr_datasets.dataset_interface import OCRDatasetSource, PageDatasetSource
 from tasks.task_interface import OCRTask
@@ -11,6 +11,7 @@ from tasks.task_interface import OCRTask
 
 class PageTranscriptionTask(OCRTask):
     id = "page-transcription"
+    metrics = {"cer": cer, "wer": wer}
 
     def build_dataset(
         self,
@@ -29,7 +30,6 @@ class PageTranscriptionTask(OCRTask):
         return Dataset(
             name=source.id,
             cases=list(cases),
-            evaluators=[StandardEvaluator()],
         )
 
     def _build_cases(self, source: PageDatasetSource) -> Iterable[Case]:

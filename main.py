@@ -27,7 +27,7 @@ def main():
     report = build_evaluation_report(
         model,
         dataset,
-        task.id,
+        task,
         args.batch_size,
         results,
     )
