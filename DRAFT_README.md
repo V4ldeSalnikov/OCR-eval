@@ -73,6 +73,17 @@ uv run python main.py --model OpenAI/gpt-5.6-luna --dataset simple
 uv run python main.py --model OpenAI/gpt-5.6-terra --dataset simple
 ```
 
+Claude models require `ANTHROPIC_API_KEY`. Haiku is the economical baseline
+and Sonnet is the stronger baseline:
+
+```shell
+uv run python main.py --model Anthropic/claude-haiku-4-5-20251001 --dataset simple
+uv run python main.py --model Anthropic/claude-sonnet-5 --dataset simple
+```
+
+Very small line crops can reduce Claude's vision accuracy. The benchmark sends
+the original image without provider-specific resizing.
+
 ## Tesseract
 
 The Tesseract adapters assume that the Tesseract engine is installed and available as `tesseract` from a new shell. Install the official `dan`, `nor`, and `swe` files from [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) in Tesseract's active `tessdata` directory. If that directory is not writable, place the files in another directory and set `TESSDATA_PREFIX` to it.

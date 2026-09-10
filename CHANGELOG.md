@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.41.0] - 2026-09-10
+
+### Added
+
+- Added Claude Haiku 4.5 and Claude Sonnet 5 as hosted vision-language
+  baselines for line recognition and page transcription.
+
+### Changed
+
+- Disabled Claude's thinking mode for direct OCR transcription.
+
 ## [v0.40.0] - 2026-09-10
 
 ### Added
