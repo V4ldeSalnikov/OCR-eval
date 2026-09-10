@@ -14,6 +14,7 @@ from ocr_datasets.dataset_interface import (
 
 class OJ4OCRMT(PageDatasetSource):
     source = "hltcoe/OJ4OCRMT"
+    revision = "15960b0c7a682b1fd1c19f560ac07d17a07214a5"
     language_names = {"da": "danish", "sv": "swedish"}
 
     def __init__(
@@ -30,7 +31,7 @@ class OJ4OCRMT(PageDatasetSource):
         self.page_type = page_type
         self.dpi = dpi
         self.files = HfFileSystem()
-        self.root = f"datasets/{self.source}"
+        self.root = f"datasets/{self.source}@{self.revision}"
 
     def load_documents(self) -> Iterable[OCRDocument]:
         documents = self._load_split()
@@ -41,6 +42,7 @@ class OJ4OCRMT(PageDatasetSource):
                 pages=self._load_pages(doc_id, page_numbers),
                 metadata={
                     "source": self.source,
+                    "revision": self.revision,
                     "split": self.split,
                     "page_type": self.page_type,
                     "doc_id": doc_id,
