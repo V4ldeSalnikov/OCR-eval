@@ -1,7 +1,24 @@
 from models.model_meta import ModelMeta
-from models.models_implementations import easyocr_adapter, glm_ocr, got_ocr2, paddleocr_vl, qwen2_vl, qwen3_vl
+from models.models_implementations import (
+    easyocr_adapter,
+    glm_ocr,
+    got_ocr2,
+    paddleocr_vl,
+    qwen2_vl,
+    qwen3_vl,
+    tesseract_adapter,
+)
 from typing import Any
-model_modules = [easyocr_adapter, glm_ocr, got_ocr2, paddleocr_vl, qwen3_vl, qwen2_vl]
+
+model_modules = [
+    easyocr_adapter,
+    glm_ocr,
+    got_ocr2,
+    paddleocr_vl,
+    qwen3_vl,
+    qwen2_vl,
+    tesseract_adapter,
+]
 
 MODEL_REGISTRY = {}
 

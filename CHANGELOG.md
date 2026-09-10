@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.27.0] - 2026-09-10
+
+### Added
+
+- Added Tesseract `tessdata_best` baselines for Danish, Norwegian, and Swedish printed lines.
+- Documented the external Tesseract engine and language-data setup in the draft README.
+
 ## [v0.26.0] - 2026-09-10
 
 ### Added
