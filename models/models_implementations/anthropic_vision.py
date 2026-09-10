@@ -55,6 +55,11 @@ class AnthropicVision(OCRModel):
             ],
             thinking={"type": "disabled"},
         )
+        if response.stop_reason != "end_turn":
+            raise RuntimeError(
+                f"Anthropic response ended with stop reason "
+                f"'{response.stop_reason}'"
+            )
         [text] = [block.text for block in response.content if block.type == "text"]
 
         return OCROutput(text=text)

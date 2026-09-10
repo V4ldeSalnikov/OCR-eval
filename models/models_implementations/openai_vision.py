@@ -53,6 +53,11 @@ class OpenAIVision(OCRModel):
             reasoning={"effort": "none"},
             store=False,
         )
+        if response.status != "completed":
+            raise RuntimeError(
+                f"OpenAI response ended with status '{response.status}': "
+                f"{response.incomplete_details}"
+            )
 
         return OCROutput(text=response.output_text)
 

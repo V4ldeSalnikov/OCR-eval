@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.43.0] - 2026-09-10
+
+### Changed
+
+- Made OpenAI and Anthropic evaluations fail when a hosted response is
+  incomplete instead of scoring a truncated transcription.
+
 ## [v0.42.0] - 2026-09-10
 
 ### Added
