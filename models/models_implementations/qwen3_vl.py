@@ -41,7 +41,24 @@ class Qwen3VL(OCRModel):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model.to(self.device)
 
-        self.processor = AutoProcessor.from_pretrained(model_id)
+        self.image_options = (
+            {"max_pixels": 4096 * 32 * 32} if task == "page-transcription" else {}
+        )
+        self.processor = AutoProcessor.from_pretrained(model_id, **self.image_options)
+
+    @property
+    def inference_settings(self) -> dict:
+        return {
+            "max_pixels": self.processor.image_processor.size["longest_edge"],
+            "min_pixels": self.processor.image_processor.size["shortest_edge"],
+            "image_patch_size": 16,
+            "max_new_tokens": self.max_new_tokens,
+            "do_sample": False,
+            "dtype": str(self.model.dtype),
+            "model_revision": getattr(self.model.config, "_commit_hash", None),
+            "system_prompt": self.system_prompt,
+            "user_prompt": self.user_prompt,
+        }
 
     def __call__(self, inputs: OCRInput) -> OCROutput:
         return self.batch_call([inputs])[0]
@@ -56,7 +73,7 @@ class Qwen3VL(OCRModel):
                     "content": [{"type": "text", "text": self.system_prompt}],
                 },
                 {"role": "user", "content": [
-                    {"type": "image", "image": image},
+                    {"type": "image", "image": image, **self.image_options},
                     {"type": "text", "text": self.user_prompt},
                 ]},
             ])
@@ -66,7 +83,7 @@ class Qwen3VL(OCRModel):
             self.processor.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
             for message in messages
         ]
-        image_inputs, video_inputs = process_vision_info(messages)
+        image_inputs, video_inputs = process_vision_info(messages, image_patch_size=16)
         model_inputs = self.processor(
             text=texts, images=image_inputs, videos=video_inputs,
             padding=True, return_tensors="pt"

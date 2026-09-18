@@ -28,7 +28,7 @@ def build_evaluation_report(
         for case, output in results
     ]
 
-    return {
+    report = {
         "model": model.id,
         "dataset": dataset.name,
         "task": task.id,
@@ -36,6 +36,9 @@ def build_evaluation_report(
         "cases": case_results,
         "corpus_metrics": task.calculate_metrics(predictions, references),
     }
+    if hasattr(model, "inference_settings"):
+        report["inference_settings"] = model.inference_settings
+    return report
 
 
 def print_evaluation_report(report: dict) -> None:

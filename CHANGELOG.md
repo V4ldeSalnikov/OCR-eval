@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 From v0.1.0 onward, each development commit advances the minor version.
 
+## [v0.44.0] - 2026-09-18
+
+### Changed
+
+- Capped Qwen page inputs at 4,096 visual tokens to bound image memory use.
+- Corrected Qwen3 visual preprocessing to use its 16-pixel patch size.
+
+### Added
+
+- Recorded Qwen image limits, generation settings, prompts, dtype and model
+  revision in evaluation reports.
+
 ## [v0.43.0] - 2026-09-10
 
 ### Changed
