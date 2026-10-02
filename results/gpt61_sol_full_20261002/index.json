@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "run_id": "gpt61_sol_full_20261002",
+  "model": {
+    "id": "OpenAI/gpt-6.1-sol",
+    "name": "OpenAI/gpt-6.1-sol",
+    "family": "GPT-6.1",
+    "reference": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "notes": "Standard API, low reasoning, original image detail.",
+    "license": "proprietary",
+    "supported_tasks": [
+      "line-recognition",
+      "page-transcription"
+    ],
+    "warnings": []
+  },
+  "status": "completed",
+  "started_at": "2026-10-02T07:54:00.009246+00:00",
+  "finished_at": "2026-10-02T08:41:31.373209+00:00",
+  "code_revision": "19cb4597093fdebe339cfe66d40e0c68f8f23d35",
+  "seed": 20260917,
+  "targets": {
+    "line-recognition": 1000,
+    "page-transcription": 100
+  },
+  "samples": 6477,
+  "failed_samples": 0,
+  "estimated_cost_usd": 27.6775625,
+  "benchmarks": [
+    {
+      "benchmark": "Scandinavian OCR",
+      "tasks": 11,
+      "cer": 0.15307547525415924,
+      "wer": 0.2780273806778964
+    },
+    {
+      "benchmark": "Danish OCR",
+      "tasks": 6,
+      "cer": 0.12993260784278457,
+      "wer": 0.23328265192332157
+    },
+    {
+      "benchmark": "Norwegian OCR",
+      "tasks": 2,
+      "cer": 0.18604348535070933,
+      "wer": 0.3175138709636255
+    },
+    {
+      "benchmark": "Swedish OCR",
+      "tasks": 3,
+      "cer": 0.17738253667920853,
+      "wer": 0.3411925113298933
+    }
+  ],
+  "tasks": [
+    {
+      "sample_set_id": "line-recognition/danish-typewritten",
+      "report": "line-recognition/danish-typewritten.json",
+      "sha256": "66d4288a72f7c0ae64ef5a2762f7a06fd6322b39cf815b232f51be069c0e96bb",
+      "samples": 1000,
+      "corpus_metrics": {
+        "cer": 0.00530573543948839,
+        "wer": 0.031589985581334384
+      },
+      "estimated_cost_usd": 0.695144
+    },
+    {
+      "sample_set_id": "line-recognition/historical-danish",
+      "report": "line-recognition/historical-danish.json",
+      "sha256": "99bab588a9b6c259ca14927157965911fcb7d946ee1729f026ae579ad484bf87",
+      "samples": 1000,
+      "corpus_metrics": {
+        "cer": 0.40104863900044624,
+        "wer": 0.6538110451848471
+      },
+      "estimated_cost_usd": 2.719326
+    },
+    {
+      "sample_set_id": "line-recognition/modern-danish",
+      "report": "line-recognition/modern-danish.json",
+      "sha256": "96c3601f7fa5c4c7287523d12126740422b8046fff59dbdc7712b8836a5e3fde",
+      "samples": 977,
+      "corpus_metrics": {
+        "cer": 0.15488266464799394,
+        "wer": 0.27290482954545453
+      },
+      "estimated_cost_usd": 1.528094
+    },
+    {
+      "sample_set_id": "line-recognition/norhand",
+      "report": "line-recognition/norhand.json",
+      "sha256": "e6d4c93bc39c5de8b63655cfeefff55e4fe8384560899b0fcb07fcc991803615",
+      "samples": 1000,
+      "corpus_metrics": {
+        "cer": 0.25636927091828415,
+        "wer": 0.49532538955087074
+      },
+      "estimated_cost_usd": 2.688684
+    },
+    {
+      "sample_set_id": "line-recognition/riksarkivet-ood",
+      "report": "line-recognition/riksarkivet-ood.json",
+      "sha256": "9dc0ee8541ccd6f4fd378ba1cd11f357c35278efb6cde3a9d7620ec959885a62",
+      "samples": 1000,
+      "corpus_metrics": {
+        "cer": 0.4683667122776465,
+        "wer": 0.7852276246515949
+      },
+      "estimated_cost_usd": 3.380685
+    },
+    {
+      "sample_set_id": "line-recognition/swedish-fraktur",
+      "report": "line-recognition/swedish-fraktur.json",
+      "sha256": "9c45f4a24a54c4ebaee9343f253ab0423871d7830ea0ae57ba72f35862de34d3",
+      "samples": 1000,
+      "corpus_metrics": {
+        "cer": 0.0499954258530784,
+        "wer": 0.20923295454545454
+      },
+      "estimated_cost_usd": 1.178262
+    },
+    {
+      "sample_set_id": "page-transcription/historical-danish",
+      "report": "page-transcription/historical-danish.json",
+      "sha256": "0a523b0e7e905cae5bffff897425b85700f4d61a24cf326fb82b6e2722165b41",
+      "samples": 100,
+      "corpus_metrics": {
+        "cer": 0.17227268190438166,
+        "wer": 0.33831716239860027
+      },
+      "estimated_cost_usd": 4.2443675
+    },
+    {
+      "sample_set_id": "page-transcription/modern-danish",
+      "report": "page-transcription/modern-danish.json",
+      "sha256": "6e23ccd756ada0123ead259dca6c2c8fc74c8acf55067475a420fc4432283873",
+      "samples": 100,
+      "corpus_metrics": {
+        "cer": 0.030646459227467813,
+        "wer": 0.06839336301092674
+      },
+      "estimated_cost_usd": 0.75483
+    },
+    {
+      "sample_set_id": "page-transcription/nasjonalt-vitenarkiv",
+      "report": "page-transcription/nasjonalt-vitenarkiv.json",
+      "sha256": "b47f55890c3730acf89c0462aeccb04b31ef046e2c4fffba443602cbf52a4baf",
+      "samples": 100,
+      "corpus_metrics": {
+        "cer": 0.1157176997831345,
+        "wer": 0.13970235237638023
+      },
+      "estimated_cost_usd": 3.15515
+    },
+    {
+      "sample_set_id": "page-transcription/oj4ocrmt-danish",
+      "report": "page-transcription/oj4ocrmt-danish.json",
+      "sha256": "31750d9a6f2fd78f783ff77e47bca66516f62045580733936a9f3131e4d35f32",
+      "samples": 100,
+      "corpus_metrics": {
+        "cer": 0.015439466836929283,
+        "wer": 0.03467952581876633
+      },
+      "estimated_cost_usd": 3.6763
+    },
+    {
+      "sample_set_id": "page-transcription/oj4ocrmt-swedish",
+      "report": "page-transcription/oj4ocrmt-swedish.json",
+      "sha256": "a4451bb6067d3fb9cff09cb7062a36fed15ce2ea80ee6b51e4baac3374ad5622",
+      "samples": 100,
+      "corpus_metrics": {
+        "cer": 0.013785471906900661,
+        "wer": 0.02911695479263047
+      },
+      "estimated_cost_usd": 3.65672
+    }
+  ],
+  "validation": {
+    "passed": true,
+    "tasks_checked": 11,
+    "samples_checked": 6477,
+    "checks": [
+      "frozen manifest hashes",
+      "image/reference alignment",
+      "corpus CER/WER recomputation",
+      "completed run audit",
+      "credential pattern scan"
+    ]
+  }
+}

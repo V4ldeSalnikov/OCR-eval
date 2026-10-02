@@ -2,6 +2,8 @@
 
 Evaluation framework for Multilingual, Multitype OCR models (classical + VLM based). Based on Pydantic Eval framework
 
+[Published evaluation results](results/README.md) · [ScandiOCR leaderboard](https://v4ldesalnikov.github.io/ocr-eval/)
+
 Dataset TODO list:
 
   Danish :

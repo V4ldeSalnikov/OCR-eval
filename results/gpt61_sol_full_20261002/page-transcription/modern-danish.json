@@ -1,0 +1,995 @@
+{
+  "schema_version": 1,
+  "run_id": "gpt61_sol_full_20261002",
+  "model_id": "OpenAI/gpt-6.1-sol",
+  "sample_set_id": "page-transcription/modern-danish",
+  "dataset_id": "modern-danish",
+  "dataset_name": "modern-danish-handwriting",
+  "task": "page-transcription",
+  "status": "completed",
+  "selected_samples": 100,
+  "completed_samples": 100,
+  "successful_samples": 100,
+  "failed_samples": 0,
+  "batch_size": 1,
+  "corpus_metrics": {
+    "cer": 0.030646459227467813,
+    "wer": 0.06839336301092674
+  },
+  "manifest_sha256": "b44fae20bfee8088f2dc5944a644384da83d6f9b911f35d273255a779360066f",
+  "source_revision": "51773641267840022aa9a4e8a1129b4d751d2070",
+  "split": "train",
+  "source_url": "https://huggingface.co/datasets/RA-Data-Science/modern-danish-handwriting",
+  "seed": 20260917,
+  "sampling_method": "Seeded balanced sampling across document IDs",
+  "reference_type": "annotated_text",
+  "started_at": "2026-10-02T08:35:57.006127+00:00",
+  "finished_at": "2026-10-02T08:36:36.951975+00:00",
+  "code_revision": "19cb4597093fdebe339cfe66d40e0c68f8f23d35",
+  "implementation_sha256": "1c8b1e82ee368c62b38682350eb3bfb4d3eff296fcdc1b722cce17163ed42228",
+  "inference_settings": {
+    "model_id": "gpt-6.1-sol",
+    "endpoint": "https://api.openai.com/v1/responses",
+    "reasoning": {
+      "effort": "low"
+    },
+    "service_tier": "default",
+    "store": false,
+    "image_encoding": "RGB PNG base64",
+    "image_resize": null,
+    "image_detail": "original",
+    "prompt_caching": "provider default",
+    "per_task_settings": {
+      "line-recognition": {
+        "model": "gpt-6.1-sol",
+        "instructions": "You are an OCR engine. Transcribe the text. Return only the text from the image in a single line.",
+        "user_prompt": "Transcribe the text on the image.",
+        "detail": "original",
+        "reasoning": {
+          "effort": "low"
+        },
+        "max_output_tokens": 8192,
+        "service_tier": "default",
+        "store": false
+      },
+      "page-transcription": {
+        "model": "gpt-6.1-sol",
+        "instructions": "You are an OCR engine. Transcribe all text on the page in natural reading order. Return only the text and preserve line breaks.",
+        "user_prompt": "Transcribe all text on this page in natural reading order.",
+        "detail": "original",
+        "reasoning": {
+          "effort": "low"
+        },
+        "max_output_tokens": 16384,
+        "service_tier": "default",
+        "store": false
+      }
+    },
+    "sdk_version": "3.8.0"
+  },
+  "runtime_settings": {
+    "workers": 24,
+    "min_request_interval_seconds": 0.25,
+    "timeout_seconds": 180,
+    "sdk_retries": 0,
+    "rate_limit_retries": 5,
+    "retry_failed_samples": false
+  },
+  "failure_policy": {
+    "version": "empty_prediction_v1",
+    "failed_prediction": "",
+    "corpus_denominator": "all_selected_references",
+    "retry_failed_samples": false,
+    "completion": "all_selected_samples_have_an_attempt_record"
+  },
+  "usage_info": {
+    "input_tokens": 261680,
+    "cached_input_tokens": 0,
+    "cache_write_tokens": 261380,
+    "output_tokens": 10078,
+    "reasoning_tokens": 4970
+  },
+  "estimated_cost_usd": 0.75483,
+  "cases": [
+    {
+      "name": "modern-danish-724822-0",
+      "reference": "For Den Danske Bank er det — trods\ntraditionel, ivrig omkostningsbevidsthed\n— nye signaler at bebude afskedigelser\ni stedet for korpsånd. Det mener\nFinn Østrup.",
+      "prediction": "FOR DEN DANSKE BANK ER DET - TRODS\nTRADITIONEL, IVRIG OMKOSTNINGSBEVIDSTHED\n- NYE SIGNALER AT BEBUDE AFSKEDIGELSER\nI STEDET FOR KORPÅND. DET MENER\nFINN ØSTRUP.",
+      "cer": 0.7875,
+      "wer": 1.0,
+      "inference_status": "success",
+      "image_sha256": "e72aa439bce9226085b014ac38119310f989897d86e4e20b074a85acb931db6b"
+    },
+    {
+      "name": "modern-danish-724822-1",
+      "reference": "Zenon underviste i skyggen af stoa,\nsøjlegangen på agora i Athen.",
+      "prediction": "Zenon underviste i skyggen av\nstoa, søylegangen",
+      "cer": 0.3076923076923077,
+      "wer": 0.5454545454545454,
+      "inference_status": "success",
+      "image_sha256": "156bd1a5dc4451ad95e1c32811b3a15a03742bae63918f2b214daf93159aee79"
+    },
+    {
+      "name": "modern-danish-724822-10",
+      "reference": "Den sovjetiske folkekongres har i princippet\nvedtaget at opløse Sovjetunionen —\nmen samtidig har præsident Mikhail\nGorbatjov lidt et nyt politisk nederlag,\nfordi hans forfatningsudkast ikke kunne\nsamle stemmer nok.",
+      "prediction": "Den sovjetiske folkekongres har i princippet\nvedtaget at opløse Sovjetunionen -\nmen samtidig har præsident Mikhail\nGorbatjov lidt et nyt politisk nederlag,\nfordi hans forfatningsudkast ikke kunne\nsamle stemmer nok.",
+      "cer": 0.004672897196261682,
+      "wer": 0.03333333333333333,
+      "inference_status": "success",
+      "image_sha256": "d84774fedcc7229ffa85bf0adb25a1f1e2a2418fa3807bfdddb93b3317592d96"
+    },
+    {
+      "name": "modern-danish-724822-100",
+      "reference": "Du lovede selvfølgelig også at tage\ndig af problemet med Diego, naturligvis\nskulle Lange og Ronnie ikke have lov\ntil at tæve ham, men på den anden side\nskulle Diego også lade være med at\ndrille dem!",
+      "prediction": "Du lovede selvfølgelig også at tage\ndig af problemet med Diego, naturligvis\nskulle Lauge og Karina ikke have lov\ntil at tæve ham, men på den anden side\nskulle Diego også lade være med at\ndrille dem!",
+      "cer": 0.03535353535353535,
+      "wer": 0.05405405405405406,
+      "inference_status": "success",
+      "image_sha256": "1e6eec8f660a395e60cf7d5b606a927d4eaddf28169d6af35d987002565a0b7a"
+    },
+    {
+      "name": "modern-danish-724822-101",
+      "reference": "INTET MOTIV I ingen af tilfældene er\nder noget motiv.",
+      "prediction": "INTET MOTIV I ingen af tilfældene er\nder noget motiv.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "9dfe51f919b577f298486da896d66949678b81205875585dfc0bf301dc24f668"
+    },
+    {
+      "name": "modern-danish-724822-106",
+      "reference": "(De Baltiske lande er blevet selvstændige\nstater — men hvor demokratiske er de\nud fra tradition og sindelag, når det\nkommer til stykket. Vi ser på, hvordan\nmindretallene bliver behandlet.) Østersøkonferencen\nåbnede i dag i København.",
+      "prediction": "(De Baltiske lande er blevet selvstændige\nStater- men hvor demokratiske er de\nud fra tradition og sindelag, når det\nkommer til stykket. Vi ser på, hvordan\nmindretallene bliver behandlet.) Østersøkonferencen\nåbnede i dag i København",
+      "cer": 0.017167381974248927,
+      "wer": 0.08333333333333333,
+      "inference_status": "success",
+      "image_sha256": "4d0a8c45bdeee85abba014b2cf616ed2d8323915d315ffade666602b6e2e1fd2"
+    },
+    {
+      "name": "modern-danish-724822-11",
+      "reference": "Den var endnu ikke færdigudviklet men\nkan sagtens kende forskel på en Remy\nVSOP og en billig øst-import. Gør en\ngod gerning, køb Dirty Harrys revolver",
+      "prediction": "Den var endnu ikke færdigudviklet men\nkan sagtens kende forskel på en Remy\nVSOP og en billig øst-import. Gør en\ngod gerning, køb Dirty Harrys revolver",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "ab4c2f1779b73d95dc83374b1747ca6f8f560afcbe44ed37607f484ab59d8efe"
+    },
+    {
+      "name": "modern-danish-724822-112",
+      "reference": "Den nøjagtige rangfølge er dog endnu\nikke 100 pct. sikker, fordi der vil\ngå et par uger, før der kan skaffes\nhelt up-to-date sammenlignelige tal\nfra resten af Europa.",
+      "prediction": "Den nøjagtige rækkefølge er dog endnu\nikke 100 pct. sikker, fordi der vil\ngå et par uger, før der kan skaffes\nhelt up-to-date sammenlignelige tal\nfra resten af Europa.",
+      "cer": 0.024096385542168676,
+      "wer": 0.034482758620689655,
+      "inference_status": "success",
+      "image_sha256": "27e04adc0587ef0640e3a488ceab7b4368f1a8329a2cb7d11d7259e15c7ea80f"
+    },
+    {
+      "name": "modern-danish-724822-113",
+      "reference": "Samtidig afviser hun, at partiet kan\nkontrollere, hvilke mennesker, der\nmelder ind i CD. Politiassistent Erik\nDagø er kommet i søgelyset, fordi han\nhar kritiseret, at et sportsfirma bruger\nfarvede fotomodeller i en brochure.",
+      "prediction": "Samtidig afviser hun, at partiet kan\nkontrollere, hvilke mennesker, der\nmelder ind i CD. Politiassistent Erik\nDaa er kommet i søgelyset, fordi han\nhar kritiseret, at et sportsfirma bruger\nfarvede fotomodeller i brochure.",
+      "cer": 0.022321428571428572,
+      "wer": 0.058823529411764705,
+      "inference_status": "success",
+      "image_sha256": "c142a56680359ee40839f667f98381caf87868abb422f96aaf0051c99be61644"
+    },
+    {
+      "name": "modern-danish-724822-115",
+      "reference": "Erfarne Ivan Nielsen, som er af de\nmest energiske oprørere og forkæmpere\nfor ændringer af de famøse, gældende\ntillægskontrakter er helt på linie\nmed sin anfører.",
+      "prediction": "Erfarne Ivan Nielsen, som er af de\nmest energiske oprørere og forkæmpere\nfor ændringer af de famøse, gældende\ntillægskontrakter er helt på linie\nmed sin anfører.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "27a303bb8464f9dd20d37f52bca0413073bef75c29165ddf7fae48e9e23d8d09"
+    },
+    {
+      "name": "modern-danish-724822-119",
+      "reference": "Med sin sang og sit spil fascinerede\nhan tusinder af danske turister, som\nfor nogle minutter standsede op for\nat lytte.",
+      "prediction": "Med sin sang og sit spil fascinerede\nhan tusinder af danske turister, som\nfor nogle minutter standsede op for\nat lytte.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "f8acea9065dc6b54756ee5c33da6aa56f6b39d2c5d6de993bbfa29784df1bc01"
+    },
+    {
+      "name": "modern-danish-724822-120",
+      "reference": "De nægtede ifølge Poul Wejlebjerg også\nat medvirke til en \"blød landing\".",
+      "prediction": "De nægtede ifølge Poul Dejlebjerg også\nat medvirke til en \"blød landing\".",
+      "cer": 0.0136986301369863,
+      "wer": 0.08333333333333333,
+      "inference_status": "success",
+      "image_sha256": "ef3ba8a42f1716dadda1992807b82e0ac9ee2307d5b64b3efb5ae8d68c3e87c3"
+    },
+    {
+      "name": "modern-danish-724822-123",
+      "reference": "Optimismen på dette felt er nu dalet\nbetydeligt, og kun de mest positive\ntror vi vil se planter med denne evne\nom 20 til 30 år.",
+      "prediction": "Optimismen på dette felt er nu dalet\nbetydeligt, og kun de mest positive\ntror vi vil se planter med denne evne\nom 20 til 30 år.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "6a009d4b8199a722cdd03e5c6ae92615e9971880e95c186468b1d2ebdb669e65"
+    },
+    {
+      "name": "modern-danish-724822-125",
+      "reference": "Det skønnes, at omkring to millioner\nmarokkanere med bopæl i Tyskland, Belgien\nog Frankrig, i løbet af sommeren kommer\nvia Algeciras til Marokko. Og det er\nen stor del af disse, som har været\nfanget af færge-strejken.",
+      "prediction": "Det skønnes, at omkring to millioner\nMarokkanere med bopæl i Tyskland, Belgien\nog Frankrig, i løbet af sommeren kommer\nvia Algeciras til Marokko. Og det er\nen stor del af disse, som har været\nfanget af færge-strejken.",
+      "cer": 0.004608294930875576,
+      "wer": 0.02702702702702703,
+      "inference_status": "success",
+      "image_sha256": "e21fa18601b7172acd4e20eb45e5fd4becd0231217a28a85f5802d34fba0172c"
+    },
+    {
+      "name": "modern-danish-724822-126",
+      "reference": "For hver engelsk mil og femten kilometer\ner der opstillet ure, så løberne kan\nregne ud, om de holder deres personlige\ntider.",
+      "prediction": "For hver engelske mil og femten kilometer\ner der opstillet ure, så løberne kan\nregne ud, om de holder deres personlige\ntider.",
+      "cer": 0.008064516129032258,
+      "wer": 0.045454545454545456,
+      "inference_status": "success",
+      "image_sha256": "7f40dd7b097c9d0f6c700bf9051570ceeb53a1284310cfe68e1a3f7672a7277e"
+    },
+    {
+      "name": "modern-danish-724822-128",
+      "reference": "Jeg ser en stor fordel i at være tæt\npå spillerne i det daglige og få fornemmelsen\naf, hvilken dosering træning, der skal\ntil på de forskellige tider af sæsonen.",
+      "prediction": "Jeg ser en stor fordel i at være tæt\npå spillerne i det daglige og få fornemmelsen\naf, hvilken dosering træning, der skal\ntil på de forskellige tider af sæsonen",
+      "cer": 0.006211180124223602,
+      "wer": 0.03333333333333333,
+      "inference_status": "success",
+      "image_sha256": "5d77cd8eb69507e7957293d00ecb4f44889d4c03195ec4b68474f4191c09b787"
+    },
+    {
+      "name": "modern-danish-724822-13",
+      "reference": "Jeg gør, hvad I beder mig om, men I\nguder, jeg kan ikke spille lykkelig.",
+      "prediction": "Jeg gør, hvad I beder mig om, men I\nguder, jeg kan ikke spille lykkelig.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "a542c605c0b43c29c941d0afc279ffe0e92119d172fbd433407007171384a6a5"
+    },
+    {
+      "name": "modern-danish-724822-132",
+      "reference": "Og dermed afsløres det, at alle hans\nkonklusioner er udtryk for en politisk\npræference for staten, og intet, absolut\nintet, har med fagøkonomi at gøre.",
+      "prediction": "Og dermed afsløres det, at alle hans\nkonklusioner er udtryk for en politisk\npræference for staten, og intet, absolut\nintet, har med fagøkonomi at gøre.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "06af38a235b3bfdf88b5a089ef65a3bd32af2cc485e43f225a98b329bfcc003a"
+    },
+    {
+      "name": "modern-danish-724822-133",
+      "reference": "Nakskov-pigen var simpelt hen så motiveret,\n\"tændt\" og trimmet til opgaven, at\nhun præsterede næstbedste individuelle\ntid af samtlige 32 piger i finalen.",
+      "prediction": "Nakskov-pigen var simpelt hen så motiveret,\n“tændt” og trimmet til opgaven, at hun\npræsterede præsterede næstbedste individuelle tid\naf samtlige 32 piger i finalen.",
+      "cer": 0.08496732026143791,
+      "wer": 0.08695652173913043,
+      "inference_status": "success",
+      "image_sha256": "4234c44d269bee2adfceafc611fb5b7e4774c0fe226bf72b70371c1b3600d973"
+    },
+    {
+      "name": "modern-danish-724822-135",
+      "reference": "På anklagestolene sad seks danske søfolk\nfra narko-skibet Nerma og tre amerikanske\nmedanklagede stumme af spænding. Foran\nsig havde de deres forsvarere.",
+      "prediction": "På anklagestolene sad seks danske søfolk\nfra narko-skibet Nerma og tre amerikanske\nmedanklagede stumme af spænding. Foran\nsig havde de deres forsvarere.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "806ac8e59c826cf9757a3d5b3cf29f293092d213d1032ce6b9230845b4560929"
+    },
+    {
+      "name": "modern-danish-724822-136",
+      "reference": "Her fokuseres også på patienternes\ngode og dårlige erfaringer med behandlingsforløbet.\nSpørgeskemaerne afleveres i lukkede\nkuverter til sociologerne. På behandler-siden\nregistrerer Ole og Suzette van Hauen-Drucker\nalle behandlinger på skemaer, som siden\nbehandles via EDB.",
+      "prediction": "Her fokuseres også på patienternes\ngode og dårlige erfaringer med behandlingsforløb\nSpørgeskemaerne afleveres i lukkede\nkuverter til sociologerne. På behandler-siden\nregistrerer Ole og Suzette van Hauen-Drecker\nalle behandlinger på skemaer, som siden\nbehandles via EDB.",
+      "cer": 0.014705882352941176,
+      "wer": 0.05714285714285714,
+      "inference_status": "success",
+      "image_sha256": "03c67c5f60810cd8982d9577e0424a1976c529752684734d2ed67a330d0c292b"
+    },
+    {
+      "name": "modern-danish-724822-139",
+      "reference": "Det hævdes bl.a. at \"det har hidtil\nværet en selvfølge, at menneskelivet\ner ukrænkeligt\", ihvertfald i vores\nkulturkreds. Jeg må indrømme at jeg\nhar svært ved at genkende vores kultur\nud fra beskrivelsen.",
+      "prediction": "Det hævdes bl.a. at \"det har hidtil\nværet en selvfølge, at menneskelivet\ner ukrænkeligt\", ihvertfald i vores\nkulturkreds. Jeg må indrømme at jeg\nhar svært ved at genkende vores kultur\nud fra beskrivelsen.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "3ad844c30f2e777ef8dac990a6f4bbcac865ed1c985a7ecdab428b497141289c"
+    },
+    {
+      "name": "modern-danish-724822-140",
+      "reference": "Så spænding om resultatet fik vi aldrig.\nTaberne havde ganske enkelt ikke kapacitet\ntil at straffe modstanderne for deres\nmeningsløse sjuskefejl i forsvaret\nefter pausen. Flemming Nielsen",
+      "prediction": "Så spænding om resultatet fik vi aldrig.\nTaberne havde ganske enkelt ikke kapaciteten.\ntil at straffe modstanderne for deres\nmeningsløse sjuskefejl i forsvaret\nefter pausen. Flemming Nielsen",
+      "cer": 0.016042780748663103,
+      "wer": 0.037037037037037035,
+      "inference_status": "success",
+      "image_sha256": "779bee2c241dd0e52d669bb60ea5b90cdd939b3e54870061eba0d54e7704a371"
+    },
+    {
+      "name": "modern-danish-724822-142",
+      "reference": "— Nej, det kan jeg ikke, svarede han,\nmen jeg kan lave et, der er endnu bedre!\nDet blev optakten til det specielle\nkamera-firma Victor Hasselblad AB,\nsom i år kan fejre 50 års jubilæum.",
+      "prediction": "- Nej, det kan jeg ikke, svarede han,\nmen jeg kan lave et, der er endnu bedre!\nDet blev optakten til det specielle\nkamera-firma Victor Hasselblad AB,\nsom i år kan fejre 50 års jubilæum.",
+      "cer": 0.005405405405405406,
+      "wer": 0.02857142857142857,
+      "inference_status": "success",
+      "image_sha256": "130a853411e5211e4f3d0ae9c556544ecce17f17d06841586d4cd1ff304a99dc"
+    },
+    {
+      "name": "modern-danish-724822-143",
+      "reference": "Jeg er 42 år, arbejdsløs på 2. år og\nkontoruddannet. Da jeg blev arbejdsløs,\ngik jeg i gang med forskellige kurser\nog gennemførte disse med arbejdsformidlingens\nvelsignelse.",
+      "prediction": "Jeg er 42 år, arbejdsløs på 2 år og\nkontoruddannet. Da jeg blev arbejdsløs\ngik jeg i gang med forskellige kurser\nog gennemførte disse med arbejdsformidlingens\nvelsignelse.",
+      "cer": 0.011560693641618497,
+      "wer": 0.07407407407407407,
+      "inference_status": "success",
+      "image_sha256": "addd5f065d076a8a0d41772868c9ac67673572fdb0d0987aa03b857c793ef16b"
+    },
+    {
+      "name": "modern-danish-724822-144",
+      "reference": "\" Fortsætter dette, betyder det en\nafbrydelse af afspændingen mellem Øst\nog Vest.",
+      "prediction": "Fortsætter dette, betyder det en\nafløydelse af afspændingen mellem Øst\nog Vest.",
+      "cer": 0.04938271604938271,
+      "wer": 0.15384615384615385,
+      "inference_status": "success",
+      "image_sha256": "0c739224efddec57386b38cfc9864e1df7e22d8ae3a8d4db0332bb75f6392d43"
+    },
+    {
+      "name": "modern-danish-724822-147",
+      "reference": "hans skriver at det er den\ntradition han ønsker videreført\ni relation til Lægevidenskabelig\nForskning",
+      "prediction": "han skriver at det er den\ntradition han ønsker videreført\ni relation til Lægevidenskabelig\nForskning",
+      "cer": 0.009900990099009901,
+      "wer": 0.06666666666666667,
+      "inference_status": "success",
+      "image_sha256": "01209f8e429d8db87818dd85764bf588a82036543d37a6b33c81bcb12143920b"
+    },
+    {
+      "name": "modern-danish-724822-15",
+      "reference": "\"I sidder deroppe på podiet, vi står\nhernede.",
+      "prediction": "\" I sidder deroppe på podiet, vi står\nhernede.",
+      "cer": 0.022222222222222223,
+      "wer": 0.25,
+      "inference_status": "success",
+      "image_sha256": "f5dd61d6de7d9c3566fd9ea1a9e41c0dcfa9b29ac1726804b78b6ca430ac4879"
+    },
+    {
+      "name": "modern-danish-724822-156",
+      "reference": "På væggene er udstillet smukke lædertasker,\nbrogede veste, bluser og mange andre\nting. I det yderste lokale gør vi efter\nmorgenmaden gymnastik afpasset til\nos gamle bedste- og oldemødre og —\nfædre. Derefter drikkes der saftevand.",
+      "prediction": "På væggene er udstillet smukke lædertasker,\nbrogede veste, bluser og mange andre\nting. I det yderste lokale gør vi efter\nmorgenmaden gymnastik afpasset til\nos gamle bedste- og oldemødre og -\nfædre. Derefter drikkes der saftevand.",
+      "cer": 0.004366812227074236,
+      "wer": 0.027777777777777776,
+      "inference_status": "success",
+      "image_sha256": "e3b2dbf4fef6418c721cec64837425fd38e275cb49267f0f534b90dc1c636c9f"
+    },
+    {
+      "name": "modern-danish-724822-157",
+      "reference": "Jeg bryder mig ikke om engangsaffærer,\ndog har jeg haft en kort sommerromance.\nKærlighed vil altid være in.",
+      "prediction": "Jeg bryder mig ikke om engangs affærer,\ndog har jeg haft en kort sommerromance.\nKærlighed vil altid være in.",
+      "cer": 0.009345794392523364,
+      "wer": 0.1111111111111111,
+      "inference_status": "success",
+      "image_sha256": "5ba463405bce96dbe86715ada120a1015a7e0abe1059a4f51ce2de65da409924"
+    },
+    {
+      "name": "modern-danish-724822-159",
+      "reference": "Konsulenterne har forskellige uddannelser.",
+      "prediction": "Konsulenterne har forskellige uddannelser.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "4f6b8bb67171d0d804cdd129b7e81eb0d20f5e1201e4f938e173a436349cec52"
+    },
+    {
+      "name": "modern-danish-724822-161",
+      "reference": "\"Hvis vi sidder og venter på, at forbrugerne\nselv tager initiativet, kommer det\ntil at tage lang tid. Vi politikere,\nproducenter og detailhandlere må presse\npå. Vi kan med sindsro gøre det\".",
+      "prediction": "Hvis vi sidder og venter på, at forbrugerne\nselv tager initiativet, kommer det til at\ntage lang tid. Vi politikere, producenter\nog detailhandlere må presse på. Vi kan med\nsindsro gøre det.",
+      "cer": 0.010526315789473684,
+      "wer": 0.0625,
+      "inference_status": "success",
+      "image_sha256": "ecfc01daa0c3cef9db420a033ab56fd6d2c662d51afd13b63daf53799da19301"
+    },
+    {
+      "name": "modern-danish-724822-164",
+      "reference": "Det var tredje år i træk. Et godt gæt på\nudviklingen i år vil være et fornyet fald.\nNedgangen i vækst følger efter et tilsvarende\nåremål med stigende vækst.",
+      "prediction": "Det var tredje år i træk. Et godt gæt på\nudviklingen i år vil være et fornyet fald.\nNedgangen i vækst følger efter et tilsvarende\nåremål med stigende vækst.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "546d1a28e2ec023ccb8b1233c79c6957fa201ec332df4273aa955d885a95a52e"
+    },
+    {
+      "name": "modern-danish-724822-165",
+      "reference": "DET eneste, der virkelig lykkes for\ndenne film, er at være rodet og kedelig\npå samme tid. BUDSKABET er, at \"Jorden\ner et fedt sted!\", som Jesus bliver\nved med at sige.",
+      "prediction": "DET eneste, der virkelig lykkes for\ndenne film, er at være rodet og kedelig\npå samme tid. BUDSKABET er, at \"Jorden\ner et fedt sted!\", som Jesus bliver\nved med at sige.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "baac87292be8981b0d2d92e4b8c6bfd1469cb11ab47fe1e29c95989d0658ac1a"
+    },
+    {
+      "name": "modern-danish-724822-166",
+      "reference": "\"Men det kan man ikke leve af, og det\nvar også meget besværligt med alle\nde regler, som gjaldt i fællesskaberne,\"\nfortæller Gladys Henriksen. Og på en\nferie i Malaysia fandt jeg på, at starte\nen import af krukker.",
+      "prediction": "\"Men det kan man ikke leve af, og det\nvar også meget besværligt med alle\nde regler, som gjaldt i fællesskaberne,\"\nfortæller Gladys Henriksen. Og på en\nferie i Malaysia fandt jeg på, at starte\nen import af orkideer.",
+      "cer": 0.023474178403755867,
+      "wer": 0.02564102564102564,
+      "inference_status": "success",
+      "image_sha256": "5da322f36294842ee96fcc74c1bab4fc3e86f36de1915b4ab75b60fa1db11d2c"
+    },
+    {
+      "name": "modern-danish-724822-167",
+      "reference": "Til gengæld er det svært for flygtninge\noverhovedet at komme ind og søge asyl\ni Danmark.",
+      "prediction": "Til gengæld er det svært for flygtninge\noverhovedet at komme ind og søge asyl\ni Danmark.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "4da21050a1db6a2ae290eb3cdd195bc4f99ba2ec1cbd5220c8552bf22d5a0f1f"
+    },
+    {
+      "name": "modern-danish-724822-17",
+      "reference": "Vi er ganske vist i Europa i færd med\nat opgive ideen, men kan alligevel\nikke rigtig bekvemme os … og nogle\ntaler stadig om en så umulig konstruktion\nsom fædrelandenes Europa.\"",
+      "prediction": "Vi er ganske vist i Europa i færd med\nat opgive ideen, men har alligevel\nikke rigtig bekvemmet os... og nogle\ntaler stadig om en så umulig konstruktion\nsom fædrelandenes Europa.\"",
+      "cer": 0.03409090909090909,
+      "wer": 0.125,
+      "inference_status": "success",
+      "image_sha256": "b756682e6e14e23b0a969e85cd583c5b7a6fbdd7e39e7d8e5ec7fef54380ed54"
+    },
+    {
+      "name": "modern-danish-724822-170",
+      "reference": "Blandt dem, der kun har gennemført\nfolkeskolen, er det ni ud af ti, der\nmodtager hjælp af en eller anden slags.",
+      "prediction": "Blandt dem, der kun har gennemført folkeskolen,\ner det ni ud af ti, der modtager hjælp af\nen eller anden slags",
+      "cer": 0.009009009009009009,
+      "wer": 0.047619047619047616,
+      "inference_status": "success",
+      "image_sha256": "e2f00f8e2a5f0e75bdcdcc480249627b42e6d86364138027821306a2bd2917a7"
+    },
+    {
+      "name": "modern-danish-724822-173",
+      "reference": "Ikke at vi har fået dem, men at de\nlidt\" afsindige \"ikke er med mere.\nJeg tænker på for eksempel Henning\nDons, John Winther og Mikael Kold.\"\nHvad havde de, som nu savnes?",
+      "prediction": "Ikke at vi har fået dem, men at de\nlidt \"afsindige\" ikke er med mere.\nJeg tænker på for eksempel Henning\nDons, John Winther og Mikeal Kold.\"\nHvad havde de, som nu savnes?",
+      "cer": 0.03529411764705882,
+      "wer": 0.12121212121212122,
+      "inference_status": "success",
+      "image_sha256": "cf363d2a6c98e8445200d13e59051ab56bc5b7af4f1fb8e37e8c85dd05173333"
+    },
+    {
+      "name": "modern-danish-724822-179",
+      "reference": "Poul og Connie Thomsen, lærer og biblioteksassistent\ni en lille by i Vendsyssel, blev ikke\nsvigtet, selv om Danmarks Radio i TV-udsendelsen\nfik seerne til at tro, at Poul Thomsen\nkunne være morder.",
+      "prediction": "Poul og Connie Thomsen, lærer og biblioteksassister\ni en lille by i Vendsyssel, blev ikke\nsvigtet, selv om Danmarks Radio i TV-udsendelsen\nfik seerne til at tro, at Poul Thomsen\nkunne være morder.",
+      "cer": 0.01015228426395939,
+      "wer": 0.030303030303030304,
+      "inference_status": "success",
+      "image_sha256": "959ff00acc0b04477aea8c9f2613f6db2f869451600585f5d34dcc099ca23211"
+    },
+    {
+      "name": "modern-danish-724822-185",
+      "reference": "Han kalder Unibanks planer \"mere ekspansive\"\nend Den Danske Banks. Denne betegnes\ntil gengæld som \"en gammeldags, forsigtig\nbank, der ikke vil føre sig frem.\"",
+      "prediction": "Han kalder Unibanks planer \"mere ekspansive\"\nend Den Danske Banks. Denne betegnes\ntil gengæld som \"en gammeldags, forsigtig\nbank, der ikke vil føre sig frem\"",
+      "cer": 0.006329113924050633,
+      "wer": 0.04,
+      "inference_status": "success",
+      "image_sha256": "6dae3cb44db12cb1098438d107179bacf753dbc9c439e6aa91d4b3ebf40e21e7"
+    },
+    {
+      "name": "modern-danish-724822-186",
+      "reference": "Og det er fuldstændig uden sentimentalitet\n(han har slet ikke alderen til at være\nsentimental) Lars Højer fortæller om\nsin fodboldbarndom. Der er såmænd bare\ntale om en ganske almindelig hverdagshistorie.",
+      "prediction": "Og det er fuldstændig uden sentimentalitet\n(han har slet ikke alderen til at være\nsentimental) Lars Højer fortæller om\nsin fodboldbarndom. Der er såmænd bare\ntale om en ganske almindelig hverdagshistorie.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "3b6aa39b8e755d073d9ecea36fea6353c4fe7e1e2d229d614633ddbdc44f34b7"
+    },
+    {
+      "name": "modern-danish-724822-187",
+      "reference": "Ingen ved bedre end en radiorådsforkvinde,\nhvordan man trykker på de rigtige knapper,\nnår kabalen skal gå op.",
+      "prediction": "Ingen ved bedre end en radiorådsforkvinde\nhvordan man trykker på de rigtige knapper\nnår kabalen skal gå op.",
+      "cer": 0.01834862385321101,
+      "wer": 0.1111111111111111,
+      "inference_status": "success",
+      "image_sha256": "fc59208a8946b7e40aa261455cc568cb9960a56320983b4b5f2cc69eb5c5b22f"
+    },
+    {
+      "name": "modern-danish-724822-188",
+      "reference": "Den gamle var ikke til at stoppe kæften\npå. — Din mor lærte jeg aldrig rigtig\nat kende, Kent, jeg tror hun var mørk\ni sit sind, men som sagt kendte jeg\nhende ikke videre godt.",
+      "prediction": "Den gamle var ikke til at stoppe kæften.\npå. - Din mor lærte jeg aldrig rigtig\nat kende, Kent, jeg tror hun var mørk\ni sit sind, men som sagt kendte jeg\nhende ikke videre godt.",
+      "cer": 0.011428571428571429,
+      "wer": 0.05555555555555555,
+      "inference_status": "success",
+      "image_sha256": "0049f428c57e382936599d5ee265be66a993a824cd844d08bb35a2102cf16090"
+    },
+    {
+      "name": "modern-danish-724822-189",
+      "reference": "Det er jo ikke meningen, at man skal\nsætte ind på gyngerne, hvad man vinder\npå karrusellerne. Der er i 1992 afsat to kvardrat-\nmeter pr. barn. Og her har det ligesom med\nudregningen af husleje, vi tager det hele med",
+      "prediction": "Det er jo ikke meningen, at man skal\nsætte ind på gyngerne, hvad man vinder\npå karrusellerne. Her er i 1992 afsat 50 kvadrat-\nmeter pr. barn. Og her er det ligesom med\nudregningen af husleje, vi tager det hele med",
+      "cer": 0.027906976744186046,
+      "wer": 0.0975609756097561,
+      "inference_status": "success",
+      "image_sha256": "475a03cfeedc7be27017edf3c65bdc07f47c51a7f84aee1a779f4a1c828e2751"
+    },
+    {
+      "name": "modern-danish-724822-190",
+      "reference": "Team Barcelona er ikke noget for ham,\nmen han glæder sig over, at dansk boksning\ner på vej hastigt frem.",
+      "prediction": "Team Barcelona er ikke noget for ham,\nmen han glæder sig over, at dansk boksning\ner på vej hastigt frem.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "ae77734b62a40191e42d2579b6a2f618c17914227a9ab76cbc0752cfeafc69c5"
+    },
+    {
+      "name": "modern-danish-724822-192",
+      "reference": "Men det viser blot, hvor lidt der skal\ntil for at blive slået ud af kurs af\nmanglende koncentration.",
+      "prediction": "Men det viser blot, hvor lidt der skal\ntil for at blive slået ud af kurs af\nmanglende koncentration.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "d73fe6706bf6551cd5d2a8668c541af69b5d436c12accfaa17a44e76bcd8d484"
+    },
+    {
+      "name": "modern-danish-724822-193",
+      "reference": "Crisplant-ledelsen, blandt andre administrerende\ndirektør Mogens Petersen, overtager\n10 procent af aktierne i Kosan Holding.\nTeknova-direktør Erik Thygesen tegner\n24, 5 procent af aktierne i sin egen\nvirksomhed, mens Unibank overtager\nresten, indtil der er fundet alternative\ninvestorer.",
+      "prediction": "Crisplant-ledelsen, blandt andre administrerende\ndirektør Mogens Pedersen, overtager\n10 procent af aktierne i Kosan Holding.\nTeknova-direktør Erik Thygesen Kjær\n24,5 procent af aktierne i sin egen\nvirksomhed, mens Unibank overtager\nresten, indtil der er fundet alternative\ninvestorer.",
+      "cer": 0.024390243902439025,
+      "wer": 0.10526315789473684,
+      "inference_status": "success",
+      "image_sha256": "855f843a7bfadb6ac74c615b2c63757c99a88b383fa6a55f1e027927e76e526a"
+    },
+    {
+      "name": "modern-danish-724822-196",
+      "reference": "Allerede efter ti kilometer blev vi\nstandset første gang, \"fortsætter Steen\nStruve:\" Politifolkene og militæret\nvar fuldstændig udtryksløse i ansigterne,\nda de nægtede at lade os køre videre\nmod den slovensk-kroatiske grænse.",
+      "prediction": "Allerede efter ti kilometer blev vi\nstandset første gang, \"fortsætter Steen\nStruve:\" Politifolkene og militæret\nvar fuldstændig udtryksløse i ansigterne,\nda de nægtede at lade os køre videre\nmod den slovensk-kroatiske grænse.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "5ec4a00793bf7243fcfcf0371e0221305b31d8740f5186cdba6853df285b99f3"
+    },
+    {
+      "name": "modern-danish-724822-20",
+      "reference": "Lejer er langt hen ad vejen godt hjulpet\naf lejeloven, men ikke fuldt ud. Oftest\ner lejer ikke er opmærksom på, at der\ner grænser for, hvad parterne frit\nkan aftale.",
+      "prediction": "Lejer er langt hen ad vejen godt hjulpet\naf lejeloven, men ikke fuldt ud. Oftest\ner lejer ikke er opmærksom på at der\ner grænser for, hvad parterne frit\nkan aftale",
+      "cer": 0.012121212121212121,
+      "wer": 0.06451612903225806,
+      "inference_status": "success",
+      "image_sha256": "c4bc3c7492eab4ca1afd5f2c2a7f67729c7880b7aa10d1330cff58730ea6f038"
+    },
+    {
+      "name": "modern-danish-724822-201",
+      "reference": "Det kunne ikke lade sig gøre for ham\nat skubbe hende ud af tankerne som\nen tøjte.",
+      "prediction": "Det kunne ikke lade sig gøre for ham\nat strubbe hænde ud af ærmerne som\nen tøjte.",
+      "cer": 0.08641975308641975,
+      "wer": 0.17647058823529413,
+      "inference_status": "success",
+      "image_sha256": "8a30ce62fc1e2c36a0cece95946a2e3549da8a2d9d9c3bd30b17c7e7fcb35573"
+    },
+    {
+      "name": "modern-danish-724822-204",
+      "reference": "I hvert fald harmonerer mærket dårligt\npå et brev med ordlyden: PS! Jeg kommer\ntil Barbados om tre dage, tusind kys\n…",
+      "prediction": "I hvert fald harmonerer mærket dårligt\npå et brev med ordlyden: PS! Jeg kommer\ntil Barbados om tre dage, tusind kys\n...",
+      "cer": 0.02564102564102564,
+      "wer": 0.045454545454545456,
+      "inference_status": "success",
+      "image_sha256": "777ec8a8a4c7090a935a1478db258e870141221f4f977cb08b777a19c0b9ef11"
+    },
+    {
+      "name": "modern-danish-724822-209",
+      "reference": "Så snart bogen er modtaget på biblioteket\nsættes den i cirkulation.",
+      "prediction": "Så snart bogen er modtaget på biblioteket\nSættes den i Cirkulation.",
+      "cer": 0.029850746268656716,
+      "wer": 0.18181818181818182,
+      "inference_status": "success",
+      "image_sha256": "f6e2f7163ecade9c9d0f5feebbc17e081cb9dd4278b13c0afb3f302f93deb8ce"
+    },
+    {
+      "name": "modern-danish-724822-211",
+      "reference": "Nu skal der handles.",
+      "prediction": "Nu skal der handles.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "b250d90b0dfec665b6818bb7f2d5fedb00ff049cb3b6e2a9a4cccb7a29dd2bae"
+    },
+    {
+      "name": "modern-danish-724822-212",
+      "reference": "Leif Kjærgaard behøver en produktionstilladelse\ntil gensplejsede frø inden to år, ellers\nstopper den del af aktiviteten blandt\nde 30 ansatte på bioteknologisk laboratorium\npå den lollandske afdeling af Maribo\nFrø. I virkeligheden er al frøforædling\nmutation.",
+      "prediction": "Leif Kjærgaard behøver en produktionstilladelse\ntil gensplejsede frø inden to år, ellers\nstopper den del af aktiviteten blandt\nde 30 ansatte på bioteknologisk laboratorium\npå den hollandske afdeling af Maribo\nFrø. I virkeligheden er al frøforædling\nmutation",
+      "cer": 0.007751937984496124,
+      "wer": 0.05405405405405406,
+      "inference_status": "success",
+      "image_sha256": "03ef670ca8024c9fa8fa27383ead4ea486b761584ae3dcb2610024b242115b7e"
+    },
+    {
+      "name": "modern-danish-724822-213",
+      "reference": "— Det er en af tjenerne, udbrød Bertil,\nda Bülow havde rullet Henriks afsjælede\nlegeme om på ryggen. Hans øjne var\nvidt åbne, og ansigtet frosset i et\nforpint udtryk og farvet uhyggeligt\nblåviolet. — Han er død.",
+      "prediction": "- Det er en af tjenerne, udbrød Bertil,\nda Bülow havde rullet Henriks afsjælede\nlegeme om på ryggen. Hans øjne var\nvidt åbne, og ansigtet frosset i et\nforpint udtryk og farvet uhyggeligt\nblåviolet. – Han er død.",
+      "cer": 0.009478672985781991,
+      "wer": 0.05263157894736842,
+      "inference_status": "success",
+      "image_sha256": "9d9976c44618a6b26e28ef908c69f888f530e6eb716374626b5bb9c7d06656a2"
+    },
+    {
+      "name": "modern-danish-724822-214",
+      "reference": "— Har hun altid været stum? — Vi kan\nsnakke om det senere, sagde Daniel,\nog hans stemme lød direkte arrig nu.\n— Gå ud i køkkenet og hjælp Beate.",
+      "prediction": "- Har hun altid været stum? - Vi kan\nsnakke om det senere, sagde Daniel,\nog hans stemme lød direkte arrig nu.\n- Gå ud i køkkenet og hjælp Beate.",
+      "cer": 0.020833333333333332,
+      "wer": 0.1,
+      "inference_status": "success",
+      "image_sha256": "3ebe211e7b275bba65395f2ab82deb517182b9db93470a7a29c1d49910b977c5"
+    },
+    {
+      "name": "modern-danish-724822-221",
+      "reference": "Mandag den 13. juli: Dagen starter\nmed byrundtur i Bangkok. Første stop\npå turen bliver den danske ambassade,\nder ligger i et prægtigt gammelt anlæg\nfra århundredeskiftet.",
+      "prediction": "Mandag den 13. juli: Dagen starter\nmed byrundtur i Bangkok. Første stop\npå turen bliver den danske ambassade,\nder ligger i et prægtigt gammelt anlæg\nfra århundredeskiftet.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "e00fb287b8cdab40a3bed392c9d477ebcab8da8b8600be52a7b1b35ff8226064"
+    },
+    {
+      "name": "modern-danish-724822-222",
+      "reference": "— Kris er en meget seriøs racerkører,\nhvor sejrsviljen ligger utroligt dybt\n— han er en type, der vil vinde. En\nuvurderlig egenskab for en racerkører.",
+      "prediction": "- Kris er en meget seriøs racerkører,\nhvor sejersviljen ligger utroligt dybt\n- han er en type, der vil vinde. En\nuvurderlig egenskab for en racerkører.",
+      "cer": 0.02,
+      "wer": 0.11538461538461539,
+      "inference_status": "success",
+      "image_sha256": "73b41722df22aef27f819dbfa04dce9cdfec119bec7f0b0207021c97b8fb71da"
+    },
+    {
+      "name": "modern-danish-724822-25",
+      "reference": "Store frugter hang i stærke gule og\nrøde farver, i det mandshøje græs kunne\nhan skimte blå blomster. - Ved gud,\ndet er den smukkeste grund jeg har\nset.",
+      "prediction": "Store frugter hang i stærke gule og\nrøde farver, i det mandshøje græs kunne\nhan skimte blå blomster. - Ved gud,\ndet er den smukkeste grund jeg har\nset.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "bf8ed8c121067b1e604b69616a65a8df71fea203dba6d426b9fa1a5035198a83"
+    },
+    {
+      "name": "modern-danish-724822-26",
+      "reference": "Til Leila, der har efternavnet Jensen,\nkan fyrene efter et show godt finde\npå at sige: Det er bare fedt! Derhjemme\npå telefonsvareren kan hun omvendt\nblive mødt med bemærkningen: Dit perverse\nsvin!",
+      "prediction": "Til Leila, der har efternavnet Jensen\nkan fyre efter et show godt finde\npå at sige, Dette var fedt! Derhjemme\npå telefonsvareren har hun omvendt\nblevet mødt med bemærkninger: Dit perverse\nsvin!",
+      "cer": 0.06598984771573604,
+      "wer": 0.2727272727272727,
+      "inference_status": "success",
+      "image_sha256": "86e936d579f099a28ccb7ebf078459022cbdde3c3bed18a3d71f1cb2d54947ef"
+    },
+    {
+      "name": "modern-danish-724822-27",
+      "reference": "Men trods tilskuddet fra EF bliver\ndet ikke nogen helt billig tur. EF\nbetaler 75 pct. af udgifterne til rejse\nog ophold. Hver deltager skal selv\nop med 1500 kr.. Hertil kommer lommepenge\nog tabt arbejdsfortjeneste.",
+      "prediction": "Men trods tilskuddet fra EF bliver\ndet ikke nogen helt billig tur. EF\nbetaler 75 pct. af udgifterne til rejse\nog ophold. Hver deltager skal selv\nop med 1500 kr.. Hertil kommer lommepenge\nog tabt arbejdsfortjeneste.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "dcd16a17f50b051b200cd0580a967d69d4f7fca8c2a840466f73ca81488eb50f"
+    },
+    {
+      "name": "modern-danish-724822-28",
+      "reference": "Og det håber vi så på, for vi vil jo\nså gerne have et, helst to børn. Og\nhelst snart. Bent og Kitt Christiansen\nkigger på hinanden. Dybt og intenst.",
+      "prediction": "Og det håber vi så på, for vi vil jo\nså gerne have et, helst to børn. Og\nhelst snart. Bent og Kitt Christiansen\nkigger på hinanden. Dybt og intenst.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "1bf93798494639a68eaaf89c60e5dcbc96db5fcd233cec67d82093220a0fb561"
+    },
+    {
+      "name": "modern-danish-724822-31",
+      "reference": "Fjerde skifte, ottende bakke …",
+      "prediction": "Fjerde skifte, ottende bakke...",
+      "cer": 0.1,
+      "wer": 0.4,
+      "inference_status": "success",
+      "image_sha256": "0fdebf46a41fcc0fe7e15749efc888a9d062e9ea81cd8dd29b4f2a2dd0aad77a"
+    },
+    {
+      "name": "modern-danish-724822-33",
+      "reference": "Enten for at blive en del af Danske\nSkønlitterære Forfattere (DSF), eller\nfor at stå frit. Forud var gået vilde\nstridigheder om dels bibliotekspengenes\nfordeling mellem forskellige typer\nforfattere, dels intern uenighed om\nforeningens struktur.",
+      "prediction": "Enten for at blive en del af Danske\nSkønlitterære Forfattere (DSF), eller\nfor at stå frit. Forud var gået vilde\nstridigheder om dels bibliotekspengenes\nfordeling mellem forskellige typer\nforfattere, dels intern uenighed om\nforeningens struktur.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "58c34ce61cc7ab4af7f166c895d75ffebbfa11d52d289942c076e503fbfed25e"
+    },
+    {
+      "name": "modern-danish-724822-35",
+      "reference": "ENTEN: En gang gammeldags ævl, hvilende\npå moralen fra dronning Victorias tid,\nhvor kvinder var kvinder og tog sig\naf hus, mand og børn.",
+      "prediction": "ENTEN: En gang gammeldags jul, hvilende\npå moralen fra Dronning Victorias tid,\nhvor kvinder var kvinder og tog sig\naf hus, mand og børn.",
+      "cer": 0.022058823529411766,
+      "wer": 0.08333333333333333,
+      "inference_status": "success",
+      "image_sha256": "4a33460c87da91ca1afacf0042d078d5f1aaa36e05266006d637ba8983269ff2"
+    },
+    {
+      "name": "modern-danish-724822-36",
+      "reference": "Den officielle forklaring på nedprioriteringen\naf de tamilske familiesammenføringssager\n— den såkaldt falske melodi — var netop\nressourcemangel i ministeriet.",
+      "prediction": "Den officielle forklaring på nedprioriteringen\naf de tamilske familiesammenføringssager\n– den såkaldt falske melodi – var netop\nressourcemangel i ministeriet.",
+      "cer": 0.012658227848101266,
+      "wer": 0.1,
+      "inference_status": "success",
+      "image_sha256": "0afa010db899702a258a2370688bb77e4768dce4aa27dbdf15a1033261e2d592"
+    },
+    {
+      "name": "modern-danish-724822-38",
+      "reference": "Det obligatoriske pandebånd syntes\numiddelbart at være hans eneste synlige,\negocentriske træk og alibi for at stå\nder.",
+      "prediction": "Det obligatoriske pandebånd syntes\numiddelbart at være hans eneste synlige,\negocentriske træk og alibi for at stå\nder.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "4673a8284845de8a64f2e5b1cff22f7fd8c710786fe972501c674850fd842ce0"
+    },
+    {
+      "name": "modern-danish-724822-40",
+      "reference": "1000-1200 — den tid hvor runeskriften\nafløstes af det latinske alfabet.",
+      "prediction": "1000-1200 - den tid hvor runeskriften\nafløstes af det latinske alfabet.",
+      "cer": 0.014084507042253521,
+      "wer": 0.09090909090909091,
+      "inference_status": "success",
+      "image_sha256": "cf9d81639a793e358f9fa4a5c7a60ee9a93d1909e0dae999f0d10141d95ca980"
+    },
+    {
+      "name": "modern-danish-724822-41",
+      "reference": "Hun hviskede det. Var der en skjult\nbesked i de ord? Et \"trods alt\".",
+      "prediction": "Hun hviskede det. Var der en skjult\nbesked i de ord? Et \"trods alt\".",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "34efeeb6fc6572488b19bd6761deefe0da4f096ea472f64f05761b6958254017"
+    },
+    {
+      "name": "modern-danish-724822-45",
+      "reference": "Min kunst lader jeg ikke ligge, jeg\nville gøre mig selv evige bebrejdelser\".\nHun blev hurtigt klar over, at hendes\nnervøsitet ikke var ubegrundet.",
+      "prediction": "Min kunst lader jeg ikke ligge, jeg\nville gøre mig selv evige bebrejdelser\".\nHun blev hurtigt klar over, at hendes\nnervøsitet ikke var ubegrundet.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "15fb8db90e945d6d76ee8ab2fb225d58e3cda3f207132ab963e13ce1594f40cb"
+    },
+    {
+      "name": "modern-danish-724822-5",
+      "reference": "Resten går til folk, der holder af\nat være anderledes.",
+      "prediction": "Resten går til folk, der holder af\nat være anderledes.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "decb6cf7fe56dd15c2c434685eda565bb408dafef5b88696a7152e86bb0748aa"
+    },
+    {
+      "name": "modern-danish-724822-51",
+      "reference": "Fordi de er overvægtige. Eller slet og ret\ntykke og fede i mere eller mindre grad,\nsom en enkelt udtrykker det.",
+      "prediction": "Fordi de er overvægtige. Eller slet og ret\ntykke og fede i mere eller mindre grad,\nsom en enkelt udtrykker det.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "4546ba7a7e8812b04b75d87dcee71019a21cd32ef279769a0d8f8634f2cc0253"
+    },
+    {
+      "name": "modern-danish-724822-52",
+      "reference": "Som følge af Den Kolde Krigs afslutning\nog mange soldaters hjemkomst fra Europa\nafskediges der nu også kraftigt i de militære\nrækker, og garnisonsbyens betydning som\nhovedmotor for områdets økonomi vil aftage\nmeget voldsomt. Sejr i Texas afgørende",
+      "prediction": "Som følge af Den Kolde Krigs afslutning\nog mange soldaters hjemkomst fra Europa\nafskediges der nu også kraftigt i de militære\nrækker, og garnisonsbyens betydning som\nhovedmotor for områdets økonomi vil aftage\nmeget voldsomt. Sejr i Texas afgørende",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "2c7953b67970e05bde5bae9d054f8919d86cd846a947f0b889b4370c4d69a992"
+    },
+    {
+      "name": "modern-danish-724822-53",
+      "reference": "Talen forløb forbløffende godt, syntes\nJesus selv. Alle klappede og ville\nskåle med ham.",
+      "prediction": "Talen forløb forbløffende godt, syntes\nJesus selv. Alle klappede og ville\nskåle med ham.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "a409c8dce792af844e3e9fcd8e42b099077f072ef99e7b284517cc48b0ddbbf9"
+    },
+    {
+      "name": "modern-danish-724822-54",
+      "reference": "Et af hans hjertebørn var Dansk Skibsadoption,\nhvor han gennem farverig og omhyggelig brevveksling\nmed skoleklasser, skibsbesøg og besøg på\nadoptivskolerne viderebragte forståelsen\nfor dansk skibsfart blandt skoleelever og\nskolefolk. Bechs egen adoptivskole var Birkemosesk\ni Korsør.",
+      "prediction": "Et af hans hjertebørn var Dansk Skibsadoption,\nhvor han gennem farverig og omhyggelig brevveksling\nmed skoleklasser, skibsbesøg og besøg på\nadoptivskolerne viderebragte forståelsen\nfor dansk skibsfart blandt skoleelever og\nskolefolk. Bechs egen adoptivskole var Birkemoseskolen\ni Korsør.",
+      "cer": 0.014134275618374558,
+      "wer": 0.02702702702702703,
+      "inference_status": "success",
+      "image_sha256": "2bc43dc02da0e56e7b30a28cab5f2e089d1d19163f273aa951f3a202eaffa70e"
+    },
+    {
+      "name": "modern-danish-724822-55",
+      "reference": "Menneskenes børn er nu engang såre forskellige,\nog den boglige trang, (som Beinov er besjæl\naf), er i dag ikke så almindelig, som f. eks.\nfor 20 år siden",
+      "prediction": "Menneskenes kår er nu engang såre forskellige,\nog den boglige trang, (som Bena er besjælet\naf), er i dag ikke så almindelig, som f. eks.\nfor 20 år siden",
+      "cer": 0.05228758169934641,
+      "wer": 0.10344827586206896,
+      "inference_status": "success",
+      "image_sha256": "ddb222db5c7dd2eb5d0e3575db53d39f3d4c7dd32c4fbcc96af3829613115256"
+    },
+    {
+      "name": "modern-danish-724822-56",
+      "reference": "Det er ikke nok for Den Danske Bank.\nMen det er det for Unibank. \"Vi\nskal fortsat som planlagt have\nreduceret medarbejdertallet med\n600 til 1200 i indeværende år.",
+      "prediction": "Det er ikke nyt for Den Danske Bank\nMen det er det for Unibank. \"Vi\nskal fortsat som planlagt have\nreduceret medarbejderantallet med\n600 til 12000 i indeværende år",
+      "cer": 0.043209876543209874,
+      "wer": 0.1724137931034483,
+      "inference_status": "success",
+      "image_sha256": "b52908ffefd6d5397ac157770d850ef768ae4c6478560200444394e548fadb3e"
+    },
+    {
+      "name": "modern-danish-724822-59",
+      "reference": "Tiderne afgør sammensætningerne.",
+      "prediction": "Tiderne afgør samensætningerne",
+      "cer": 0.0625,
+      "wer": 0.3333333333333333,
+      "inference_status": "success",
+      "image_sha256": "c471b23af20a1a71968ad3c353becbfdb88ede6530c916ab12107210c765677c"
+    },
+    {
+      "name": "modern-danish-724822-6",
+      "reference": "Mødet tæller udenrigsministrene fra\nde ti lande, som har det tilfælles,\nat de har større eller mindre kyststrækninger\ntil Østersøen.",
+      "prediction": "MØDET TÆLLER UDENRIGSMINISTRE FRA\nDE TI LANDE, SOM HAR DET TILFÆLLES,\nAT DE HAR STØRRE ELLER MINDRE KYSTSTRÆKNINGER\nTIL ØSTERSØEN.",
+      "cer": 0.8181818181818182,
+      "wer": 1.0,
+      "inference_status": "success",
+      "image_sha256": "80ff3c9b19927396ac8a2b3039dc8903d2dd6cba5949ed599f0a26eee88294e5"
+    },
+    {
+      "name": "modern-danish-724822-60",
+      "reference": "To store solfangere ved kollegiets\nindgang skal levere varmt brugsvand\ntil beboerne, ligesom solen gennem\net glastag opvarmer et langt fælles\nspise- og opholdsrum. Byggeriet er\ntegnet af Arne Kjærs Tegnestue, Aalborg.\n(RB)",
+      "prediction": "To store solfangere ved kollegiets\nindgang skal levere varmt brugsvand\ntil beboerne, ligesom solen gennem\net glastag opvarmer et langt fælles\nspise- og opholdsrum. Byggeriet er\ntegnet af Arne Kjærs Tegnestue, Aalborg.\n(RB)",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "a3fbe2c1bbedc9839a79744d981f5fbba7053aeb0e8c260c37f99837f7fdc741"
+    },
+    {
+      "name": "modern-danish-724822-61",
+      "reference": "— Ja, jeg kan garantere dig for, at\nden var på bristepunktet. Jeg nåede\nlige akkurat at få den ind i munden\npå hende.",
+      "prediction": "- Ja, jeg kan garantere dig for, at\nden var på bristepunktet. Jeg nåede\nlige akkurat at få den ind i munden\npå hende.",
+      "cer": 0.008547008547008548,
+      "wer": 0.041666666666666664,
+      "inference_status": "success",
+      "image_sha256": "139b8ad7e383b6a634a0878a8b1a4c644aa47c2bdf52741b60d3838ffeb0ff42"
+    },
+    {
+      "name": "modern-danish-724822-65",
+      "reference": "JACOB ASBÆK er ugens glade mand. Her\nmed sine sønner, PILOU, 10 år, MARTIN,\n17 år, og THOMAS, 19 år.",
+      "prediction": "Jacob Asbæk er ugens glade mand. Her\nmed sine sønner, Pilou, 10 år, Martin,\n17 år, og Thomas, 19 år.",
+      "cer": 0.22,
+      "wer": 0.25,
+      "inference_status": "success",
+      "image_sha256": "5e1a46224ce0f5c45e174ed633f7786aacb99c22ebb76f131cf615bf79a42759"
+    },
+    {
+      "name": "modern-danish-724822-66",
+      "reference": "Den amerikanske avis International\nHerald Tribune skrev i går, at der\nkan ventes en beslutning herom på et\nNATO-udenrigsministermøde i Oslo i\njuni.",
+      "prediction": "Den amerikanske avis International\nHerald Tribune skrev i går, at der\nkan ventes en beslutning herom på et\nNATO-udenrigsministermøde i Oslo i\njuni.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "9213bc1ce27c796a26bd39e80ce2d9f0259a219df827dd8c639878346bc6d23b"
+    },
+    {
+      "name": "modern-danish-724822-69",
+      "reference": "Hvad det sidstnævnte angår, så vil\njeg rette en særlig tak til NN14 og\nNN10: Jeres præstationer har virkelig\nværet i særklasse!",
+      "prediction": "Hvad det sidstnævnte angår, så vil\njeg rette en særlig tak til NN14 og\nNN10: Jeres præstationer har virkelig\nværet i særklasse!",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "5c4c8374b08a53d9051fe31f2d53ea3d190dacba4cc482b6a402dbe2fcf45031"
+    },
+    {
+      "name": "modern-danish-724822-7",
+      "reference": "En historiker, der falder over et arkivskab\nmed hidtil oversete kildeskrifter,\nkan skrive en sandfærdig historie om,\nhvad der skete; men alt vil få farve\naf hans egne tanker.",
+      "prediction": "En historiker, der falder over et arkivskab\nmed hidtil oversete kildeskrifter,\nkan skrive en sandfærdig historie om,\nhvad der skete; men alt vil få farve\naf hans egne tanker.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "89173b0e5ab9012d8bfb393cf8626104dfa98573c1f1d69c0ef3a62d387f7af6"
+    },
+    {
+      "name": "modern-danish-724822-71",
+      "reference": "Fra nej til ja",
+      "prediction": "fra nej til ja",
+      "cer": 0.07142857142857142,
+      "wer": 0.25,
+      "inference_status": "success",
+      "image_sha256": "6474e70af4fa070b0e23f011f0da14b890ff93e216e8699ea4d63559ca744ed0"
+    },
+    {
+      "name": "modern-danish-724822-74",
+      "reference": "LV \"glemmer\" ganske enkelt det stærkt\nregulerede og subsidierede lejeboligmarked.\nI Danmark er prisen på over 90 pct.\naf udlejningsboligerne reguleret i\nform af maksimalpriser.",
+      "prediction": "LV \"glemmer\" ganske enkelt det stærkt\nregulerede og subsidierede lejeboligmarked.\nI Danmark er prisen på over 90 pct.\naf udlejningsboligerne reguleret i\nform af maksimalpriser.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "1842daa5f2b739d157f416de4421e8663efbc9e14ece19ee49207323a28e67c1"
+    },
+    {
+      "name": "modern-danish-724822-77",
+      "reference": "At hendes mor lå på intensivafdelingen\nmed et hjertetilfælde, fordi hun havde\nhaft et ophidset skænderi med en fiskehandler.",
+      "prediction": "At hendes mor lå på intensivafdelingen\nmed et hjertetilfælde, fordi hun havde\nhaft et ophidset skænderi med en fiskehandler.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "42244deff27ccb09aca0d7996f29d283b3b83edb415d318f6f3ceff513276b5f"
+    },
+    {
+      "name": "modern-danish-724822-78",
+      "reference": "Begrebet er vildledende, da falkejagt\nforegår frit som i naturen og ikke\nen kamp som i romerske arenaer.",
+      "prediction": "Begrebet er vildledende, da falkejagt\nforegår frit som i naturen og ikke\nen kamp som i romerske arenaer.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "879b0ee59ea11097ffb5d6a491a2f37682c13dea6ce534f511b5c2a7b15162e3"
+    },
+    {
+      "name": "modern-danish-724822-79",
+      "reference": "Lehder har to store lidenskaber: Beatles-musik\nog politik.",
+      "prediction": "Lehder har to store lidenskaber: Beatles-musik\nog politik.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "266d9035868035dc5b6556401aebc6ed7116611f6871c50f59e6288e3e6598f1"
+    },
+    {
+      "name": "modern-danish-724822-80",
+      "reference": "Pragtfuldt udsmykket er også skibets\nagterspejl og de nær dette liggende\ndele af skibssiderne.",
+      "prediction": "Pragtfuldt udsmykket er også Skibets\nagterspejl og de nær dette liggende\ndele af Skibssiderne",
+      "cer": 0.031914893617021274,
+      "wer": 0.14285714285714285,
+      "inference_status": "success",
+      "image_sha256": "291c3651b42035e500abd89396aa1d03353ede392cd08091fb28fc38d49bc7bc"
+    },
+    {
+      "name": "modern-danish-724822-84",
+      "reference": "Dette vil samtidig kunne udvide antallet\naf UTB-praktikpladser og ATB-jobs,\nligesom de langtidsledige herved får\nmulighed for at kunne gå ind i egentlige\njobs i stedet for de traditionelle\nATB-jobs, der ofte bærer præg af rutineprægede\nopgaver.",
+      "prediction": "Dette vil samtidig kunne udvide antallet\naf UTB-praktikpladser og ATB-jobs,\nligesom de langtidsledige herved får\nmulighed for at kunne gå ind i egentlige\njobs i stedet for de traditionelle\nATB-jobs, der ofte bærer præg af rutineprægede\nopgaver.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "c73423ec11be790a23770b3c8bc17df704817c02033c09c8b84a0669344e18b8"
+    },
+    {
+      "name": "modern-danish-724822-88",
+      "reference": "Kun Frigodan, producent af dybfrosne\ngrøntsager, trak sektorens regnskabsresultat\ni den forkerte retning som følge af\nsidste års fejlslagne ærtehøst i Danmark.\nIntet gennembrud for Nutrio",
+      "prediction": "Kun Frigodan, Producent af dybfrosne\ngrøntsager, trak sektorens regnskabsresultat\ni den forkerte retning som følge af\nsidste års fejlslagne ærtehøst i Danmark.\nIntet gennembrud for Nutrio",
+      "cer": 0.0053475935828877,
+      "wer": 0.038461538461538464,
+      "inference_status": "success",
+      "image_sha256": "3b403cdc8778d9a36cf4f1658594e72543e5d306dac055c5afcdbfc2d9bc37e9"
+    },
+    {
+      "name": "modern-danish-724822-9",
+      "reference": "På rastepladserne kommer mange tyske\nbilister hen og kikker, og det er helt\nsikkert, de lige skal slå med knoerne\npå forskærmene — og så nikker de:\"\nkvalitet, kvalitet. \" \"",
+      "prediction": "På rastepladserne kommer mange tyske\nbilister hen og kigger, og det er helt\nsikkert, de lige skal slå med knoerne\npå forskærmene – og så mener de: \"\nkvalitet, kvalitet. \" \"",
+      "cer": 0.046511627906976744,
+      "wer": 0.16129032258064516,
+      "inference_status": "success",
+      "image_sha256": "fb57dbeca9ea7fa4744a1dc8c0f015a86e2b049441a3fd95956e5e072b3e7346"
+    },
+    {
+      "name": "modern-danish-724822-95",
+      "reference": "Men ser verden udenfor grå og håbløs\nud, kan man altid begynde med at pynte\npå sin egen verden og sit hjem. For\neksempel kan man male badeværelset\ni en skøn farve.",
+      "prediction": "Men ser verden udenfor grå og håbles\nud, kan man altid begynde med at pynte\npå sin egen verden og sit hjem. For\neksempel kan man male badeværelset\ni en skøn farve.",
+      "cer": 0.006134969325153374,
+      "wer": 0.03125,
+      "inference_status": "success",
+      "image_sha256": "b9cf806fcdfc36ae38bc294360d950618bdcfafc0430726041bf1204bcf9e2ac"
+    },
+    {
+      "name": "modern-danish-724822-96",
+      "reference": "De manglede ligesindede at tale med,\"\nmener cand. mag. i historie Carl Erik\nAndresen, arkivar ved Lokalhistorisk\nMuseum i Greve. Men unge samlede sig\nogså af andre grunde. Under anden verdenskrig\ngjaldt det den illegale modstandskamp.",
+      "prediction": "De manglede ligesindede at tale med,\"\nmener cand. mag. i historie Carl Erik\nAndresen, arkivar ved Lokalhistorisk\nMuseum i Greve. Men unge samlede sig\nogså af andre grunde. Under anden verdenskrig\ngjaldt det den illegale modstandskamp",
+      "cer": 0.004273504273504274,
+      "wer": 0.027777777777777776,
+      "inference_status": "success",
+      "image_sha256": "de4ad0b6fe1c9f295ac649cca4210635307ceb2be617b0f7768fcf13f0d81f23"
+    },
+    {
+      "name": "modern-danish-724822-97",
+      "reference": "Kunderne kommer væltende dernede fra.\nEndnu inden brummetonen er færdig med\nat angive, at nu er det altså nu, vælter,\nsnubler, løber, puffer, ivrer folk\nop ad trappen ved egen benkraft.",
+      "prediction": "Kunderne kommer væltende dernede fra.\nEndnu inden brummetonen er færdig med\nat angive, at nu er der altså nu, vælter,\nsnubler, løber, puffer, ivrer folk\nop ad trappen ved egen benkraft",
+      "cer": 0.010810810810810811,
+      "wer": 0.06451612903225806,
+      "inference_status": "success",
+      "image_sha256": "f3ca9ec26e21044e4273ff5ae9217c4f5dd594bae1bd2a679934923978cb4bb0"
+    },
+    {
+      "name": "modern-danish-724822-98",
+      "reference": "På Christiansborg savner hun opbakning\ntil en holdningsdiskussion om flygtninge.\nBlandt andet fra justitsminister Hans\nEngell. \"Justitsministeren går ikke\nengang ud og forsvarer den udlændingelov,\nhan selv står bag.",
+      "prediction": "På Christiansborg savner hun opbakning\ntil en holdningsdiskussion om flygtninge.\nBlandt andet fra justitsminister Hans\nEngell. \"Justitsministeren går ikke\nengang ud og forsvarer den udlændingelov,\nhan selv står bag.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "52643641a1de858c4df0fb93a0e48dcbee339c74580b1bcf984354aaec97a47d"
+    },
+    {
+      "name": "modern-danish-724822-99",
+      "reference": "Nemlig, at mange ældre har skjulte\nlidelser, der indskrænker deres daglige\nfunktion.",
+      "prediction": "Nemlig, at mange ældre har skjulte\nlidelser, der indskrænker deres daglige\nfunktion.",
+      "cer": 0.0,
+      "wer": 0.0,
+      "inference_status": "success",
+      "image_sha256": "53ef0e26a724373983dc3922f12c43e0625a567f12facdbe64f114f0c34698ae"
+    }
+  ]
+}
