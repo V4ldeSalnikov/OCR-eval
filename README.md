@@ -1,46 +1,53 @@
-# World-OCR-Benchmark (MVP)
+# ScandiOCR
 
-Evaluation framework for Multilingual, Multitype OCR models (classical + VLM based). Based on Pydantic Eval framework
+Evaluate OCR and vision-language models on printed and handwritten documents in Danish, Norwegian and Swedish.
 
-[Published evaluation results](results/README.md) · [ScandiOCR leaderboard](https://v4ldesalnikov.github.io/ocr-eval/)
+[Leaderboard](https://v4ldesalnikov.github.io/ocr-eval/) · [Datasets](https://v4ldesalnikov.github.io/ocr-eval/datasets/) · [Methodology](https://v4ldesalnikov.github.io/ocr-eval/methodology/) · [Published results](results/README.md)
 
-Dataset TODO list:
+## Installation
 
-  Danish :
-  - [X] [Historical Danish Handwriting](https://huggingface.co/datasets/aarhus-city-archives/historical-danish-handwriting)
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) (version 0.12.5 or newer), then:
 
-  Swedish :
-  - [ ] [Swedish newspapers 1871-1906](https://spraakbanken.gu.se/en/resources/svenska-tidningar-1871-1906)
-  - [ ] [Swedish newspapers 1818-1870](https://spraakbanken.gu.se/en/resources/svenska-tidningar-1818-1870)
-  - [ ] [Swedish fraktur 1626-1816](https://spraakbanken.gu.se/en/resources/svensk-fraktur-1626-1816)
-  
-  Faroese :
-  - [ ] [FaroeseOCR](https://mtd.setur.fo/en/resource/faroeseocr/)
+```sh
+git clone https://github.com/V4ldeSalnikov/OCR-eval.git
+cd OCR-eval
+uv sync --locked
+```
 
-  Icelandic:
-  - [ ] [OCR Icelandic benchmark](https://huggingface.co/datasets/Sigurdur/OCR-Icelandic-benchmark)
+This creates a virtual environment with Python 3.12 and the project dependencies. The provided environment supports Windows and Linux on x86-64. An NVIDIA GPU is recommended for local models.
 
+## Run an evaluation
 
-Models TODO list :
+Each command evaluates one model on one dataset. For example, recognise 100 Norwegian handwritten lines with TrOCR:
 
-  Classical OCR models :
-  - [ ] [docTR danish](https://huggingface.co/diversen/doctr-torch-crnn_vgg16_bn-danish-v1)
-  - [ ] [Tesseract](https://tesseract-ocr.github.io/tessdoc/)
+```sh
+uv run main.py --model Sprakbanken/TrOCR-norhand-v3 --dataset norhand --task line-recognition --max-examples 100 --batch-size 1
+```
 
+Or transcribe 10 full Danish document pages with Qwen:
 
-  VLM-based models :
-  - [ ] [Gemma3-27b](https://huggingface.co/google/gemma-3-27b-it)
-  - [ ] [Gemma3-12b](https://huggingface.co/google/gemma-3-12b-it)
-  - [ ] [Gemma3-4b](https://huggingface.co/google/gemma-3-4b-it)
-  - [ ] [Qwen3-VL-2B-Instruct](huggingface.co/Qwen/Qwen3-VL-2B-Instruct)
-  - [ ] [Qwen3-VL-4B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct)
-  - [ ] [DeepSeek-OCR](https://huggingface.co/deepseek-ai/DeepSeek-OCR)
-  - [ ] [PaddleOCR-VL](https://huggingface.co/PaddlePaddle/PaddleOCR-VL)
-  - [ ] [Nanonets-OCR2-3B](https://huggingface.co/nanonets/Nanonets-OCR2-3B)
+```sh
+uv run main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset oj4ocrmt-danish --task page-transcription --max-examples 10 --batch-size 1
+```
 
-General benchmark TODO list :
+Models and datasets are downloaded as needed on the first run.
 
-- [ ] Transfer project ot uv to manage dependencies
-- [ ] Create tests for datasets
-- [ ] Create tests for models
-- [ ] Automatically set the language for the model, depending on the dataset that is being used for evaluation
+- `--model`: the model to evaluate.
+- `--dataset`: the dataset to use.
+- `--task`: `line-recognition` for cropped text lines, or `page-transcription` for whole pages. The model and dataset must support the chosen task.
+- `--max-examples`: how many examples to evaluate (default: 100).
+- `--batch-size`: how many images to process together. Start with 1 to reduce memory use.
+
+To see all available models, datasets and options:
+
+```sh
+uv run main.py --help
+```
+
+Tesseract models also require [Tesseract](https://tesseract-ocr.github.io/tessdoc/Installation.html) and the relevant language data. Hosted models require the provider's API credentials.
+
+## Results
+
+After evaluation, scores are printed in the terminal and a timestamped JSON report is saved in `runs/`. Each report contains the reference text, model prediction, and character and word error rates (CER/WER) for every example, plus scores for the whole evaluation. Lower error rates are better.
+
+These commands use the first requested examples from the dataset. The published leaderboard uses fixed evaluation samples; see the [methodology](https://v4ldesalnikov.github.io/ocr-eval/methodology/#sampling) for details.
