@@ -1,0 +1,18 @@
+{
+  "name": "scandiocr-leaderboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node --test scripts/test_ocr_*.mjs"
+  },
+  "dependencies": {
+    "astro": "6.3.1"
+  }
+}

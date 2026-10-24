@@ -2,7 +2,7 @@
 
 Evaluate OCR and vision-language models on printed and handwritten documents in Danish, Norwegian and Swedish.
 
-[Leaderboard](https://v4ldesalnikov.github.io/ocr-eval/) · [Datasets](https://v4ldesalnikov.github.io/ocr-eval/datasets/) · [Methodology](https://v4ldesalnikov.github.io/ocr-eval/methodology/) · [Published results](results/README.md)
+[Leaderboard](https://v4ldesalnikov.github.io/OCR-eval/) · [Datasets](https://v4ldesalnikov.github.io/OCR-eval/datasets/) · [Methodology](https://v4ldesalnikov.github.io/OCR-eval/methodology/) · [Full prediction reports](https://github.com/V4ldeSalnikov/resultsScandiOCReval)
 
 ## Installation
 
@@ -50,4 +50,9 @@ Tesseract models also require [Tesseract](https://tesseract-ocr.github.io/tessdo
 
 After evaluation, scores are printed in the terminal and a timestamped JSON report is saved in `runs/`. Each report contains the reference text, model prediction, and character and word error rates (CER/WER) for every example, plus scores for the whole evaluation. Lower error rates are better.
 
-These commands use the first requested examples from the dataset. The published leaderboard uses fixed evaluation samples; see the [methodology](https://v4ldesalnikov.github.io/ocr-eval/methodology/#sampling) for details.
+These commands use the first requested examples from the dataset. The published leaderboard uses fixed evaluation samples; see the [methodology](https://v4ldesalnikov.github.io/OCR-eval/methodology/#sampling) for details.
+
+## Website
+
+The leaderboard lives in [`website/`](website/README.md) and deploys from this repository.
+Full prediction reports for all models are published in [resultsScandiOCReval](https://github.com/V4ldeSalnikov/resultsScandiOCReval).

@@ -1,4 +1,10 @@
-# Published evaluation results
+# Published results
+
+All model reports are now available in [resultsScandiOCReval](https://github.com/V4ldeSalnikov/resultsScandiOCReval): 22 model configurations, 222 task reports and 140,494 predictions.
+
+The original hosted-model bundles below remain here to preserve existing links. New publications belong in the separate results repository.
+
+## Original hosted-model bundles
 
 The runs below evaluate the same frozen 6,477 images across 11 tasks. Each model's folder contains the full predictions, references, scores, inference settings and dataset provenance. Reports contain no input images or private API runtime data.
 
