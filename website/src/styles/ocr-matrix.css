@@ -5,6 +5,9 @@
 .request-model { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line); border-radius:5px; font-size:13px; white-space:nowrap; }
 .request-model:hover,.request-model:focus-visible { border-color:var(--red); background:var(--red-soft); text-decoration:none; }
 #leaderboard { scroll-margin-top:24px; }
+.view-switch { display:flex; gap:24px; border-bottom:1px solid var(--line); margin-bottom:22px; }
+.view-switch button { border:0; border-bottom:2px solid transparent; background:none; color:var(--muted); font:inherit; font-size:14px; padding:0 0 12px; }
+.view-switch button[aria-pressed=true] { color:var(--red); border-bottom-color:var(--red); font-weight:600; }
 .matrix-controls { display:flex; align-items:flex-end; gap:20px; flex-wrap:wrap; }
 .matrix-select { display:flex; flex-direction:column; gap:6px; }
 .matrix-select>span,.metric-switch legend { color:var(--muted); font-size:12px; font-weight:550; }
@@ -71,6 +74,44 @@
 .task-matrix tbody tr:hover td { box-shadow:inset 0 0 0 999px #be253807; }
 .task-matrix .selected-task { outline:1px solid #be253833; outline-offset:-1px; }
 .task-leaderboard .table-footer { flex-wrap:wrap; }
+.size-task-control { min-width:0; max-width:400px; }
+.size-task-control select { max-width:100%; text-overflow:ellipsis; }
+.size-caption { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:24px 0 12px; }
+.size-caption p { font-size:15px; font-weight:550; margin:0; }
+.size-legend { display:flex; gap:20px; font-size:12px; color:var(--muted); }
+.size-legend span { display:inline-flex; align-items:center; gap:7px; }
+.size-legend i { width:9px; height:9px; border:1.5px solid #8b8b96; border-radius:50%; }
+.size-legend i.frontier { border-color:var(--red); background:var(--red); }
+.size-layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:24px; border:1px solid var(--line); border-radius:5px; padding:18px 20px; }
+#size-chart { min-width:0; min-height:400px; }
+#size-chart>svg { display:block; width:100%; }
+.size-axes line { stroke:#ededf0; }
+.size-axes text { fill:var(--muted); font:11px sans-serif; }
+.size-axes .size-axis-title { fill:#242427; font-size:12px; }
+.size-frontier { fill:none; stroke:var(--red); stroke-width:1.5; stroke-dasharray:4 4; opacity:.6; }
+.size-point { cursor:pointer; outline:none; }
+.size-hit { fill:transparent; }
+.size-dot { fill:white; stroke:#8b8b96; stroke-width:1.5; pointer-events:none; }
+.size-point.frontier .size-dot { fill:var(--red); stroke:var(--red); }
+.size-point.selected .size-dot,.size-point:focus-visible .size-dot { stroke:#242427; stroke-width:2.5; r:7; }
+#size-detail { border-left:1px solid var(--line); padding:20px 0 16px 24px; align-self:stretch; }
+.size-detail-label { color:var(--muted); font-size:11px; display:block; margin-bottom:12px; }
+.size-model-name { display:block; font-size:16px; font-weight:600; line-height:1.5; overflow-wrap:anywhere; }
+.size-publisher { margin:4px 0 22px; font-size:12px; color:var(--muted); }
+#size-detail dl { margin:0 0 24px; }
+#size-detail dl>div { display:flex; gap:12px; justify-content:space-between; padding:9px 0; font-size:12px; }
+#size-detail dt { color:var(--muted); }
+#size-detail dd { margin:0; font-weight:600; }
+#size-detail>a:not(.size-model-name) { display:block; font-size:12px; margin-top:12px; }
+.size-footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; color:var(--muted); font-size:12px; margin:14px 0; }
+.size-omissions { font-size:12px; color:var(--muted); }
+.size-omissions summary { cursor:pointer; }
+.size-omissions p { line-height:1.8; margin-top:8px; }
+@media(max-width:900px) {
+  .size-layout { grid-template-columns:1fr; gap:0; }
+  #size-detail { border-left:0; border-top:1px solid var(--line); padding:18px 0 4px; }
+  #size-detail dl { max-width:360px; margin-bottom:12px; }
+}
 @media(max-width:1000px) { .matrix-controls { gap:12px; }.matrix-controls .search-control { flex:1; min-width:160px; } }
 @media(max-width:680px) {
   .site-main:has(.task-leaderboard) { padding:24px 16px 40px; }
@@ -86,4 +127,8 @@
   .task-matrix { --model-width:145px; --overall-width:85px; }
   .task-matrix th.model-cell,.task-matrix td.model-cell { padding-left:10px; }
   .matrix-scroll { max-height:70vh; }
+  .size-task-control { grid-column:1 / -1; max-width:none; }
+  .size-caption { align-items:flex-start; flex-direction:column; gap:10px; }
+  .size-layout { padding:12px 8px; }
+  #size-detail { padding:18px 8px 8px; }
 }

@@ -4,12 +4,18 @@ import { datasetDescriptions } from '../data/ocr-datasets';
 import { benchmarks, inputDescription } from '../data/ocr-benchmarks';
 import { modelOpenness } from '../data/ocr-openness';
 import { criteria, opennessIcon, statusLabels, opennessAnchor, type Evidence } from '../lib/ocr-openness';
+import { modelParameters } from '../data/ocr-parameters';
+import { paretoPoints } from '../lib/ocr-pareto';
+import { renderPareto } from './ocr-pareto';
 
 const element = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const search = element<HTMLInputElement>('model-search');
 const benchmarkSelect = element<HTMLSelectElement>('benchmark-select');
 const aggregationSelect = element<HTMLSelectElement>('aggregation-select');
 const metricButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-metric]')];
+const viewButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-view]')];
+const sizeTaskSelect = element<HTMLSelectElement>('size-task');
+let view: 'table' | 'size' = 'table', sizeTask = 'overall';
 let data: Snapshot, benchmark = benchmarks[0], metric: Metric = 'wer', aggregation: Aggregation = 'mean';
 let sortKey = 'overall', descending = false;
 const number = (value: number) => value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -51,6 +57,8 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape') hide
 function overallLabel() { return aggregation === 'mean' ? `Mean ${metric.toUpperCase()}` : aggregation === 'borda' ? 'Borda rank' : 'Win rate'; }
 function saveSelection(push = false) {
   const params = new URLSearchParams({ benchmark: benchmark.id, metric, aggregation });
+  if (view === 'size') params.set('view', 'size');
+  if (sizeTask !== 'overall') params.set('size_task', sizeTask);
   if (sortKey !== 'overall') params.set('sort', sortKey);
   if (descending !== (sortKey === 'overall' && aggregation === 'win-rate')) params.set('direction', descending ? 'desc' : 'asc');
   if (search.value.trim()) params.set('q', search.value.trim());
@@ -137,6 +145,14 @@ function render() {
     groups.get(sample.dataset_id)!.push(sample);
   }
   const samples = [...groups.values()].flat();
+  if (!benchmark.sampleIds.includes(sizeTask)) sizeTask = 'overall';
+  sizeTaskSelect.replaceChildren(new Option('Overall · mean across tasks', 'overall'), ...samples.map(sample =>
+    new Option(`${datasetDescriptions[sample.dataset_id].name} · ${sample.task === 'line-recognition' ? 'Cropped lines' : 'Full pages'}`, sample.id)));
+  sizeTaskSelect.value = sizeTask;
+  const showSize = view === 'size';
+  element('table-view').hidden = showSize; element('size-view').hidden = !showSize;
+  element('aggregation-control').hidden = showSize; element('size-task-control').hidden = !showSize;
+  viewButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
   const groupEnds = new Set([...groups.values()].map(group => group[group.length - 1].id));
   const rows = matrixRows(data, benchmarkSamples, metric, aggregation);
   const columns = Object.fromEntries(samples.map(sample => [sample.id, rows.map(row => row.scores[sample.id]).filter((value): value is number => value !== null)]));
@@ -182,13 +198,28 @@ function render() {
   text('table-caption', `${benchmark.name}: ${overallLabel()} and ${metric.toUpperCase()} for each task, grouped by dataset. Cropped lines and full pages are separate tasks. Task error rates are percentages; lower is better.`);
   text('selection-description', `${groups.size} datasets · ${samples.length} tasks · ${metric.toUpperCase()} (%)`);
   text('metric-help', `${metric === 'wer' ? 'WER counts word' : 'CER counts character'} substitutions, deletions and insertions relative to the reference text. Lower is better; scores can exceed 100%.`);
-  text('aggregation-help', explanations[aggregation]);
+  text('aggregation-help', showSize ? sizeTask === 'overall' ? explanations.mean : 'The plot shows the selected task’s corpus error rate.' : explanations[aggregation]);
+  text('view-help', showSize
+    ? 'A frontier model has no competitor with both fewer or equal active parameters and lower or equal error, with at least one strict improvement. Overall scores require results on every task. Parameter counts are estimates, not speed or memory measurements.'
+    : 'Task cells always show error rates. Overall scores require results on every task. Shading compares models within each task; darker red means higher error.');
   text('visible-models', `${visible.length} model${visible.length === 1 ? '' : 's'}`);
   element<HTMLAnchorElement>('benchmark-about').href = `/OCR-eval/benchmarks/${benchmark.id}/`;
   benchmarkSelect.value = benchmark.id; aggregationSelect.value = aggregation;
   metricButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.metric === metric)));
   element('table-status').hidden = visible.length > 0;
   text('table-status', 'No models match your search.');
+  if (showSize) {
+    const plotSamples = sizeTask === 'overall' ? samples : samples.filter(sample => sample.id === sizeTask);
+    const allPoints = paretoPoints(data, plotSamples, metric, modelParameters);
+    // Search hides points but never promotes a dominated model onto the frontier.
+    const plotted = allPoints.filter(point => `${point.model.name} ${point.model.id} ${point.model.family}`.toLowerCase().includes(query));
+    renderPareto(plotted, metric, sizeTask === 'overall');
+    if (sizeTask !== 'overall') text('selection-description', `1 dataset · ${plotSamples[0].task === 'line-recognition' ? 'Cropped lines' : 'Full pages'} · ${metric.toUpperCase()} (%)`);
+    text('size-count', `${plotted.length} models · ${sizeTask === 'overall' ? `Mean ${metric.toUpperCase()}` : metric.toUpperCase()} · Parameter estimates`);
+    const unknown = data.models.filter(model => !modelParameters[model.id] && plotSamples.every(sample => model.supported_tasks.includes(sample.task)));
+    element('size-omissions').hidden = !unknown.length;
+    text('size-unknown', unknown.map(model => model.name).join(' · '));
+  }
 }
 function restoreSelection() {
   const params = new URLSearchParams(location.search);
@@ -197,6 +228,8 @@ function restoreSelection() {
     ?? benchmarks.find(item => item.languages.length === 1 && item.languages[0] === legacyLanguage) ?? benchmarks[0];
   metric = params.get('metric') === 'cer' ? 'cer' : 'wer';
   aggregation = ['borda', 'win-rate'].includes(params.get('aggregation') ?? '') ? params.get('aggregation') as Aggregation : 'mean';
+  view = params.get('view') === 'size' ? 'size' : 'table';
+  sizeTask = params.get('size_task') ?? 'overall';
   const requested = params.get('sort') ?? params.get('sample') ?? `${params.get('task') ?? 'line-recognition'}/${params.get('dataset') ?? ''}`;
   sortKey = benchmark.sampleIds.includes(requested) ? requested : 'overall';
   descending = params.has('direction') ? params.get('direction') === 'desc' : sortKey === 'overall' && aggregation === 'win-rate';
@@ -210,6 +243,8 @@ async function start() {
   benchmarkSelect.addEventListener('change', () => { benchmark = benchmarks.find(item => item.id === benchmarkSelect.value)!; sortKey = 'overall'; descending = aggregation === 'win-rate'; render(); saveSelection(true); });
   aggregationSelect.addEventListener('change', () => { aggregation = aggregationSelect.value as Aggregation; sortKey = 'overall'; descending = aggregation === 'win-rate'; render(); saveSelection(true); });
   metricButtons.forEach(button => button.addEventListener('click', () => { metric = button.dataset.metric as Metric; render(); saveSelection(true); }));
+  viewButtons.forEach(button => button.addEventListener('click', () => { view = button.dataset.view as typeof view; render(); saveSelection(true); }));
+  sizeTaskSelect.addEventListener('change', () => { sizeTask = sizeTaskSelect.value; render(); saveSelection(true); });
   search.addEventListener('input', () => { render(); saveSelection(); });
   const help = document.querySelector<HTMLElement>('.score-help')!;
   help.addEventListener('keydown', event => {
