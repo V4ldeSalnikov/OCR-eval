@@ -9,12 +9,14 @@ from export_ocr_examples import SOURCES, checked_image, select_cases
 class ExampleTests(unittest.TestCase):
     def test_selection_is_stable_and_independent_of_model_scores(self):
         cases = [{"name": str(i), "score": 0} for i in range(20)]
+        original_three = [case["name"] for case in select_cases(cases, count=3)]
         selected = [case["name"] for case in select_cases(cases)]
         cases.reverse()
         for i, case in enumerate(cases):
             case["score"] = i * 100
         self.assertEqual(selected, [case["name"] for case in select_cases(cases)])
-        self.assertEqual(len(selected), 3)
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(selected[:3], original_three)
 
     def test_changed_or_outside_images_are_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:

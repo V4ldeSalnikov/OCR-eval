@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "selection": "First three cases by SHA256('scandiocr-examples-v1:' + case name), independent of model scores.",
+  "selection": "First 10 cases by SHA256('scandiocr-examples-v1:' + case name), independent of model scores.",
   "groups": [
     {
       "sample_set_id": "line-recognition/norhand",
@@ -18,6 +18,34 @@
         {
           "id": "254671254342ccd6fd43",
           "case_id": "norhand-test-1106"
+        },
+        {
+          "id": "9587e8a1b78b8990d6d0",
+          "case_id": "norhand-test-13"
+        },
+        {
+          "id": "f193d8efbac1d8fa1c0e",
+          "case_id": "norhand-test-251"
+        },
+        {
+          "id": "031b4e80ee127b6bcdb7",
+          "case_id": "norhand-test-411"
+        },
+        {
+          "id": "621aa44fa8306a06de3b",
+          "case_id": "norhand-test-1197"
+        },
+        {
+          "id": "0ee0d70402251c9c879e",
+          "case_id": "norhand-test-69"
+        },
+        {
+          "id": "a525904f06c81e658d38",
+          "case_id": "norhand-test-723"
+        },
+        {
+          "id": "eba8dbb1d8035f0b62f5",
+          "case_id": "norhand-test-85"
         }
       ]
     },
@@ -37,6 +65,34 @@
         {
           "id": "65a79ea8570820341d51",
           "case_id": "danish-typewritten-EHRI-DR-19420910-DK_01-0018"
+        },
+        {
+          "id": "6da5f7e5bf68e3cf482e",
+          "case_id": "danish-typewritten-EHRI-DR-19431002-DK_02-0035"
+        },
+        {
+          "id": "98486427c46abeea9dea",
+          "case_id": "danish-typewritten-EHRI-DR-19431002-DK_02-0015"
+        },
+        {
+          "id": "70d0bde872039a9e30c8",
+          "case_id": "danish-typewritten-EHRI-DR-19420910-DK_02-0021"
+        },
+        {
+          "id": "e15a2446a96ca2ec35e9",
+          "case_id": "danish-typewritten-EHRI-DR-19410701-DK_01-0005"
+        },
+        {
+          "id": "9c3ebcd4c62095cb8ead",
+          "case_id": "danish-typewritten-EHRI-DR-19410127-DK_04-0006"
+        },
+        {
+          "id": "26325995463eae2162c4",
+          "case_id": "danish-typewritten-EHRI-DR-19431111-DK_01-0034"
+        },
+        {
+          "id": "662a191d94eb533b390f",
+          "case_id": "danish-typewritten-EHRI-DR-19431213-DK_04-0008"
         }
       ]
     },
@@ -56,6 +112,34 @@
         {
           "id": "a04e0e9f54e8ac6eb1b9",
           "case_id": "modern-danish-724822-60-0"
+        },
+        {
+          "id": "51255d1a79c1c7d08304",
+          "case_id": "modern-danish-724822-96-4"
+        },
+        {
+          "id": "9cf042c18ae7955e0f2d",
+          "case_id": "modern-danish-724822-156-3"
+        },
+        {
+          "id": "caed213775c743e1e4ba",
+          "case_id": "modern-danish-724822-176-2"
+        },
+        {
+          "id": "1f3d3d2400613ce72341",
+          "case_id": "modern-danish-724822-30-2"
+        },
+        {
+          "id": "d046ab514fa9efc6c7ac",
+          "case_id": "modern-danish-724822-41-1"
+        },
+        {
+          "id": "100221f0d4446f980501",
+          "case_id": "modern-danish-724822-177-1"
+        },
+        {
+          "id": "a311c425dd3ce8ca0e12",
+          "case_id": "modern-danish-724822-130-0"
         }
       ]
     },
@@ -75,6 +159,34 @@
         {
           "id": "93cb3f6cff25238e87da",
           "case_id": "riksarkivet-ood-test-1048"
+        },
+        {
+          "id": "22960e09131eec035ab6",
+          "case_id": "riksarkivet-ood-test-3772"
+        },
+        {
+          "id": "35f08dd37040ff94be95",
+          "case_id": "riksarkivet-ood-test-5976"
+        },
+        {
+          "id": "0e60ac394a19f52287e0",
+          "case_id": "riksarkivet-ood-test-4166"
+        },
+        {
+          "id": "e173d7c7bd49aafc945f",
+          "case_id": "riksarkivet-ood-test-5075"
+        },
+        {
+          "id": "951cccc15a1aa02ccf8d",
+          "case_id": "riksarkivet-ood-test-33"
+        },
+        {
+          "id": "07c73b25832c8cb2c2ac",
+          "case_id": "riksarkivet-ood-test-3985"
+        },
+        {
+          "id": "75f9254f6bf7c85e8f0e",
+          "case_id": "riksarkivet-ood-test-5345"
         }
       ]
     },
@@ -94,6 +206,34 @@
         {
           "id": "162b0fae96a86eab2167",
           "case_id": "swedish-fraktur-train-15462"
+        },
+        {
+          "id": "26433ccc8d8a9846708a",
+          "case_id": "swedish-fraktur-train-11225"
+        },
+        {
+          "id": "e500622acf582a29c791",
+          "case_id": "swedish-fraktur-train-21783"
+        },
+        {
+          "id": "7e83b2093b5cb6112f35",
+          "case_id": "swedish-fraktur-train-9101"
+        },
+        {
+          "id": "5dd85758c170ef7eb890",
+          "case_id": "swedish-fraktur-train-9053"
+        },
+        {
+          "id": "08d357ed2f7f78003bf1",
+          "case_id": "swedish-fraktur-train-16017"
+        },
+        {
+          "id": "33b6fed8fe3303442939",
+          "case_id": "swedish-fraktur-train-10037"
+        },
+        {
+          "id": "807d6b7854189fdd6318",
+          "case_id": "swedish-fraktur-train-20130"
         }
       ]
     },
@@ -113,6 +253,34 @@
         {
           "id": "41f804ebe7b5925d3bbd",
           "case_id": "dkhist-68131-1285-25"
+        },
+        {
+          "id": "16c756cd9de38ac17d5c",
+          "case_id": "dkhist-7765712-9073-44"
+        },
+        {
+          "id": "7ea62a01316535621ab1",
+          "case_id": "dkhist-7780991-10756-3"
+        },
+        {
+          "id": "2e03b37df5ce693dde03",
+          "case_id": "dkhist-499783-7088-35"
+        },
+        {
+          "id": "0a4144b583400a19f306",
+          "case_id": "dkhist-496944-3788-1"
+        },
+        {
+          "id": "60ea9a0713192bf120bf",
+          "case_id": "dkhist-496944-3776-26"
+        },
+        {
+          "id": "822fd4d84463400db6a6",
+          "case_id": "dkhist-241731-2256-39"
+        },
+        {
+          "id": "61a519f36774b8ec5d6c",
+          "case_id": "dkhist-7764731-11277-25"
         }
       ]
     },
@@ -132,6 +300,34 @@
         {
           "id": "3d681e2b2853c873063b",
           "case_id": "modern-danish-724822-221"
+        },
+        {
+          "id": "bfbb43fa806cf5169079",
+          "case_id": "modern-danish-724822-88"
+        },
+        {
+          "id": "8ae67a6921bfacd95ebd",
+          "case_id": "modern-danish-724822-179"
+        },
+        {
+          "id": "9fad870cbad5e243c819",
+          "case_id": "modern-danish-724822-201"
+        },
+        {
+          "id": "735c655a857071bb7e28",
+          "case_id": "modern-danish-724822-190"
+        },
+        {
+          "id": "217adf2d122c2822bd1f",
+          "case_id": "modern-danish-724822-101"
+        },
+        {
+          "id": "a36a976bc53d9481fa2f",
+          "case_id": "modern-danish-724822-113"
+        },
+        {
+          "id": "b7dd337d63c0515d69da",
+          "case_id": "modern-danish-724822-211"
         }
       ]
     },
@@ -151,6 +347,34 @@
         {
           "id": "53721fc82fb6ecc1c4b7",
           "case_id": "dkhist-7664111-7621"
+        },
+        {
+          "id": "93d01a84753abaaf235d",
+          "case_id": "dkhist-7779271-9889"
+        },
+        {
+          "id": "eb0b0e6d35dbccc4ed27",
+          "case_id": "dkhist-66359-1136"
+        },
+        {
+          "id": "bba67b8f1ecc22887536",
+          "case_id": "dkhist-7765712-8735"
+        },
+        {
+          "id": "7d7f3cdf3320758c5d24",
+          "case_id": "dkhist-7780991-10764"
+        },
+        {
+          "id": "9151b414d143c367dd84",
+          "case_id": "dkhist-7765272-8569"
+        },
+        {
+          "id": "101fb42349596bd5ca0f",
+          "case_id": "dkhist-499776-6266"
+        },
+        {
+          "id": "58324923f3f77697ca12",
+          "case_id": "dkhist-499108-4150"
         }
       ]
     },
@@ -170,6 +394,34 @@
         {
           "id": "6d8948f5fd768664146f",
           "case_id": "oj4ocrmt-da-OJ:C:2023:214-p87"
+        },
+        {
+          "id": "be3062118b9d0b250466",
+          "case_id": "oj4ocrmt-da-OJ:C:2023:107-p77"
+        },
+        {
+          "id": "2b4b76a309934f567296",
+          "case_id": "oj4ocrmt-da-OJ:C:2023:143-p19"
+        },
+        {
+          "id": "91ac88f4284917d29b0b",
+          "case_id": "oj4ocrmt-da-OJ:L:2023:231-p14"
+        },
+        {
+          "id": "136e343e1eee3f26ec23",
+          "case_id": "oj4ocrmt-da-OJ:L:2023:143-p3"
+        },
+        {
+          "id": "4f5fd4254a141bda2bd7",
+          "case_id": "oj4ocrmt-da-OJ:L:2023:052-p32"
+        },
+        {
+          "id": "e8080ddd0f33d85582c3",
+          "case_id": "oj4ocrmt-da-OJ:L:2023:159I-p151"
+        },
+        {
+          "id": "4cf9c7c90c13066855bf",
+          "case_id": "oj4ocrmt-da-OJ:L:2023:234-p54"
         }
       ]
     },
@@ -189,6 +441,34 @@
         {
           "id": "0ea5921b2480a135b624",
           "case_id": "oj4ocrmt-sv-OJ:L:2023:058-p612"
+        },
+        {
+          "id": "f96ea7cd74803a74ee73",
+          "case_id": "oj4ocrmt-sv-OJ:L:2023:066-p129"
+        },
+        {
+          "id": "8bcd4fcb84ad1c87d422",
+          "case_id": "oj4ocrmt-sv-OJ:L:2023:141-p43"
+        },
+        {
+          "id": "bc375f483ff6a1caf6db",
+          "case_id": "oj4ocrmt-sv-OJ:C:2023:214-p87"
+        },
+        {
+          "id": "5369b26a0765d94b0e8b",
+          "case_id": "oj4ocrmt-sv-OJ:C:2023:340-p10"
+        },
+        {
+          "id": "e9326b63797dafe2be72",
+          "case_id": "oj4ocrmt-sv-OJ:C:2023:064-p34"
+        },
+        {
+          "id": "8d2532bfb4d213f7a369",
+          "case_id": "oj4ocrmt-sv-OJ:C:2023:053-p10"
+        },
+        {
+          "id": "3da379856544843db817",
+          "case_id": "oj4ocrmt-sv-OJ:L:2023:188-p4"
         }
       ]
     },
@@ -208,14 +488,42 @@
         {
           "id": "fcd53b1240951fe5aca2",
           "case_id": "nva-886fc4fb-2b66-48fa-978d-b7986827f416-p49"
+        },
+        {
+          "id": "cc0cb40394951eb7a749",
+          "case_id": "nva-886fc4fb-2b66-48fa-978d-b7986827f416-p82"
+        },
+        {
+          "id": "2ca47ad4231cd89406fc",
+          "case_id": "nva-dc078c8e-4cf3-4bda-8d80-c60159158ee2-p63"
+        },
+        {
+          "id": "1785a0d5409cab94ae8f",
+          "case_id": "nva-a488274c-5130-480b-bc17-519f45efe8ef-p10"
+        },
+        {
+          "id": "6d64d2445f424fb96f7f",
+          "case_id": "nva-fcc210ed-e297-4952-8a80-18b14b96c9ef-p48"
+        },
+        {
+          "id": "1807f97d5c059c1f93c0",
+          "case_id": "nva-dc078c8e-4cf3-4bda-8d80-c60159158ee2-p65"
+        },
+        {
+          "id": "2596f50c3e138e282e96",
+          "case_id": "nva-ccd57e74-440e-4ee2-896c-3ceccaa5dc5e-p36"
+        },
+        {
+          "id": "7d4bd23844b6b505cc45",
+          "case_id": "nva-ab8119d5-4baa-4023-bbef-632fbdee78bf-p14"
         }
       ]
     }
   ],
   "not_published": [],
   "counts": {
-    "examples": 33,
-    "predictions": 666,
+    "examples": 110,
+    "predictions": 2220,
     "datasets": 9
   }
 }

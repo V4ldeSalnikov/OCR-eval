@@ -59,5 +59,5 @@ test('hosted evaluations appear in every benchmark with verified aggregate score
     }
   }
   assert.equal(predictions, index.counts.predictions);
-  assert.equal(predictions, 666);
+  assert.equal(predictions, 2220);
 });

@@ -1,9 +1,9 @@
 # Example attribution
 
 These are selected inputs and saved predictions from ScandiOCR Eval, not new model runs.
-Each task/dataset contributes three cases, chosen by sorting the SHA-256 digest of
+Each task/dataset contributes ten cases, chosen by sorting the SHA-256 digest of
 `scandiocr-examples-v1:` plus the case identifier. Selection does not use model scores.
-The public gallery contains 33 examples and 666 predictions from nine datasets.
+The public gallery contains 110 examples and 2,220 predictions from nine datasets.
 
 Images are byte-identical to the frozen benchmark PNGs. Inputs may already be line
 crops or PDF renderings made by the evaluation adapter. References and predictions

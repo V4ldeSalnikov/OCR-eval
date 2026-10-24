@@ -8,7 +8,8 @@ import shutil
 
 from export_ocr_results import read_bytes, read_json
 
-SELECTION = "First three cases by SHA256('scandiocr-examples-v1:' + case name), independent of model scores."
+EXAMPLES_PER_TASK = 10
+SELECTION = f"First {EXAMPLES_PER_TASK} cases by SHA256('scandiocr-examples-v1:' + case name), independent of model scores."
 CC_BY = "https://creativecommons.org/licenses/by/4.0/"
 # Source cards checked before publication. Riksarkivet examples explicitly authorised by the user.
 SOURCES = {
@@ -24,7 +25,7 @@ SOURCES = {
 }
 
 
-def select_cases(cases, count=3):
+def select_cases(cases, count=EXAMPLES_PER_TASK):
     return sorted(cases, key=lambda case: sha256(("scandiocr-examples-v1:" + case["name"]).encode()).digest())[:count]
 
 

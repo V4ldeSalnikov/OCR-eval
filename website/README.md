@@ -15,7 +15,7 @@ Open http://localhost:4321/OCR-eval/. Run `npm test` and `npm run build` before 
 Pushing changes here to `main` deploys the site through `.github/workflows/deploy-website.yml`.
 
 `public/results.json` is the leaderboard snapshot. `public/examples/` contains the
-33 attributed input images and their saved predictions. Full reports for every model
+110 attributed input images (10 per task) and their saved predictions. Full reports for every model
 are stored in [resultsScandiOCReval](https://github.com/V4ldeSalnikov/resultsScandiOCReval).
 The website builds from its checked-in snapshot and does not need API credentials.
 
