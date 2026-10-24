@@ -21,11 +21,6 @@ let sortKey = 'overall', descending = false;
 const number = (value: number) => value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const percent = (value: number) => `${number(value * 100)}%`;
 const text = (id: string, value: string) => { element(id).textContent = value; };
-const explanations: Record<Aggregation, string> = {
-  mean: 'Mean averages the selected error rate across tasks, giving every task equal weight. Lower is better.',
-  borda: 'Borda rank averages a model’s position on each task. Ties share the average position. Lower is better.',
-  'win-rate': 'Win rate estimates how often a model beats another model, using Bradley–Terry comparisons of task scores. Ties count as half a win. Higher is better.',
-};
 function node<K extends keyof HTMLElementTagNameMap>(tag: K, value = '', className = '') {
   const item = document.createElement(tag); item.textContent = value; item.className = className; return item;
 }
@@ -215,11 +210,6 @@ function render() {
   table.style.minWidth = `calc(var(--model-width) + var(--overall-width) + var(--openness-width) + ${96 * samples.length}px)`;
   text('table-caption', `${benchmark.name}: ${overallLabel()} and ${metric.toUpperCase()} for each task, grouped by language and dataset. Cropped lines and full pages are separate tasks. Task error rates are percentages; lower is better.`);
   text('selection-description', `${groups.size} datasets · ${samples.length} tasks · ${metric.toUpperCase()} (%)`);
-  text('metric-help', `${metric === 'wer' ? 'WER counts word' : 'CER counts character'} substitutions, deletions and insertions relative to the reference text. Lower is better; scores can exceed 100%.`);
-  text('aggregation-help', showSize ? sizeTask === 'overall' ? explanations.mean : 'The plot shows the selected task’s corpus error rate.' : explanations[aggregation]);
-  text('view-help', showSize
-    ? 'A frontier model has no competitor with both fewer or equal active parameters and lower or equal error, with at least one strict improvement. Overall scores require results on every task. Parameter counts are estimates, not speed or memory measurements.'
-    : 'Task cells always show error rates. Overall scores require results on every task. Shading compares models within each task; darker red means higher error.');
   text('visible-models', `${visible.length} model${visible.length === 1 ? '' : 's'}`);
   element<HTMLAnchorElement>('benchmark-about').href = `/OCR-eval/benchmarks/${benchmark.id}/`;
   benchmarkSelect.value = benchmark.id; aggregationSelect.value = aggregation;
@@ -264,15 +254,36 @@ async function start() {
   viewButtons.forEach(button => button.addEventListener('click', () => { view = button.dataset.view as typeof view; render(); saveSelection(true); }));
   sizeTaskSelect.addEventListener('change', () => { sizeTask = sizeTaskSelect.value; render(); saveSelection(true); });
   search.addEventListener('input', () => { render(); saveSelection(); });
-  const help = document.querySelector<HTMLElement>('.score-help')!;
-  help.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { help.querySelector<HTMLButtonElement>('button')!.focus(); help.classList.add('dismissed'); }
-  });
-  help.addEventListener('mouseenter', () => help.classList.remove('dismissed'));
-  help.addEventListener('click', () => help.classList.remove('dismissed'));
-  help.addEventListener('focusin', () => help.classList.remove('dismissed'));
   window.addEventListener('popstate', restoreSelection);
 }
+const helpPanels = [...document.querySelectorAll<HTMLElement>('.score-help')];
+function showHelp(help: HTMLElement, open: boolean) {
+  const button = help.querySelector<HTMLButtonElement>('button')!, panel = help.querySelector<HTMLElement>('.score-popover')!;
+  panel.hidden = !open; button.setAttribute('aria-expanded', String(open));
+  if (!open) return;
+  helpPanels.filter(other => other !== help).forEach(other => showHelp(other, false));
+  const rect = button.getBoundingClientRect();
+  panel.style.left = `${Math.max(16, Math.min(rect.left, innerWidth - panel.offsetWidth - 16))}px`;
+  panel.style.top = `${Math.max(16, rect.bottom + panel.offsetHeight <= innerHeight - 16 ? rect.bottom : rect.top - panel.offsetHeight)}px`;
+}
+for (const help of helpPanels) {
+  const button = help.querySelector<HTMLButtonElement>('button')!;
+  help.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') showHelp(help, true); });
+  help.addEventListener('pointerleave', () => { if (!help.contains(document.activeElement)) showHelp(help, false); });
+  button.addEventListener('focus', () => { if (button.matches(':focus-visible')) showHelp(help, true); });
+  button.addEventListener('click', () => showHelp(help, true));
+  help.addEventListener('focusout', event => { if (!help.contains(event.relatedTarget as Node | null)) showHelp(help, false); });
+  help.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { button.focus(); showHelp(help, false); }
+  });
+}
+document.addEventListener('pointerdown', event => {
+  helpPanels.filter(help => !help.contains(event.target as Node)).forEach(help => showHelp(help, false));
+});
+window.addEventListener('resize', () => helpPanels.forEach(help => showHelp(help, false)));
+window.addEventListener('scroll', event => {
+  if (!(event.target instanceof Element && event.target.closest('.score-popover'))) helpPanels.forEach(help => showHelp(help, false));
+}, true);
 start().catch(() => {
   element('load-error').hidden = false;
   text('load-error', 'The results could not be loaded. Please reload the page or download the results below.');
