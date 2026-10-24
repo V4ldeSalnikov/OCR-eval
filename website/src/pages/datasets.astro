@@ -19,6 +19,10 @@ const numbers = new Intl.NumberFormat('en-GB');
         <div class="entry-meta">{item.language_codes.map(code => languageNames[code]).join(' / ')} <span>·</span> {item.id === 'danish-typewritten' ? 'Typewritten' : item.document_type === 'handwritten' ? 'Handwritten' : 'Printed'}</div>
         <h2>{item.name}</h2>
         <p>{item.description}</p>
+        <div class="entry-links dataset-examples">{item.samples.map(sample => {
+          const label = item.samples.length === 1 ? 'View examples' : sample.task === 'line-recognition' ? 'View line examples' : 'View page examples';
+          return <a href={`/OCR-eval/compare/?view=examples&task=${sample.task}&dataset=${item.id}`} aria-label={`${label} for ${item.name}`}>{label} <span aria-hidden="true">→</span></a>;
+        })}</div>
         <p><strong>Reference text.</strong> {item.reference}</p>
         <div class="sample-summary">{item.samples.map(sample => <div><a href={`/OCR-eval/?benchmark=${benchmarks.find(benchmark => benchmark.languages.length === 1 && benchmark.sampleIds.includes(sample.id))!.id}&sample=${encodeURIComponent(sample.id)}#leaderboard`}>{sample.task === 'line-recognition' ? 'Text line scores' : 'Full page scores'} <span aria-hidden="true">→</span></a><span>{numbers.format(sample.selected_samples)} images · {sample.split} split</span></div>)}</div>
         {item.note && <p class="dataset-note">{item.note}</p>}
