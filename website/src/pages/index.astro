@@ -8,7 +8,10 @@ import '../styles/ocr-matrix.css';
   <div class="task-leaderboard">
     <header class="page-heading">
       <div><h1>Leaderboard</h1><p>OCR for Danish, Norwegian and Swedish.</p></div>
-      <p class="benchmark-size">{snapshot.models.length} models <span>·</span> {snapshot.datasets.length} datasets</p>
+      <div class="leaderboard-actions">
+        <p class="benchmark-size">{snapshot.models.length} models <span>·</span> {snapshot.datasets.length} datasets</p>
+        <a class="request-model" href="https://github.com/V4ldeSalnikov/OCR-eval/issues/new?template=model-evaluation.yml">Request a model <span aria-hidden="true">↗</span></a>
+      </div>
     </header>
     <section id="leaderboard" aria-label="Model scores">
       <div class="matrix-controls">

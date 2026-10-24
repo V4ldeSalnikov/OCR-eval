@@ -1,0 +1,27 @@
+name: Request a model evaluation
+description: Suggest an OCR or vision-language model to evaluate on ScandiOCR.
+title: "Model evaluation: "
+body:
+  - type: input
+    id: model-name
+    attributes:
+      label: Model name
+      description: Include the version or checkpoint you want evaluated.
+      placeholder: organisation/model-name
+    validations:
+      required: true
+  - type: input
+    id: model-link
+    attributes:
+      label: Model link
+      description: Link to the Hugging Face model, repository, or API documentation.
+      placeholder: https://huggingface.co/organisation/model-name
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Optional suggested settings, benchmarks, or other details useful for running the model.
+    validations:
+      required: false

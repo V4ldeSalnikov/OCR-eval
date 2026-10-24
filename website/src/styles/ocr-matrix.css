@@ -1,5 +1,9 @@
 .site-main:has(.task-leaderboard) { max-width:1680px; padding-left:32px; padding-right:32px; }
 .task-leaderboard .page-heading { margin-bottom:22px; padding-bottom:22px; }
+.leaderboard-actions { display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:flex-end; }
+.leaderboard-actions .benchmark-size { margin:0; padding:0; }
+.request-model { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line); border-radius:5px; font-size:13px; white-space:nowrap; }
+.request-model:hover,.request-model:focus-visible { border-color:var(--red); background:var(--red-soft); text-decoration:none; }
 #leaderboard { scroll-margin-top:24px; }
 .matrix-controls { display:flex; align-items:flex-end; gap:20px; flex-wrap:wrap; }
 .matrix-select { display:flex; flex-direction:column; gap:6px; }
@@ -66,6 +70,7 @@
 @media(max-width:1000px) { .matrix-controls { gap:12px; }.matrix-controls .search-control { flex:1; min-width:160px; } }
 @media(max-width:680px) {
   .site-main:has(.task-leaderboard) { padding:24px 16px 40px; }
+  .leaderboard-actions { width:100%; justify-content:space-between; margin-top:16px; gap:12px; }
   .matrix-controls { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .matrix-select select { width:100%; min-width:0; padding-right:6px; font-size:12px; }
   .matrix-select { min-width:0; }
