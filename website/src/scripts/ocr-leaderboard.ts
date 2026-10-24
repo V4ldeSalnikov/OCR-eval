@@ -1,6 +1,6 @@
 import { type Metric, type SampleSet, type Snapshot } from '../lib/ocr-results';
 import { matrixRows, type Aggregation, type MatrixRow } from '../lib/ocr-matrix';
-import { datasetDescriptions } from '../data/ocr-datasets';
+import { datasetDescriptions, languageNames } from '../data/ocr-datasets';
 import { benchmarks, inputDescription } from '../data/ocr-benchmarks';
 import { modelOpenness } from '../data/ocr-openness';
 import { criteria, opennessIcon, statusLabels, opennessAnchor, type Evidence } from '../lib/ocr-openness';
@@ -80,7 +80,8 @@ function heading(key: string, label: string, subtitle: string, className: string
   });
   cell.append(button); return cell;
 }
-function renderRow(row: MatrixRow, samples: SampleSet[], columns: Record<string, number[]>, groupEnds: Set<string>) {
+const datasetLanguage = (id: string) => data.datasets.find(dataset => dataset.id === id)!.language_codes[0];
+function renderRow(row: MatrixRow, samples: SampleSet[], columns: Record<string, number[]>, groupEnds: Set<string>, languageEnds: Set<string>) {
   const tr = node('tr'); tr.dataset.model = row.model.id;
   const model = node('td', '', 'model-cell');
   const [publisher, ...parts] = row.model.name.split('/');
@@ -120,7 +121,8 @@ function renderRow(row: MatrixRow, samples: SampleSet[], columns: Record<string,
     const value = row.scores[sample.id];
     const cell = node('td', '', sortKey === sample.id ? 'selected-task' : ''); cell.dataset.sample = sample.id;
     if (groupEnds.has(sample.id)) cell.classList.add('dataset-end');
-    cell.setAttribute('headers', `dataset-${sample.dataset_id} task-${sample.id}`);
+    if (languageEnds.has(sample.id)) cell.classList.add('language-end');
+    cell.setAttribute('headers', `language-${datasetLanguage(sample.dataset_id)} dataset-${sample.dataset_id} task-${sample.id}`);
     if (value === null) { cell.textContent = '—'; cell.classList.add('missing-score'); cell.title = 'No completed score for this task.'; }
     else {
       const scores = columns[sample.id];
@@ -144,7 +146,15 @@ function render() {
     if (!groups.has(sample.dataset_id)) groups.set(sample.dataset_id, []);
     groups.get(sample.dataset_id)!.push(sample);
   }
-  const samples = [...groups.values()].flat();
+  const languageGroups = new Map<string, [string, SampleSet[]][]>();
+  for (const [datasetId, tasks] of groups) {
+    const language = datasetLanguage(datasetId);
+    if (!languageGroups.has(language)) languageGroups.set(language, []);
+    languageGroups.get(language)!.push([datasetId, tasks]);
+  }
+  const orderedGroups = [...languageGroups.values()].flat();
+  const samples = orderedGroups.flatMap(([, tasks]) => tasks);
+  const languageEnds = new Set([...languageGroups.values()].map(datasets => datasets.at(-1)![1].at(-1)!.id));
   if (!benchmark.sampleIds.includes(sizeTask)) sizeTask = 'overall';
   sizeTaskSelect.replaceChildren(new Option('Overall · mean across tasks', 'overall'), ...samples.map(sample =>
     new Option(`${datasetDescriptions[sample.dataset_id].name} · ${sample.task === 'line-recognition' ? 'Cropped lines' : 'Full pages'}`, sample.id)));
@@ -164,38 +174,46 @@ function render() {
   });
   const query = search.value.trim().toLowerCase();
   const visible = rows.filter(row => `${row.model.name} ${row.model.id} ${row.model.family}`.toLowerCase().includes(query));
-  const head = node('tr'), taskHead = node('tr', '', 'task-headings');
-  const model = node('th', 'Model', 'model-cell'); model.scope = 'col'; model.rowSpan = 2;
+  const head = node('tr'), datasetHead = node('tr'), taskHead = node('tr', '', 'task-headings');
+  const model = node('th', 'Model', 'model-cell'); model.scope = 'col'; model.rowSpan = 3;
   const overall = heading('overall', overallLabel(), aggregation === 'win-rate' ? 'Higher is better' : 'Lower is better', 'overall-cell');
-  overall.rowSpan = 2; head.append(model, overall);
-  const openness = node('th', '', 'openness-cell'); openness.scope = 'col'; openness.rowSpan = 2;
+  overall.rowSpan = 3; head.append(model, overall);
+  const openness = node('th', '', 'openness-cell'); openness.scope = 'col'; openness.rowSpan = 3;
   const opennessLink = node('a', 'Openness', 'openness-heading'); opennessLink.href = '/OCR-eval/openness/';
   opennessLink.title = 'Weights, license, training code, training data, paper and documentation. Highlighted icons indicate confirmed availability. Hover or select an icon for details.';
   openness.append(opennessLink);
   head.append(openness);
+  for (const [language, datasets] of languageGroups) {
+    const cell = node('th', languageNames[language] ?? language, 'language-group language-end');
+    cell.id = `language-${language}`; cell.colSpan = datasets.reduce((sum, [, tasks]) => sum + tasks.length, 0);
+    head.append(cell);
+  }
   const columnGroups = [];
-  for (const [datasetId, tasks] of groups) {
-    const name = datasetDescriptions[datasetId].name;
-    const group = node('th', '', 'dataset-group dataset-end');
+  for (const [datasetId, tasks] of orderedGroups) {
+    const { name, shortName } = datasetDescriptions[datasetId];
+    const languageId = `language-${datasetLanguage(datasetId)}`;
+    const group = node('th', '', `dataset-group dataset-end${languageEnds.has(tasks.at(-1)!.id) ? ' language-end' : ''}`);
     group.id = `dataset-${datasetId}`; group.scope = 'colgroup'; group.colSpan = tasks.length;
-    const link = node('a', name, 'dataset-heading'); link.href = `/OCR-eval/datasets/#${datasetId}`;
-    link.title = `Read about ${name}`; group.append(link); head.append(group);
+    group.setAttribute('headers', languageId);
+    const link = node('a', shortName, 'dataset-heading'); link.href = `/OCR-eval/datasets/#${datasetId}`;
+    link.title = `Read about ${name}`; group.append(link); datasetHead.append(group);
     const columns = node('colgroup'); columns.span = tasks.length; columns.dataset.dataset = datasetId; columnGroups.push(columns);
     for (const sample of tasks) {
-      const label = sample.task === 'line-recognition' ? 'Cropped lines' : 'Full pages';
-      const cell = heading(sample.id, label, '', `task-header${groupEnds.has(sample.id) ? ' dataset-end' : ''}`,
+      const label = sample.task === 'line-recognition' ? 'Line' : 'Page';
+      const cell = heading(sample.id, label, '', `task-header${groupEnds.has(sample.id) ? ' dataset-end' : ''}${languageEnds.has(sample.id) ? ' language-end' : ''}`,
         `Sort by ${metric.toUpperCase()}: ${name}, ${label}. ${inputDescription(sample.task)}`);
-      cell.id = `task-${sample.id}`; cell.setAttribute('headers', group.id); taskHead.append(cell);
+      cell.querySelector('button>span')!.classList.add('input-tag');
+      cell.id = `task-${sample.id}`; cell.setAttribute('headers', `${languageId} ${group.id}`); taskHead.append(cell);
     }
   }
   const table = document.querySelector<HTMLTableElement>('.task-matrix')!;
   table.querySelectorAll('colgroup[data-dataset]').forEach(group => group.remove());
   element('matrix-columns').replaceChildren(node('col', '', 'model-column'), node('col', '', 'overall-column'), node('col', '', 'openness-column'));
   element('matrix-columns').after(...columnGroups);
-  element('results-head').replaceChildren(head, taskHead);
-  element('results-body').replaceChildren(...visible.map(row => renderRow(row, samples, columns, groupEnds)));
+  element('results-head').replaceChildren(head, datasetHead, taskHead);
+  element('results-body').replaceChildren(...visible.map(row => renderRow(row, samples, columns, groupEnds, languageEnds)));
   table.style.minWidth = `calc(var(--model-width) + var(--overall-width) + var(--openness-width) + ${96 * samples.length}px)`;
-  text('table-caption', `${benchmark.name}: ${overallLabel()} and ${metric.toUpperCase()} for each task, grouped by dataset. Cropped lines and full pages are separate tasks. Task error rates are percentages; lower is better.`);
+  text('table-caption', `${benchmark.name}: ${overallLabel()} and ${metric.toUpperCase()} for each task, grouped by language and dataset. Cropped lines and full pages are separate tasks. Task error rates are percentages; lower is better.`);
   text('selection-description', `${groups.size} datasets · ${samples.length} tasks · ${metric.toUpperCase()} (%)`);
   text('metric-help', `${metric === 'wer' ? 'WER counts word' : 'CER counts character'} substitutions, deletions and insertions relative to the reference text. Lower is better; scores can exceed 100%.`);
   text('aggregation-help', showSize ? sizeTask === 'overall' ? explanations.mean : 'The plot shows the selected task’s corpus error rate.' : explanations[aggregation]);

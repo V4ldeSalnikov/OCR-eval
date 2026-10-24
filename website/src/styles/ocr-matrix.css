@@ -50,6 +50,8 @@
 .task-matrix th,.task-matrix td { padding:12px 8px; border-bottom:1px solid var(--line); text-align:right; vertical-align:middle; }
 .task-matrix thead { position:sticky; top:0; z-index:3; }
 .task-matrix thead th { background:var(--soft); vertical-align:bottom; font-weight:550; }
+.task-matrix thead th[rowspan] { vertical-align:middle; }
+.task-matrix th.language-group { padding:8px; text-align:center; color:inherit; background:#f0f0f2; font-weight:650; }
 .task-matrix th.model-cell,.task-matrix td.model-cell { position:sticky; left:0; text-align:left; background:white; z-index:2; padding-left:14px; border-right:1px solid var(--line); }
 .task-matrix thead th.model-cell { z-index:5; background:var(--soft); }
 .task-matrix .overall-cell { position:sticky; left:var(--model-width); background:#fafafa; border-right:1px solid var(--line); z-index:2; font-weight:600; }
@@ -57,11 +59,14 @@
 .task-matrix th button { font:inherit; font-weight:600; line-height:1.35; border:0; background:none; color:inherit; text-align:inherit; padding:0; width:100%; cursor:pointer; }
 .task-matrix .dataset-heading { display:block; line-height:1.35; font-weight:600; color:inherit; text-decoration:underline; text-decoration-color:#c3c3ca; text-underline-offset:3px; }
 .task-matrix .dataset-heading:hover,.task-matrix .dataset-heading:focus-visible { color:var(--red); text-decoration-color:currentColor; }
-.task-matrix th.dataset-group { text-align:center; padding-bottom:8px; border-bottom:0; }
+.task-matrix th.dataset-group { text-align:center; vertical-align:middle; padding:10px 8px 6px; border-bottom:0; }
 .task-matrix th.task-header { padding-top:6px; padding-bottom:10px; }
-.task-matrix th.task-header button { font-size:10px; font-weight:400; color:var(--muted); white-space:nowrap; }
+.task-matrix th.task-header button { display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:400; color:var(--muted); white-space:nowrap; }
+.task-matrix .input-tag { display:inline-block; padding:2px 7px; border:1px solid #dddde2; border-radius:4px; background:white; }
+.task-matrix th.task-header button:hover .input-tag,.task-matrix th.task-header[aria-sort] .input-tag { color:var(--red); border-color:var(--red); background:var(--red-soft); }
 .task-matrix .dataset-end { border-right:1px solid var(--line); }
 .task-matrix .dataset-end:last-child { border-right:0; }
+.task-matrix .language-end:not(:last-child) { border-right:2px solid #d6d6dc; }
 .task-matrix th small { display:block; font-weight:400; color:var(--muted); margin-top:5px; font-size:10px; }
 .task-matrix th[aria-sort] button { color:var(--red); }
 .task-matrix th .sort-arrow { margin-left:3px; }
