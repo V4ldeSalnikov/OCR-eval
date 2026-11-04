@@ -1,7 +1,7 @@
 import { rankModels, type Snapshot, type Metric } from '../lib/ocr-results';
 import { DEFAULT_MODELS, validModels, wordDiff } from '../lib/ocr-compare';
 import { datasetDescriptions, languageNames } from '../data/ocr-datasets';
-import { benchmarks, inputName } from '../data/ocr-benchmarks';
+import { allBenchmarks as benchmarks, inputName } from '../data/ocr-benchmarks';
 
 type ExampleIndex = { groups: { sample_set_id: string; dataset_id: string; task: string; examples: { id: string; case_id: string }[] }[] };
 type Prediction = { text: string; cer: number; wer: number; inference_status: string };
@@ -80,10 +80,10 @@ function renderScores() {
     const values = models.map(id => data.results.find(result => result.model_id === id && result.sample_set_id === sample.id && result.status === 'completed')?.corpus_metrics?.[metric]);
     appendScores(row, values); return row;
   });
-  const baselineSamples = samples.filter(sample => benchmarks[0].sampleIds.includes(sample.id));
-  for (const task of new Set(baselineSamples.map(sample => sample.task))) {
-    const aggregates = rankModels(data, baselineSamples.filter(sample => sample.task === task), task, metric);
-    const row = node('tr', '', 'mean-row'); row.append(node('td', `Mean · ${taskName(task)} · v1`));
+  const benchmarkSamples = samples.filter(sample => benchmarks[0].sampleIds.includes(sample.id));
+  for (const task of new Set(benchmarkSamples.map(sample => sample.task))) {
+    const aggregates = rankModels(data, benchmarkSamples.filter(sample => sample.task === task), task, metric);
+    const row = node('tr', '', 'mean-row'); row.append(node('td', `Mean · ${taskName(task)} · ${benchmarks[0].version}`));
     appendScores(row, models.map(id => aggregates.find(item => item.model.id === id)?.metrics[metric])); rows.push(row);
   }
   el('comparison-body').replaceChildren(...rows);

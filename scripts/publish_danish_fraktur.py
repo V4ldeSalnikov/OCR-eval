@@ -1,4 +1,4 @@
-"""Publish the frozen Danish Fraktur pilot alongside the unchanged v1 snapshot."""
+"""Publish Danish Fraktur results with the archived v1 results in the current catalogue."""
 import argparse
 from datetime import UTC, datetime
 from hashlib import sha256
@@ -24,9 +24,13 @@ def publish(run, output):
     manifest_path = run / "samples" / SAMPLE_ID / "manifest.json"
     manifest = read(manifest_path)
     manifest_hash = sha256(manifest_path.read_bytes()).hexdigest()
-    source_manifest = ROOT / "ocr_datasets/data/danish_fraktur/manifest.jsonl"
+    source_manifest = run / "dataset_provenance/manifest.jsonl"
     assert sha256(source_manifest.read_bytes()).hexdigest() == manifest["source_manifest_sha256"]
     source = [json.loads(line) for line in source_manifest.read_text(encoding="utf-8").splitlines()]
+    released = [json.loads(line) for line in (ROOT / "ocr_datasets/data/danish_fraktur/manifest.jsonl").read_text(encoding="utf-8").splitlines()]
+    # Release 1.0.0 changes only the status/version, retaining every evaluated field.
+    assert [{k: v for k, v in row.items() if k != "dataset_version"} for row in released] == [
+        {k: v for k, v in row.items() if k != "dataset_version"} for row in source]
     assert len(source) == len(manifest["cases"]) == 20
     assert [(row["id"], row["text"], row["image_sha256"]) for row in source] == [
         (case["name"], case["reference"], case["image_sha256"]) for case in manifest["cases"]]
@@ -34,13 +38,13 @@ def publish(run, output):
     assert len(selected) == len(plan["jobs"]) == 5
     assert DATASET_ID not in {item["id"] for item in data["datasets"]}
     data["datasets"].append({
-        "id": DATASET_ID, "label": "Danish Fraktur books · pilot", "language_codes": ["da"],
+        "id": DATASET_ID, "label": "Danish Fraktur books", "language_codes": ["da"],
         "document_type": "printed", "source_url": SOURCE_URL,
-        "tasks": ["page-transcription"], "warnings": ["draft-pilot"],
+        "tasks": ["page-transcription"], "version": "1.0.0", "warnings": ["fraktur-reference-review"],
     })
     data["sample_sets"].append({
         "id": SAMPLE_ID, "dataset_id": DATASET_ID, "task": "page-transcription",
-        "selected_samples": 20, "target_samples": 20, "source_revision": "1.0.0-draft",
+        "selected_samples": 20, "target_samples": 20, "source_revision": manifest["source_revision"],
         "split": "test", "sampling_method": manifest["sampling_method"],
         "manifest_sha256": manifest_hash, "reference_type": "annotated_text",
     })
@@ -66,17 +70,17 @@ def publish(run, output):
             "implementation_sha256": benchmark["implementation_sha256"],
             "inference_settings": report["inference_settings"],
             "runtime_guards": benchmark["runtime_guards"], "failure_policy": report["failure_policy"],
-            "gpu_memory": benchmark["gpu_memory"], "warnings": ["draft-pilot"],
+            "gpu_memory": benchmark["gpu_memory"], "warnings": ["fraktur-reference-review"],
         })
     data["results"].extend(new_results)
     data["source_runs"].append({
         "id": run.name, "git_commit": plan["git_commit"], "seed": None,
         "targets": {"page-transcription": 20}, "metric_policy": data["run"]["metric_policy"],
-        "warnings": ["draft-pilot"], "counts": counts(new_results, 5, 1, 1),
+        "warnings": ["fraktur-reference-review"], "counts": counts(new_results, 5, 1, 1),
         "model_selection": [{key: item[key] for key in ("rank", "model", "license", "swedish_cer", "swedish_wer", "model_revision", "selection_report_sha256")} for item in plan["selection"]],
         "selection_method": plan["selection_method"], "task_note": plan["task_note"],
     })
-    data["warnings"].append({"id": "draft-pilot", "message": "Danish Fraktur is a 20-page draft pilot from two books. References have Wikisource validation and an additional AI scan review, not an independent human audit. Initial models were selected by Swedish Fraktur line CER; Danish inputs are whole pages. The pilot is outside Scandinavian OCR v1."})
+    data["warnings"].append({"id": "fraktur-reference-review", "message": "Danish Fraktur is a complete 20-page task in the Danish and Scandinavian benchmarks. References have Wikisource validation and an additional AI scan review, not an independent human audit. Initial models were selected by Swedish Fraktur line CER; Danish inputs are whole pages. The completed 1.0.0 release preserves every reference and image; saved evaluations retain their original source revision identifiers."})
     data["generated_at"] = datetime.now(UTC).isoformat()
     data["run"].update(
         id=" + ".join(item["id"] for item in data["source_runs"]),

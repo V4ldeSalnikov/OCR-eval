@@ -11,6 +11,10 @@ From v0.1.0 onward, each development commit advances the minor version.
 
 - Added Danish Fraktur.
 
+### Changed
+
+- Updated Danish Fraktur.
+
 ## [v0.44.0] - 2026-09-18
 
 ### Changed

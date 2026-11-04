@@ -1,4 +1,4 @@
-Danish Fraktur — Wikisource pilot, version 1.0.0-draft
+Danish Fraktur — Wikisource, version 1.0.0
 
 DATA LICENCE (separate from the repository's software licence)
 

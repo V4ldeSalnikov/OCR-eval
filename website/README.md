@@ -15,7 +15,8 @@ Open http://localhost:4321/OCR-eval/. Run `npm test` and `npm run build` before 
 Pushing changes here to `main` deploys the site through `.github/workflows/deploy-website.yml`.
 
 `public/catalog.json` is the current leaderboard snapshot, including the Danish
-Fraktur pilot. `public/results.json` remains the frozen Scandinavian OCR v1 snapshot.
+Fraktur task in Scandinavian OCR v2 and Danish OCR v2. `public/results.json`
+remains the archived Scandinavian OCR v1 snapshot.
 `public/examples/catalog.json` indexes 120 attributed input images (10 per task)
 and their saved predictions; `public/examples/index.json` retains the v1 gallery.
 Full reports for every model
@@ -30,6 +31,8 @@ python scripts/publish_danish_fraktur.py --output ../resultsScandiOCReval
 
 This verifies saved references, sample counts and scores, exports public fields, and
 updates the report links in the website catalogue and exports the examples. It
-preserves the fixed v1 task lists and snapshot. It does not run model inference.
+preserves the archived v1 task lists and snapshot. The website uses the current
+task lists in `allBenchmarks`, with Danish Fraktur included in the main and Danish
+tables. It does not run model inference.
 The scripts in `website/scripts/` rebuild aggregate snapshots and the example gallery
 from the original local runs; use `--help` for their arguments.

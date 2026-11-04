@@ -5,4 +5,5 @@ export default defineConfig({
   base: '/OCR-eval',
   output: 'static',
   trailingSlash: 'always',
+  redirects: { '/benchmarks/danish-fraktur/': '/OCR-eval/benchmarks/danish/' },
 });

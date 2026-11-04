@@ -10,13 +10,13 @@ tags:
 - ocr
 - fraktur
 - historical-documents
-- draft
 ---
 
-# Danish Fraktur — Wikisource pilot
+# Danish Fraktur — Wikisource
 
-Version **1.0.0-draft**: 20 complete page scans with Danish reference transcriptions,
-for ScandiOCR's `page-transcription` task. This is a small evaluation set,
+Version **1.0.0**: 20 complete page scans with Danish reference transcriptions,
+forming a complete `page-transcription` task in the Danish and Scandinavian OCR
+benchmarks. This is a small evaluation set,
 not a training dataset. It contains ten pages from each of two books:
 
 | Book | Author | Year | Scan pages |
@@ -31,7 +31,7 @@ contributors supply the transcriptions.
 ## Selection and review
 
 The source inventory contained 35 validated pages in the Kierkegaard book and 48
-in the Andersen book. This pilot uses a curated selection of body-text pages,
+in the Andersen book. This dataset uses a curated selection of body-text pages,
 including short passages, dense prose, headings, poetry, printer's signatures and
 words continuing across pages. Title pages, blank pages, unvalidated pages and
 pages with footnotes are excluded. Selection preceded any model evaluation.
@@ -44,7 +44,7 @@ recorded explicitly in `review.json`, including restored line-end hyphens, three
 omitted printer's signatures and corrections to case or transcription errors.
 The original source snapshots remain unchanged in `sources.json`.
 
-This remains a **draft**: the additional comparison was performed by an AI
+The additional comparison was performed by an AI
 assistant, not an independent human transcription team. No numerical ground-truth
 accuracy has been established. The local `review.html` displays every scan beside
 its reference for further inspection.
@@ -100,12 +100,16 @@ uv run main.py --model Qwen/Qwen2-VL-2B-Instruct --dataset danish-fraktur --task
 ```
 
 The loader downloads missing images automatically and otherwise works from the
-local cache. [Initial results for five open models](https://v4ldesalnikov.github.io/OCR-eval/?benchmark=danish-fraktur&metric=cer)
+local cache. [Initial results for five open models](https://v4ldesalnikov.github.io/OCR-eval/?benchmark=danish&sample=page-transcription%2Fdanish-fraktur&metric=cer)
 and [full prediction reports](https://github.com/V4ldeSalnikov/resultsScandiOCReval)
 are published separately. These models were selected by their saved Swedish
-Fraktur CER; the Swedish task uses cropped lines and this pilot uses whole pages.
-All five models were evaluated on all 20 pages. This pilot is separate from the
-fixed Scandinavian OCR v1 benchmark.
+Fraktur CER; the Swedish task uses cropped lines and this task uses whole pages.
+All five models were evaluated on all 20 pages. Danish Fraktur is included in the
+Danish and Scandinavian OCR benchmarks.
+
+Release 1.0.0 preserves every image, reference and annotation from the evaluated
+snapshot. Saved reports retain their original source revision identifiers and
+hashes; the release changes only the dataset version and completion status.
 
 ## Scope
 

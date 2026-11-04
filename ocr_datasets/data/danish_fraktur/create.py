@@ -1,4 +1,4 @@
-"""Rebuild the frozen Danish Fraktur pilot from attributed source snapshots."""
+"""Rebuild the Danish Fraktur task from attributed source snapshots."""
 
 import argparse
 import hashlib
@@ -11,7 +11,7 @@ from unicodedata import normalize
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 DEFAULT_OUTPUT = ROOT / ".cache" / "danish-fraktur-v1"
-VERSION = "1.0.0-draft"
+VERSION = "1.0.0"
 
 
 def expand_template(match: re.Match) -> str:
@@ -42,7 +42,7 @@ def plain_text(wikitext: str) -> str:
     if 'pagequality level="4"' not in wikitext:
         raise ValueError("Only validated source revisions are accepted")
     if re.search(r"<ref(?:\s|>)", wikitext):
-        raise ValueError("Footnotes require separate alignment; excluded from this pilot")
+        raise ValueError("Footnotes require separate alignment; excluded from this task")
     text = wikitext
     while "{{" in text:
         expanded = re.sub(r"\{\{([^{}]+)\}\}", expand_template, text)
@@ -112,8 +112,8 @@ def write_review(records: list[dict], output: Path) -> None:
         '.pair{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}'
         'img{width:100%}pre{white-space:pre-wrap;font:18px/1.7 Georgia,serif;margin:0}'
         '@media(max-width:800px){.pair{grid-template-columns:1fr}}</style>'
-        '<h1>Danish Fraktur — 20-page pilot</h1>'
-        '<p>Draft, version ' + VERSION + '. Scans: public domain. Transcriptions: '
+        '<h1>Danish Fraktur — 20-page task</h1>'
+        '<p>Version ' + VERSION + '. Scans: public domain. Transcriptions: '
         '<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, '
         'Danish Wikisource contributors, with ScandiOCR corrections. '
         'Click any scan for its full image.</p>' + "".join(sections) + '</html>\n',

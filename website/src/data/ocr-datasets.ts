@@ -39,11 +39,11 @@ export const datasetDescriptions: Record<string, { name: string; shortName: stri
     reference: 'Transcribed text supplied with each line image, preserving historical spelling and characters.',
   },
   'danish-fraktur': {
-    name: 'Danish books (Fraktur pilot)',
+    name: 'Danish books (Fraktur)',
     shortName: 'Fraktur books',
     description: 'Twenty complete pages: ten from Søren Kierkegaard’s Af en endnu Levendes Papirer (1838) and ten from Hans Christian Andersen’s Billedbog uden Billeder (1840). The Royal Danish Library digitised both books; Wikimedia Commons supplies the unaltered scans.',
     reference: 'Validated Danish Wikisource transcriptions, followed by Codex visual comparison of every selected scan. The frozen references preserve historical spelling, case, punctuation, visible word-division hyphens, page numbers and printer’s signatures.',
-    note: 'Draft pilot, version 1.0.0-draft. The additional comparison was performed by an AI assistant, not an independent human transcription team. The five initial models were selected by Swedish Fraktur CER; Swedish inputs are cropped lines, while this pilot evaluates whole pages. This pilot is separate from the fixed Scandinavian OCR v1 benchmark.',
+    note: 'All 20 pages form the complete Danish Fraktur task in the Danish and Scandinavian benchmarks. The additional comparison was performed by an AI assistant, not an independent human transcription team. The five initial models were selected by Swedish Fraktur CER; Swedish inputs are cropped lines, while this task evaluates whole pages.',
   },
   'oj4ocrmt-danish': {
     name: 'EU Official Journal · Danish',

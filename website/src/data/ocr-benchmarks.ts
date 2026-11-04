@@ -1,4 +1,4 @@
-// Versioned task membership: new datasets do not silently change these benchmarks.
+// Archived v1 membership matches public/results.json. The website uses allBenchmarks.
 const danish = [
   'line-recognition/danish-typewritten', 'line-recognition/modern-danish',
   'line-recognition/historical-danish', 'page-transcription/modern-danish',
@@ -19,12 +19,16 @@ export const benchmarks = [
     description: 'Archival handwriting, blackletter newspapers and modern EU documents.', sampleIds: swedish },
 ];
 
-export const pilotBenchmarks = [
-  { id: 'danish-fraktur', name: 'Danish Fraktur', version: 'pilot v1', languages: ['da'],
-    description: 'Twenty Danish book pages from 1838 and 1840. Initial results for the five open models with the lowest Swedish Fraktur CER.',
-    sampleIds: ['page-transcription/danish-fraktur'] },
-];
-export const allBenchmarks = [...benchmarks, ...pilotBenchmarks];
+// v2 adds Danish Fraktur to the Danish and Scandinavian benchmark task lists.
+export const allBenchmarks = benchmarks.map(benchmark =>
+  ['scandinavian', 'danish'].includes(benchmark.id) ? {
+    ...benchmark, version: 'v2',
+    description: benchmark.id === 'danish'
+      ? 'Council minutes, contemporary handwriting, diplomatic reports, Fraktur books and EU documents.'
+      : 'Archival handwriting, Fraktur books, newspapers and modern documents in Danish, Norwegian and Swedish.',
+    sampleIds: [...danish, 'page-transcription/danish-fraktur',
+      ...(benchmark.id === 'scandinavian' ? [...norwegian, ...swedish] : [])],
+  } : benchmark);
 
 export const inputName = (task: string) => task === 'line-recognition' ? 'Cropped text line' : 'Whole document page';
 export const inputDescription = (task: string) => task === 'line-recognition'

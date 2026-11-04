@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T21:34:50.616154+00:00",
+  "generated_at": "2026-11-04T21:59:15.749381+00:00",
   "run": {
     "id": "mvp_20260917 + new_models_20260919 + mistral_20261001 + gpt61_sol_full_20261002 + danish_fraktur_top5_20261104",
     "git_commit": "e47e83f4fc4555ca046684e3178576e5b340aa07, 19cb4597093fdebe339cfe66d40e0c68f8f23d35, 4e0f28836389caa9014af38e5fda4b7a6f980bcb",
@@ -457,7 +457,7 @@
     },
     {
       "id": "danish-fraktur",
-      "label": "Danish Fraktur books · pilot",
+      "label": "Danish Fraktur books",
       "language_codes": [
         "da"
       ],
@@ -466,8 +466,9 @@
       "tasks": [
         "page-transcription"
       ],
+      "version": "1.0.0",
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ]
     }
   ],
@@ -14186,7 +14187,7 @@
         "torch_peak_reserved_gib": 9.15
       },
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "public_report_url": "https://github.com/V4ldeSalnikov/resultsScandiOCReval/blob/main/reports/Qwen--Qwen3.5-4B/page-transcription/danish-fraktur.json"
     },
@@ -14296,7 +14297,7 @@
         "torch_peak_reserved_gib": 3.055
       },
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "public_report_url": "https://github.com/V4ldeSalnikov/resultsScandiOCReval/blob/main/reports/zai-org--GLM-OCR/page-transcription/danish-fraktur.json"
     },
@@ -14415,7 +14416,7 @@
         "torch_peak_reserved_gib": 4.502
       },
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "public_report_url": "https://github.com/V4ldeSalnikov/resultsScandiOCReval/blob/main/reports/Qwen--Qwen3.5-2B/page-transcription/danish-fraktur.json"
     },
@@ -14532,7 +14533,7 @@
         "torch_peak_reserved_gib": 15.352
       },
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "public_report_url": "https://github.com/V4ldeSalnikov/resultsScandiOCReval/blob/main/reports/google--gemma-4-E4B-it/page-transcription/danish-fraktur.json"
     },
@@ -14614,7 +14615,7 @@
         "torch_peak_reserved_gib": 16.992
       },
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "public_report_url": "https://github.com/V4ldeSalnikov/resultsScandiOCReval/blob/main/reports/Qwen--Qwen2-VL-7B-Instruct/page-transcription/danish-fraktur.json"
     }
@@ -14645,8 +14646,8 @@
       "message": "A small inspection of modern Danish line crops found neighboring-line text inside some rectangular crops. This can contribute insertion errors; every model used the same frozen images."
     },
     {
-      "id": "draft-pilot",
-      "message": "Danish Fraktur is a 20-page draft pilot from two books. References have Wikisource validation and an additional AI scan review, not an independent human audit. Initial models were selected by Swedish Fraktur line CER; Danish inputs are whole pages. The pilot is outside Scandinavian OCR v1."
+      "id": "fraktur-reference-review",
+      "message": "Danish Fraktur is a complete 20-page task in the Danish and Scandinavian benchmarks. References have Wikisource validation and an additional AI scan review, not an independent human audit. Initial models were selected by Swedish Fraktur line CER; Danish inputs are whole pages. The completed 1.0.0 release preserves every reference and image; saved evaluations retain their original source revision identifiers."
     }
   ],
   "source_runs": [
@@ -14763,7 +14764,7 @@
       },
       "metric_policy": "Corpus CER/WER fractions; lower is better and values may exceed 1. Failed attempts are empty predictions scored against all selected references and are not retried. Complete means every selected sample was attempted, not that every prediction succeeded. Text is NFC-normalized and whitespace-collapsed; case and punctuation are preserved. Page metrics do not score layout structure.",
       "warnings": [
-        "draft-pilot"
+        "fraktur-reference-review"
       ],
       "counts": {
         "models": 5,

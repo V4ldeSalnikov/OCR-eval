@@ -231,6 +231,10 @@ function render() {
 }
 function restoreSelection() {
   const params = new URLSearchParams(location.search);
+  if (params.get('benchmark') === 'danish-fraktur') {
+    params.set('benchmark', 'danish');
+    params.set('sample', 'page-transcription/danish-fraktur');
+  }
   const legacyLanguage = params.get('language') ?? data.datasets.find(dataset => dataset.id === params.get('dataset'))?.language_codes[0];
   benchmark = benchmarks.find(item => item.id === params.get('benchmark'))
     ?? benchmarks.find(item => item.languages.length === 1 && item.languages[0] === legacyLanguage) ?? benchmarks[0];
