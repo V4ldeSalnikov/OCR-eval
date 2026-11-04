@@ -1,4 +1,4 @@
-// Source descriptions are based on the linked dataset cards; evaluation sizes come from results.json.
+// Source descriptions are based on the linked dataset cards; evaluation sizes come from catalog.json.
 export const datasetDescriptions: Record<string, { name: string; shortName: string; description: string; reference: string; note?: string }> = {
   'norhand': {
     name: 'Norwegian handwriting (NorHand)',
@@ -37,6 +37,13 @@ export const datasetDescriptions: Record<string, { name: string; shortName: stri
     shortName: 'Historical newspapers',
     description: 'Swedish newspaper text in 19th-century blackletter type. Språkbanken produced the transcriptions, and the Swedish National Archives converted the material into line images.',
     reference: 'Transcribed text supplied with each line image, preserving historical spelling and characters.',
+  },
+  'danish-fraktur': {
+    name: 'Danish books (Fraktur pilot)',
+    shortName: 'Fraktur books',
+    description: 'Twenty complete pages: ten from Søren Kierkegaard’s Af en endnu Levendes Papirer (1838) and ten from Hans Christian Andersen’s Billedbog uden Billeder (1840). The Royal Danish Library digitised both books; Wikimedia Commons supplies the unaltered scans.',
+    reference: 'Validated Danish Wikisource transcriptions, followed by Codex visual comparison of every selected scan. The frozen references preserve historical spelling, case, punctuation, visible word-division hyphens, page numbers and printer’s signatures.',
+    note: 'Draft pilot, version 1.0.0-draft. The additional comparison was performed by an AI assistant, not an independent human transcription team. The five initial models were selected by Swedish Fraktur CER; Swedish inputs are cropped lines, while this pilot evaluates whole pages. This pilot is separate from the fixed Scandinavian OCR v1 benchmark.',
   },
   'oj4ocrmt-danish': {
     name: 'EU Official Journal · Danish',

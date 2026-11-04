@@ -1,7 +1,7 @@
 ---
 import OCR from '../layouts/OCR.astro';
-import snapshot from '../../public/results.json';
-import { benchmarks } from '../data/ocr-benchmarks';
+import snapshot from '../../public/catalog.json';
+import { allBenchmarks as benchmarks } from '../data/ocr-benchmarks';
 import '../styles/ocr-matrix.css';
 ---
 <OCR title="Leaderboard" description="Task-by-task OCR scores for Danish, Norwegian and Swedish documents." active="leaderboard">
@@ -63,7 +63,7 @@ import '../styles/ocr-matrix.css';
         <details class="size-omissions" id="size-omissions"><summary>Models without parameter estimates</summary><p id="size-unknown"></p></details>
       </section>
     </section>
-    <noscript><p class="message">Enable JavaScript to explore scores, or <a href="/OCR-eval/results.json">download the results</a>.</p></noscript>
+    <noscript><p class="message">Enable JavaScript to explore scores, or <a href="/OCR-eval/catalog.json">download the results</a>.</p></noscript>
   </div>
   <script>import '../scripts/ocr-leaderboard';</script>
 </OCR>

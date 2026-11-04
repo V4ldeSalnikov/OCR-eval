@@ -14,18 +14,22 @@ npm run dev
 Open http://localhost:4321/OCR-eval/. Run `npm test` and `npm run build` before publishing.
 Pushing changes here to `main` deploys the site through `.github/workflows/deploy-website.yml`.
 
-`public/results.json` is the leaderboard snapshot. `public/examples/` contains the
-110 attributed input images (10 per task) and their saved predictions. Full reports for every model
+`public/catalog.json` is the current leaderboard snapshot, including the Danish
+Fraktur pilot. `public/results.json` remains the frozen Scandinavian OCR v1 snapshot.
+`public/examples/catalog.json` indexes 120 attributed input images (10 per task)
+and their saved predictions; `public/examples/index.json` retains the v1 gallery.
+Full reports for every model
 are stored in [resultsScandiOCReval](https://github.com/V4ldeSalnikov/resultsScandiOCReval).
 The website builds from its checked-in snapshot and does not need API credentials.
 
 To publish the completed reports from the local frozen runs, from the evaluator root:
 
 ```sh
-python scripts/export_all_results.py --output ../resultsScandiOCReval
+python scripts/publish_danish_fraktur.py --output ../resultsScandiOCReval
 ```
 
 This verifies saved references, sample counts and scores, exports public fields, and
-updates the report links in the website snapshot. It does not run model inference.
+updates the report links in the website catalogue and exports the examples. It
+preserves the fixed v1 task lists and snapshot. It does not run model inference.
 The scripts in `website/scripts/` rebuild aggregate snapshots and the example gallery
 from the original local runs; use `--help` for their arguments.

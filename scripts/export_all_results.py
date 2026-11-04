@@ -32,6 +32,14 @@ CASE_METADATA = {'doc_id', 'dpi', 'handle', 'lang', 'license', 'line_bbox', 'lin
                  'page', 'page_id', 'page_type', 'pdf_id', 'publication_id', 'reference_tool',
                  'reference_type', 'revision', 'sequence', 'source', 'source_pdf_sha256',
                  'source_row', 'split', 'title', 'url', 'year'}
+FRAKTUR_METADATA = {'id', 'book_id', 'book_title', 'author', 'scan_page', 'source_page',
+                    'source_revision', 'source_timestamp', 'source_revision_url',
+                    'source_history_url', 'source_wikitext_sha256', 'source_quality',
+                    'source_quality_level', 'image_url', 'image_sha256', 'image_width',
+                    'image_height', 'commons_file_url', 'commons_file_timestamp',
+                    'commons_file_sha1', 'scan_credit', 'image_license', 'text_license',
+                    'dataset_version', 'language', 'script', 'task', 'text_sha256',
+                    'review_method', 'review_date'}
 
 
 def read(path):
@@ -55,6 +63,9 @@ def check_public(value, key=''):
 
 def write(path, value):
     check_public(value)
+    # Preserve published bytes and checksums when only dictionary order differs.
+    if path.exists() and read(path) == value:
+        return
     text = json.dumps(value, ensure_ascii=False, allow_nan=False, indent=2) + '\n'
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding='utf-8', newline='\n')
@@ -102,7 +113,8 @@ def export(snapshot_path, output, ocr_root=ROOT):
             if item['inference_status'] == 'failed':
                 assert item['prediction'] == ''
             item['image_sha256'] = frozen['image_sha256']
-            item['metadata'] = {k: v for k, v in frozen['metadata'].items() if k in CASE_METADATA}
+            fields = CASE_METADATA | FRAKTUR_METADATA if sample['dataset_id'] == 'danish-fraktur' else CASE_METADATA
+            item['metadata'] = {k: v for k, v in frozen['metadata'].items() if k in fields}
             for key, metric in (('cer', cer), ('wer', wer)):
                 assert abs(metric(item['prediction'], item['reference']) - item[key]) < 1e-12
             cases.append(item)
@@ -123,7 +135,7 @@ def export(snapshot_path, output, ocr_root=ROOT):
             'source_url': datasets[sample['dataset_id']]['source_url'], 'split': sample['split'],
             'reference_type': sample['reference_type'], 'seed': manifest['seed'],
             'sampling_method': manifest['sampling_method'],
-            **{k: row[k] for k in PROVENANCE if k in row},
+            **{k: v for k, v in row.items() if k in PROVENANCE},
             'inference_settings': ({k: v for k, v in raw['inference_settings'].items() if k in SETTINGS}
                                    if raw.get('inference_settings') is not None else None),
             'cases': cases,

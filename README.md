@@ -44,6 +44,11 @@ To see all available models, datasets and options:
 uv run main.py --help
 ```
 
+The [Danish Fraktur pilot](ocr_datasets/data/danish_fraktur/README.md) adds 20
+historical printed pages from Danish Wikisource. Use `--dataset danish-fraktur`
+with `--task page-transcription --max-examples 20`. [Initial results for five open models](https://v4ldesalnikov.github.io/OCR-eval/?benchmark=danish-fraktur&metric=cer)
+are published separately from the fixed Scandinavian OCR v1 benchmark.
+
 Tesseract models also require [Tesseract](https://tesseract-ocr.github.io/tessdoc/Installation.html) and the relevant language data. Hosted models require the provider's API credentials.
 
 ## Results

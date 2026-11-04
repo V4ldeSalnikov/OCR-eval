@@ -2,6 +2,7 @@ from models.model_meta import ModelMeta
 from models.models_implementations import (
     anthropic_vision,
     easyocr_adapter,
+    gemma4,
     glm_ocr,
     got_ocr2,
     mistral_ocr,
@@ -9,6 +10,7 @@ from models.models_implementations import (
     paddleocr_vl,
     qwen2_vl,
     qwen3_vl,
+    qwen3_5,
     tesseract_adapter,
     transkribus,
     trocr,
@@ -18,6 +20,7 @@ from typing import Any
 model_modules = [
     anthropic_vision,
     easyocr_adapter,
+    gemma4,
     glm_ocr,
     got_ocr2,
     mistral_ocr,
@@ -25,6 +28,7 @@ model_modules = [
     paddleocr_vl,
     qwen3_vl,
     qwen2_vl,
+    qwen3_5,
     tesseract_adapter,
     transkribus,
     trocr,

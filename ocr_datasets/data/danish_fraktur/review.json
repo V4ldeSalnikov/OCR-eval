@@ -1,0 +1,194 @@
+{
+  "date": "2026-11-04",
+  "method": "Wikisource quality-4 references, followed by Codex visual comparison of every selected scan; not an independent human transcription audit",
+  "notes": "Replacements restore visible line-end hyphens, punctuation, case and omitted text. Historical spelling and apparent printer errors are preserved. Single and double printed hyphens are represented by ASCII hyphens; long s by s. The two straight-quote passages use the same Danish quote convention as the other references. Layout whitespace is not a line annotation.",
+  "pages": {
+    "kierkegaard-1838-p017": {
+      "replacements": [
+        ["Tilbøielighed", "Til-\nbøielighed"],
+        ["forglemme", "for-\nglemme"],
+        ["ængstende", "æng-\nstende"],
+        ["Ret Efterverdenen", "Ret Efterver-\ndenen"],
+        ["Udgangspunkt", "Ud-\ngangspunkt"],
+        ["Livs-Hoveri", "Livs-\nHoveri"]
+      ],
+      "append": "1",
+      "note": "The printer's signature 1 below the body is absent from the source transcription."
+    },
+    "kierkegaard-1838-p018": {
+      "replacements": [
+        ["Opposition", "Oppo-\nsition"],
+        ["terminologiske", "termino-\nlogiske"],
+        ["beklage", "be-\nklage"],
+        ["\"gediegne Fylde\"", "„gediegne Fylde”"],
+        ["\"gaffende Pøbel\"", "„gaffende Pøbel”"]
+      ]
+    },
+    "kierkegaard-1838-p019": {
+      "replacements": [
+        ["Tilbøielighed", "Til-\nbøielighed"],
+        ["Præmisser", "Præmis-\nser"],
+        ["reformatorisk", "reformato-\nrisk"],
+        ["Virksomhed", "Virk-\nsomhed"],
+        ["Indledninger", "Indled-\nninger"]
+      ],
+      "append": "1*",
+      "note": "The printer's signature 1* below the body is absent from the source transcription. The printed 'er fornuftigt' is retained."
+    },
+    "kierkegaard-1838-p023": {
+      "replacements": [
+        ["immanente", "im-\nmanente"],
+        ["Næverne", "Næ-\nverne"],
+        ["inderligere", "in-\nderligere"],
+        ["begyndte", "be-\ngyndte"],
+        ["indsneget", "ind-\nsneget"]
+      ]
+    },
+    "kierkegaard-1838-p024": {
+      "replacements": [
+        ["Analogie", "Ana-\nlogie"],
+        ["\"Sip-Sip-Sipsippernip-Sipsippernip-Sippernip-Sipsip,\"", "„Sip-Sip-Sipsippernip-Sip-\nsippernip-Sippernip-Sipsip,”"],
+        ["udfoldede", "ud-\nfoldede"],
+        ["Vægtfylde", "Vægt-\nfylde"],
+        ["følgende Novellist", "føl-\ngende Novellist"],
+        ["Høidepunkt", "Høi-\ndepunkt"],
+        ["forsvindende", "forsvin-\ndende"],
+        ["\"nyfødte Jarler, nattegamle Svende\"", "„nyfødte Jarler, nattegamle Svende”"]
+      ],
+      "note": "The unusual spelling 'Posivitæt' is visible in the scan and is deliberately retained."
+    },
+    "kierkegaard-1838-p025": {
+      "replacements": [
+        ["gjennemføres", "gjennem-\nføres"],
+        ["Imidlertid", "Imidler-\ntid"],
+        ["Skribenter", "Skri-\nbenter"],
+        ["formere", "for-\nmere"],
+        ["mellem Forfatterne", "mel-\nlem Forfatterne"],
+        ["Genius'", "Ge-\nnius’"],
+        ["\"favere lingua.\"", "„favere lingua.”"],
+        ["underordnede", "under-\nordnede"]
+      ]
+    },
+    "kierkegaard-1838-p030": {
+      "replacements": [
+        ["Berøring", "Berø-\nring"],
+        ["glædeligt", "glæ-\ndeligt"]
+      ],
+      "note": "Keep initial 'naae' and final 'Tilbøie-'; the rest of these words is on other pages."
+    },
+    "kierkegaard-1838-p033": {
+      "replacements": [
+        ["Samtiden", "Sam-\ntiden"],
+        ["behørige", "be-\nhørige"],
+        ["egentlige", "egent-\nlige"],
+        ["fuldtonigt", "fuld-\ntonigt"],
+        ["Naturens imprimatur", "Na-\nturens imprimatur"]
+      ]
+    },
+    "kierkegaard-1838-p036": {
+      "replacements": [
+        ["grupperede", "grup-\nperede"],
+        ["betydningsfulde", "betyd-\nningsfulde"],
+        ["Mangfoldighed", "Mang-\nfoldighed"],
+        ["arbeidede", "arbei-\ndede"],
+        ["Livs-Supplement", "Livs-Supple-\nment"],
+        ["Tidsomstændigheder", "Tidsomstændig-\nheder"]
+      ]
+    },
+    "kierkegaard-1838-p040": {
+      "replacements": [
+        ["dennes Genie", "den-\nnes Genie"],
+        ["betydningsfuldere", "betydningsful-\ndere"],
+        ["Studium", "Stu-\ndium"],
+        ["Berøring", "Be-\nrøring"],
+        ["Almindelighed", "Almin-\ndelighed"]
+      ]
+    },
+    "andersen-1840-p009": {
+      "replacements": [["var der Mig", "var der mig"]]
+    },
+    "andersen-1840-p012": {
+      "replacements": [],
+      "note": "Short text page retained; no textual correction required."
+    },
+    "andersen-1840-p015": {
+      "replacements": [["Dronning", "Dron-\nning"]]
+    },
+    "andersen-1840-p016": {
+      "replacements": [
+        ["Tragedie", "Tra-\ngedie"],
+        ["tilside:", "til-\nside:"],
+        ["Gaden!", "Ga-\nden!"]
+      ]
+    },
+    "andersen-1840-p020": {
+      "replacements": [
+        ["Aftendæmringen", "Aftendæm-\nringen"],
+        ["Historie", "Hi-\nstorie"],
+        ["bestormede", "be-\nstormede"],
+        ["Slottets", "Slot-\ntets"],
+        ["Jorden", "Jor-\nden"],
+        ["Blødende", "Blø-\ndende"],
+        ["Purpur", "Pur-\npur"],
+        ["kæmpende", "kæm-\npende"],
+        ["Gulvet", "Gul-\nvet"],
+        ["forklarede", "forkla-\nrede"]
+      ]
+    },
+    "andersen-1840-p026": {
+      "replacements": [
+        ["imidlertid", "imidler-\ntid"],
+        ["Kjæmpegraven", "Kjæm-\npegraven"],
+        ["funklede", "funk-\nlede"],
+        ["Hænderne", "Hæn-\nderne"],
+        ["gjennemstrømmede", "gjen-\nnemstrømmede"],
+        ["nedskrev", "ned-\nskrev"],
+        ["Erindring", "Erin-\ndring"]
+      ],
+      "append": "2",
+      "note": "The printer's signature 2 below the body is absent from the source transcription."
+    },
+    "andersen-1840-p034": {
+      "replacements": [
+        ["Udbragte", "udbragte"],
+        ["prægtigt", "præg-\ntigt"],
+        ["Mødrene", "Mø-\ndrene"],
+        ["Læber", "Læ-\nber"],
+        ["strømmende", "strøm-\nmende"],
+        ["synger", "syn-\nger"]
+      ],
+      "note": "The printed word is 'blene'; do not silently modernise or correct it to 'bleve'."
+    },
+    "andersen-1840-p039": {
+      "replacements": [
+        ["anden Herre", "an-\nden Herre"],
+        ["Tanten", "Tan-\nten"],
+        ["anmeldt", "an-\nmeldt"],
+        ["genialsk", "ge-\nnialsk"],
+        ["ærgres", "ær-\ngres"],
+        ["Allesammen", "Allesam-\nmen"],
+        ["„,men", "„„men"],
+        ["Smaaseilene", "Smaafeilene"],
+        ["bevar'", "bevar’"]
+      ]
+    },
+    "andersen-1840-p040": {
+      "replacements": [
+        ["anbefales", "anbefa-\nles"],
+        ["phantastisk", "phan-\ntastisk"],
+        ["bort, ”", "bort,”"],
+        ["Huus ,", "Huus,"],
+        ["En Ung Pige", "En ung Pige"]
+      ]
+    },
+    "andersen-1840-p054": {
+      "replacements": [
+        ["Mægtige", "mægtige"],
+        ["Leerkrukke med", "Leer-\nkrukke med"],
+        ["allerede", "alle-\nrede"],
+        ["Veninder", "Ven-\ninder"],
+        ["sloges", "slo-\nges"]
+      ]
+    }
+  }
+}

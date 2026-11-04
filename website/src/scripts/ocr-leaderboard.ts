@@ -1,7 +1,7 @@
 import { type Metric, type SampleSet, type Snapshot } from '../lib/ocr-results';
 import { matrixRows, type Aggregation, type MatrixRow } from '../lib/ocr-matrix';
 import { datasetDescriptions, languageNames } from '../data/ocr-datasets';
-import { benchmarks, inputDescription } from '../data/ocr-benchmarks';
+import { allBenchmarks as benchmarks, inputDescription } from '../data/ocr-benchmarks';
 import { modelOpenness } from '../data/ocr-openness';
 import { criteria, opennessIcon, statusLabels, opennessAnchor, type Evidence } from '../lib/ocr-openness';
 import { modelParameters } from '../data/ocr-parameters';
@@ -209,7 +209,7 @@ function render() {
   element('results-body').replaceChildren(...visible.map(row => renderRow(row, samples, columns, groupEnds, languageEnds)));
   table.style.minWidth = `calc(var(--model-width) + var(--overall-width) + var(--openness-width) + ${96 * samples.length}px)`;
   text('table-caption', `${benchmark.name}: ${overallLabel()} and ${metric.toUpperCase()} for each task, grouped by language and dataset. Cropped lines and full pages are separate tasks. Task error rates are percentages; lower is better.`);
-  text('selection-description', `${groups.size} datasets · ${samples.length} tasks · ${metric.toUpperCase()} (%)`);
+  text('selection-description', `${groups.size} dataset${groups.size === 1 ? '' : 's'} · ${samples.length} task${samples.length === 1 ? '' : 's'} · ${metric.toUpperCase()} (%)`);
   text('visible-models', `${visible.length} model${visible.length === 1 ? '' : 's'}`);
   element<HTMLAnchorElement>('benchmark-about').href = `/OCR-eval/benchmarks/${benchmark.id}/`;
   benchmarkSelect.value = benchmark.id; aggregationSelect.value = aggregation;
@@ -245,7 +245,7 @@ function restoreSelection() {
   render(); saveSelection();
 }
 async function start() {
-  const response = await fetch('/OCR-eval/results.json');
+  const response = await fetch('/OCR-eval/catalog.json');
   if (!response.ok) throw new Error('Results could not be loaded.');
   data = await response.json(); restoreSelection();
   benchmarkSelect.addEventListener('change', () => { benchmark = benchmarks.find(item => item.id === benchmarkSelect.value)!; sortKey = 'overall'; descending = aggregation === 'win-rate'; render(); saveSelection(true); });

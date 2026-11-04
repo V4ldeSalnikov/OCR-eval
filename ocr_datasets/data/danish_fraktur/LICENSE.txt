@@ -1,0 +1,32 @@
+Danish Fraktur — Wikisource pilot, version 1.0.0-draft
+
+DATA LICENCE (separate from the repository's software licence)
+
+The original works and page scans are public domain, as recorded by Wikimedia
+Commons for these files:
+https://commons.wikimedia.org/wiki/File:Af_en_endnu_Levendes_Papirer.djvu
+https://commons.wikimedia.org/wiki/File:Billedbog_uden_Billeder.djvu
+
+Authors: Søren Kierkegaard (1838) and Hans Christian Andersen (1840).
+Digitisation: Royal Danish Library.
+Image hosting: Wikimedia Commons.
+
+Transcription contributions: Danish Wikisource contributors. Per-page source
+revisions and contributor-history URLs are recorded in sources.json and
+manifest.jsonl (test.jsonl in the prepared folder).
+
+The transcription contributions and adapted ScandiOCR reference texts are made
+available under Creative Commons Attribution-ShareAlike 4.0 International:
+https://creativecommons.org/licenses/by-sa/4.0/
+Full legal terms: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Adaptations by ScandiOCR, 2026-11-04: wiki markup and decorative rules removed;
+page fragments retained; visible line-end hyphens, omitted signatures, case and
+other transcription details restored as documented in review.json.
+
+When redistributing adapted transcriptions, retain attribution, identify changes,
+link the licence, and apply the applicable share-alike terms. Nothing here places
+new restrictions on the underlying public-domain works or scans.
+
+The Python preparation and loading code remains under the repository's Apache
+License 2.0; the dataset licence does not change the software licence.

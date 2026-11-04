@@ -1,11 +1,11 @@
 import { rankModels, type Snapshot, type Metric } from '../lib/ocr-results';
 import { DEFAULT_MODELS, validModels, wordDiff } from '../lib/ocr-compare';
 import { datasetDescriptions, languageNames } from '../data/ocr-datasets';
-import { inputName } from '../data/ocr-benchmarks';
+import { benchmarks, inputName } from '../data/ocr-benchmarks';
 
 type ExampleIndex = { groups: { sample_set_id: string; dataset_id: string; task: string; examples: { id: string; case_id: string }[] }[] };
 type Prediction = { text: string; cer: number; wer: number; inference_status: string };
-type Example = { id: string; case_id: string; sample_set_id: string; image_url: string; reference: string; predictions: Record<string, Prediction>; attribution: { creator: string; source_url: string; license: string; license_url: string; changes: string; document_url?: string } };
+type Example = { id: string; case_id: string; sample_set_id: string; image_url: string; reference: string; predictions: Record<string, Prediction>; attribution: { creator: string; source_url: string; license: string; license_url: string; changes: string; document_url?: string; contributors_url?: string } };
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const dataset = el<HTMLSelectElement>('example-dataset');
 const caseSelect = el<HTMLSelectElement>('example-case');
@@ -80,9 +80,10 @@ function renderScores() {
     const values = models.map(id => data.results.find(result => result.model_id === id && result.sample_set_id === sample.id && result.status === 'completed')?.corpus_metrics?.[metric]);
     appendScores(row, values); return row;
   });
-  for (const task of new Set(samples.map(sample => sample.task))) {
-    const aggregates = rankModels(data, samples.filter(sample => sample.task === task), task, metric);
-    const row = node('tr', '', 'mean-row'); row.append(node('td', `Mean · ${taskName(task)}`));
+  const baselineSamples = samples.filter(sample => benchmarks[0].sampleIds.includes(sample.id));
+  for (const task of new Set(baselineSamples.map(sample => sample.task))) {
+    const aggregates = rankModels(data, baselineSamples.filter(sample => sample.task === task), task, metric);
+    const row = node('tr', '', 'mean-row'); row.append(node('td', `Mean · ${taskName(task)} · v1`));
     appendScores(row, models.map(id => aggregates.find(item => item.model.id === id)?.metrics[metric])); rows.push(row);
   }
   el('comparison-body').replaceChildren(...rows);
@@ -185,6 +186,7 @@ async function renderExample() {
     const attribution = el('example-attribution'); const details = example.attribution;
     const source = node('p'); source.append(link('Source dataset ↗', details.source_url), link(details.license, details.license_url));
     if (details.document_url) source.append(link('Original publication ↗', details.document_url));
+    if (details.contributors_url) source.append(link('Transcription contributors ↗', details.contributors_url));
     attribution.replaceChildren(node('code', example.case_id), node('p', details.creator), source, node('p', details.changes));
     renderPredictions(); el('example-content').hidden = false; message.hidden = true;
   } catch {
@@ -212,7 +214,7 @@ function restore() {
   updateExamples(sample?.id, params.get('example') ?? ''); render();
 }
 async function start() {
-  [data, index] = await Promise.all(['/OCR-eval/results.json', '/OCR-eval/examples/index.json'].map(async url => {
+  [data, index] = await Promise.all(['/OCR-eval/catalog.json', '/OCR-eval/examples/catalog.json'].map(async url => {
     const response = await fetch(url); if (!response.ok) throw new Error('Results unavailable'); return response.json();
   }));
   restore();

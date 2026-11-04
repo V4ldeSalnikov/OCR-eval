@@ -18,6 +18,7 @@ SOURCES = {
     "modern-danish": ("Danish National Archives", "CC BY 4.0", CC_BY),
     "danish-typewritten": ("EHRI dataset contributors / Danish National Archives; line dataset by V4ldeLund", "CC BY 4.0", CC_BY),
     "swedish-fraktur": ("Språkbanken / Swedish National Archives", "Apache 2.0", "https://www.apache.org/licenses/LICENSE-2.0"),
+    "danish-fraktur": ("Søren Kierkegaard / Hans Christian Andersen; Royal Danish Library / Wikimedia Commons; Danish Wikisource contributors", "Public-domain scans; CC BY-SA 4.0 reference text", "https://creativecommons.org/licenses/by-sa/4.0/"),
     "riksarkivet-ood": ("Swedish National Archives", "License not stated by source", "https://huggingface.co/datasets/Riksarkivet/eval_htr_out_of_domain_lines"),
     "oj4ocrmt-danish": ("Paul McNamee et al. / JHU HLTCOE / European Union", "CC BY 4.0", CC_BY),
     "oj4ocrmt-swedish": ("Paul McNamee et al. / JHU HLTCOE / European Union", "CC BY 4.0", CC_BY),
@@ -32,12 +33,12 @@ def select_cases(cases, count=EXAMPLES_PER_TASK):
 def checked_image(folder, case):
     path = (folder / case["image"]).resolve()
     assert path.is_relative_to(folder.resolve()), "Image path escapes sample directory"
-    assert path.suffix == ".png"
+    assert path.suffix in {".png", ".jpg", ".jpeg"}
     assert sha256(read_bytes(path)).hexdigest() == case["image_sha256"], "Changed input image"
     return path
 
 
-def export_examples(snapshot, ocr_root, output, results_root=None):
+def export_examples(snapshot, ocr_root, output, results_root=None, index_name="index.json"):
     datasets = {item["id"]: item for item in snapshot["datasets"]}
     results_root = results_root or ocr_root.parent / "resultsScandiOCReval"
     public_reports = {}
@@ -65,11 +66,12 @@ def export_examples(snapshot, ocr_root, output, results_root=None):
                 assert case["metadata"].get("license") == "CC0", "NVA examples must have a per-document CC0 license"
             identifier = sha256((sample["id"] + ":" + case["name"]).encode()).hexdigest()[:20]
             source_image = checked_image(folder, case)
-            shutil.copyfile(source_image, images / f"{identifier}.png")
+            image_name = f"{identifier}{source_image.suffix}"
+            shutil.copyfile(source_image, images / image_name)
             creator, license_name, license_url = SOURCES[dataset["id"]]
             example = {
                 "id": identifier, "case_id": case["name"], "sample_set_id": sample["id"],
-                "image_url": f"/OCR-eval/examples/images/{identifier}.png", "image_sha256": case["image_sha256"],
+                "image_url": f"/OCR-eval/examples/images/{image_name}", "image_sha256": case["image_sha256"],
                 "reference": case["reference"], "source_revision": sample["source_revision"],
                 "attribution": {"creator": creator, "source_url": dataset["source_url"],
                                 "license": license_name, "license_url": license_url,
@@ -78,6 +80,12 @@ def export_examples(snapshot, ocr_root, output, results_root=None):
             }
             if case["metadata"].get("url"):
                 example["attribution"]["document_url"] = case["metadata"]["url"]
+            if dataset["id"] == "danish-fraktur":
+                example["attribution"].update(
+                    document_url=case["metadata"]["source_revision_url"],
+                    contributors_url=case["metadata"]["source_history_url"],
+                    changes="Unaltered Wikimedia scan. Reference adapted from Danish Wikisource: wiki markup removed and scan-reviewed corrections applied as recorded in the dataset's review.json.",
+                )
             examples[(sample["id"], case["name"])] = example
             group["examples"].append({"id": identifier, "case_id": case["name"]})
         groups.append(group)
@@ -138,7 +146,7 @@ def export_examples(snapshot, ocr_root, output, results_root=None):
                                for item in snapshot["datasets"] if item["id"] not in SOURCES],
              "counts": {"examples": len(examples), "predictions": sum(len(item["predictions"]) for item in examples.values()),
                         "datasets": len({group["dataset_id"] for group in groups})}}
-    (output / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (output / index_name).write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return index
 
 
@@ -147,6 +155,8 @@ if __name__ == "__main__":
     parser.add_argument("--ocr-root", type=Path, required=True)
     parser.add_argument("--results-root", type=Path, help="Local checkout of resultsScandiOCReval; defaults to a sibling of the evaluator")
     parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "public" / "examples")
+    parser.add_argument("--snapshot", type=Path, default=Path(__file__).resolve().parents[1] / "public" / "results.json")
+    parser.add_argument("--index-name", default="index.json")
     args = parser.parse_args()
-    snapshot = read_json(Path(__file__).resolve().parents[1] / "public" / "results.json")
-    print(json.dumps(export_examples(snapshot, args.ocr_root.resolve(), args.output.resolve(), args.results_root)["counts"]))
+    snapshot = read_json(args.snapshot)
+    print(json.dumps(export_examples(snapshot, args.ocr_root.resolve(), args.output.resolve(), args.results_root, args.index_name)["counts"]))
